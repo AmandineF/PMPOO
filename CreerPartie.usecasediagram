@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="17d3f836-f4c9-4402-bdb0-a44da7580dda" name="CreerPartie" linkedPackageId="d7217609-9a65-483a-aabc-d1b1076c54d0" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="f2cc2f91-24d1-4447-83fe-ba714e38dbb7" name="Joueur" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f674b9ba-77b5-4abe-988a-082e452dba8f" />
+        <targetEnds>
+          <association Id="d79460a1-6966-4c4d-a8fb-9656c064d15c" isDerived="false" sourceEndRoleName="Joueur" targetEndRoleName="Créer partie" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="b8f60f8e-de69-4953-af04-81a63a8af33a" LastKnownName="Créer partie" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="91314211-59ae-4edb-b9f9-338b7f1bbfc0" name="Joueur" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="eda082a3-4d25-42a3-9bd6-57c69b067b0f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b41a216c-cec0-46c3-8422-800754d7493a" name="Créer partie" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2ed64a4a-fc30-4d72-9810-220f3d038144" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3a777505-d559-4ca0-82d2-2f8c6c341ab5" />
+          </association>
+          <association Id="cf7545da-07f2-4ca7-975a-f77bd10a3031" isDerived="false" sourceEndRoleName="Joueur" targetEndRoleName="Quitter le jeu" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="75f9d516-4def-451a-82f9-3018caba2dd7" LastKnownName="Quitter le jeu" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="eaa0d9e7-3a19-4fcb-9a3b-7007b54616b9" name="Joueur" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="96255eb5-2b7d-464e-96da-b0a8e5bd2928" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="10feca24-3f5c-4750-a57c-0a710a26204b" name="Quitter le jeu" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="558df1ad-789b-452d-9eaf-8722e70634b6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="65673776-cd09-4291-ada2-a1fac3307be1" />
+          </association>
+          <association Id="7dd86290-dd3a-437c-94bb-ccfbb87890e9" isDerived="false" sourceEndRoleName="Joueur" targetEndRoleName="Charger ancienne partie" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="26f7389c-da26-46dc-b513-28f15c61d692" LastKnownName="Charger ancienne partie" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="fceb8474-c16d-4876-87ea-40598aa1a962" name="Joueur" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b1207d45-dc0c-4509-ab8b-b8f704354531" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bdf77a92-bae2-401a-b85e-51a7d80b6832" name="Charger ancienne partie" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="0c42383b-e805-4ffc-a868-346e23c77549" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="83e328d0-5bc4-4d5e-bfae-9349e0c44fb6" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="b8f60f8e-de69-4953-af04-81a63a8af33a" name="Créer partie" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a1df821e-e782-483b-b787-a82e7fce1281" />
+        <additions>
+          <include Id="157f66fd-dd5d-42b4-98e8-7e5c86bc4ce3">
+            <useCaseMoniker Id="9aaac803-7175-4a1c-b979-c2332d59fbb7" LastKnownName="Créer les joueurs" />
+            <elementDefinition Id="828fa5a3-2fa8-4c0b-9398-c3d9627d2cb2" />
+          </include>
+          <include Id="d5b7a288-2388-41b7-b2af-785fa62a18b8">
+            <useCaseMoniker Id="5a120a28-15b3-47e3-90a7-43eccb78623e" LastKnownName="Chosir une carte" />
+            <elementDefinition Id="b7f522c7-4869-47a7-9c65-bdb348b53d9a" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="75f9d516-4def-451a-82f9-3018caba2dd7" name="Quitter le jeu" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f4252695-56c2-4a37-a6bf-0b86846ddf30" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="9aaac803-7175-4a1c-b979-c2332d59fbb7" name="Créer les joueurs" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9b019503-a3e0-4d32-a2aa-863b77aebd24" />
+        <additions>
+          <include Id="ca5533f3-c781-4f7f-9c98-4b10ce17816f">
+            <useCaseMoniker Id="dd775ce5-bcc9-42a0-a7a5-cbe585b3240f" LastKnownName="Chosir un peuple" />
+            <elementDefinition Id="4e04f35a-2bcb-4611-8c55-ea5ee7813054" />
+          </include>
+          <include Id="907418dc-c64b-42f2-be5c-e6a01ea3b6e4">
+            <useCaseMoniker Id="901eac95-48c3-4d1b-9178-e1282479880b" LastKnownName="Choisir un pseudo" />
+            <elementDefinition Id="9ecfd1ce-fcb4-4940-b4e5-cd29208ccf0c" />
+          </include>
+        </additions>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="901eac95-48c3-4d1b-9178-e1282479880b" name="Choisir un pseudo" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f8c01e95-3eac-483c-85d8-274b80a3849b" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="dd775ce5-bcc9-42a0-a7a5-cbe585b3240f" name="Chosir un peuple" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="eba02fdb-9dc7-4ffb-a57c-2b35278be2b8" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="5a120a28-15b3-47e3-90a7-43eccb78623e" name="Chosir une carte" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e89140a5-5ca3-4999-bf3e-b4e999c40fca" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="26f7389c-da26-46dc-b513-28f15c61d692" name="Charger ancienne partie" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3f639881-e0e0-4265-98a5-1c3b38dbd864" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="d7217609-9a65-483a-aabc-d1b1076c54d0" name="DiagrammesPOO">
+    <elementDefinition Id="4274014f-68eb-4428-a475-cfae4e8c02ac" />
+    <profileInstances>
+      <packageHasProfileInstances Id="a1a45f2b-466b-45b1-812b-30c6df114ba4">
+        <profileInstance Id="6becbb08-03d4-4505-b6fb-a8e431198cfc" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="ddddde4a-8e9c-40f9-bfa9-d8eef0cb323a">
+        <profileInstance Id="2ff98123-054f-4f79-a069-8a13cec3c8cd" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</useCaseModelRoot>
