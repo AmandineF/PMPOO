@@ -15,7 +15,7 @@
 \usepackage{titlesec}
 \usepackage{array}
 
-
+\pagestyle{fancy}
 
 \makeatletter
 \def\clap#1{\hbox to 0pt{\hss #1\hss}}%
@@ -78,6 +78,11 @@
 \textbf{Rapport de conception}}
 }%
 
+%En-têtes
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyhead[L]{\textit{\leftmark}}
+\fancyhead[C]{}
+\fancyhead[R]{}
 
 \begin{document}
 \maketitle
@@ -92,66 +97,158 @@ Le jeu à réaliser est un jeu tour-a-tour dans lequel chaque joueur dirige un p
 Ce rapport présente le travail réalisé lors de la phase de modélisation au cours de laquelle plusieurs diagrammes ont été réalisés afin de décrire les différents aspects du jeu. Ce rapport est découpé dans l'optique de découvrir toutes les phases du jeu. Ainsi, dans un premier temps nous étudierons la phase de création d'une partie grâce aux diagrammes de cas d'utilisation, d'activité et de séquence. Puis nous étudierons le déroulement d'une partie, d'un tour de jeu et d'un combat la encore avec des diagrammes d'interaction, d'activité et de cas d'utilisation. Pour résumer et conclure sur la modélisation du jeu, nous finirons par détailler le diagramme de classe réalisé ainsi que les différents patrons de conception utilisés.
 \newpage
 \section{Création de la partie}
-\lipsum[1]
+\vspace*{0.5cm}
+Commençons par détailler ce qu'il se passe lors de l'ouverture du jeu. Si une partie précédente avait été abandonnée avant la fin du jeu, lors de l'ouverture les joueurs peuvent choisir de reprendre cette ancienne partie ou en commencer une nouvelle. Lors de la création d'une nouvelle partie, l'utilisateur commence par choisir une carte parmis les trois différents types (la démo, la petite et la normale). C'est ce choix de carte qui détermine le nombre de cases et le nombre de tours, elle est crée de manière aléatoire. Pour pouvoir jouer, il est nécessaire que les joueurs soient au nombre de deux, ils sont créés après le choix de la carte. Les deux joueurs doivent choisir un pseudo et un peuple différent (Elf, Nain ou Orc). Une fois ces tâches réalisées, la partie peux commencer. De façon évidente, l'utilisateur peux abandonner la création de la partie à tout moment en quittant le jeu. 
+\vspace*{0.5cm}
 \subsection{Diagramme de cas d'utilisation}
+\vspace*{0.5cm}
 \begin{figure}[h!]
-\fbox{\includegraphics{ucCreerPartie.png}}
-\caption{Cas d'utilisation - Créer une Partie}
+\includegraphics{ucCreerPartie.png}
+\caption{Diagramme de cas d'utilisation - Créer une partie}
+\label{fig:uccreer}
 \end{figure}
+\vspace*{1cm}
+Le diagramme de cas d'utilisation ci-dessus (\textsc{Figure \ref{fig:uccreer}}) illustre la création d'une partie du point de vue utilisateur. En arrivant sur l'interface d'accueil du jeu le joueur a trois possibilités : créer une nouvelle partie, charger une ancienne partie ou quitter l'application. Si l'utilisateur décide de créer une nouvelle partie, il commence par choisir une carte puis il crée les deux joueurs en donnant à chacun un pseudo et un peuple.
 \newpage
+
 \subsection{Diagramme d'activité}
+\vspace*{0.5cm}
 \begin{figure}[ht!]
-\fbox{\includegraphics{actCreerPartie.png}}
-\caption{Cas d'utilisation - Créer une Partie}
+\includegraphics{actCreerPartie.png}
+\caption{Diagramme d'activité - Créer une partie}
+\label{fig:actcreer}
 \end{figure}
+\vspace*{1cm}
+Le diagramme d'activité ci-dessus (\textsc{Figure \ref{fig:actcreer}}) illustre le processus de création d'une partie. Lorsque le système est en état de création d'une partie, l'évènement permettant à l'utilisateur de choisir une carte est le premier à se déclencher. Ensuite, le système rentre dans un processus de création d'un joueur : choix d'un pseudo, choix d'un peuple, création du joueur puis placement des unités sur la carte. A la fin de ce processus de création de joueur, le système vérifie le nombre de joueurs déjà créés : s'il n'y a qu'un joueur créé on retourne au début du processus de création de joueur, s'ils sont deux on lance la partie.
 \newpage
 \subsection{Diagramme de séquence}
 \begin{figure}[ht!]
-\fbox{\includegraphics{sqCreerPartie.png}}
-\caption{Cas d'utilisation - Créer une Partie}
+\includegraphics{sqCreerPartie.png}
+\caption{Diagramme de séquence - Créer une partie}
+\label{fig:seqcreer}
 \end{figure}
+\vspace*{1cm}
+Le diagramme d'activité ci-dessus (\textsc{Figure \ref{fig:seqcreer}}) illustre les interactions entre objets lors de la création d'une partie. On observe les mêmes événements qu'avec un diagramme d'activité mais en plus on constate des boucles de création. En effet, le monteur crée deux joueurs à qui il attribue deux peuples différent. Chaque peuple crée ensuite ses unités que le monteur place sur la carte.
+\newpage 
 
-\newpage
+
+
+
 \section{Déroulement d'une partie}
+\vspace*{0.5cm}
 \lipsum[1]
+\vspace*{1cm}
 \begin{figure}[ht!]
-\fbox{\includegraphics{actDeroulementPartie.png}}
-\caption{Cas d'utilisation - Créer une Partie}
+\includegraphics{actDeroulementPartie.png}
+\caption{Diagramme d'activité - Déroulement d'une partie}
+\label{fig:actpartie}
 \end{figure}
 \newpage
+
+
+
 \subsection{Déroulement d'un tour de jeu}
+\vspace*{0.5cm}
 \lipsum[1]
+\vspace*{0.5cm}
 \subsubsection{Diagramme de cas d'utilisation}
 \begin{figure}[ht!]
-\fbox{\includegraphics{ucTourDeJeu.png}}
-\caption{Cas d'utilisation - Créer une Partie}
+\includegraphics{ucTourDeJeu.png}
+\caption{Diagramme de cas d'utilisation - Déroulement d'un tour de jeu}
+\label{fig:uctour}
 \end{figure}
+\vspace*{1cm}
+\lipsum[1]
 \newpage
+
+
 \subsubsection{Diagrammes d'activités}
 \begin{figure}[ht!]
-\fbox{\includegraphics{actTourDeJeu.png}}
-\caption{Cas d'utilisation - Créer une Partie}
+\includegraphics{actTourDeJeu.png}
+\caption{Diagramme d'activité - Déroulement d'un tour de jeu}
+\label{fig:acttour}
 \end{figure}
+\vspace*{1cm}
+\lipsum[1]
 \newpage
+
+
+
 \subsection{Déroulement d'un combat}
 \begin{figure}[ht!]
-\fbox{\includegraphics[height=18cm]{actCombat.png}}
-\caption{Cas d'utilisation - Créer une Partie}
+\includegraphics[height=18cm]{actCombat.png}
+\caption{Diagramme d'activité - Déroulement d'un combat}
+\label{fig:actcombat}
 \end{figure}
-
+\vspace*{1cm}Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut purus elit, vestibulum ut, placerat ac, adipiscing vitae, felis. Curabitur dictum gravida mauris. Nam arcu libero, nonummy eget, consectetuer id, vulputate a, magna. Donec vehicula augue eu neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris ut leo. 
 \newpage
+
+
+
+
+
 \section{Diagramme de classe}
+\vspace*{0.5cm}
 \lipsum[1]
-\subsection{Modélisation globale}
-\subsection{Patrons de conception}
-\subsubsection{Fabrique}
-\subsubsection{Monteur}
-\subsubsection{Poids-mouche}
-\subsubsection{Stratégie}
-
-
+\vspace*{0.5cm}
+\begin{figure}[ht!]
+\includegraphics[height=13cm,width=15cm]{classe.png}
+\caption{Diagramme de classe - Modélisation globale}
+\label{fig:classe}
+\end{figure}
 \newpage
+
+
+
+\subsection{Fabrique}
+\begin{figure}[ht!]
+\includegraphics[height=12cm,width=14cm]{fabrique.png}
+\caption{Diagramme de classe - Fabrique}
+\label{fig:fabrique}
+\end{figure}
+\vspace*{1cm}
+\lipsum[1]
+\newpage
+
+\subsection{Monteur}
+\begin{figure}[ht!]
+\includegraphics[height=9cm,width=14cm]{monteur.png}
+\caption{Diagramme de classe - Monteur}
+\label{fig:monteur}
+\end{figure}
+\vspace*{1cm}
+\lipsum[1]
+\newpage
+
+
+
+\subsection{Poids-mouche}
+\begin{figure}[ht!]
+\includegraphics[height=12cm,width=15cm]{poidmouche.png}
+\caption{Diagramme de classe - Poids-mouche}
+\label{fig:poidmouche}
+\end{figure}
+\vspace*{1cm}
+\lipsum[1]
+\newpage
+
+
+
+\subsection{Stratégie}
+\begin{figure}[ht!]
+\includegraphics[height=8cm,width=10cm]{strategie.png}
+\caption{Diagramme de classe - Stratégie}
+\label{fig:strategie}
+\end{figure}
+\vspace*{1cm}
+\lipsum[1]
+\newpage
+
+
+
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 \lipsum[1-2]
+\newpage
+\listoffigures
 \end{document}
