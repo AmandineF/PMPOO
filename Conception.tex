@@ -137,7 +137,7 @@
 
 \section{Déroulement d'une partie}
 	\vspace*{0.5cm}
-	Une fois que la partie est lancée, l'ordre de jeu est choisi aléatoirement et un des deux joueurs commence à jouer. Le déroulement d'un tour de jeu est décrit dans la suite de ce rapport. Un des joueurs peut perdre ses unités durant le tour, la partie s'arrête alors et l'autre joueur gagne. A la fin du nombre de tours, si aucun joueur a perdu avant, on calcule le nombre de points de chaque joueur pour déterminer le vainqueur. Le diagramme d'activité ci-dessous (\textsc{Figure \ref{fig:actpartie}}) illustre le processus de déroulement d'une partie. L'état "Lancement de la partie" à été détaillé dans le diagramme d'activité de création d'une partie tandis que l'état "Tour du joueur" sera détaille par la suite.
+	Une fois que la partie est lancée, l'ordre de jeu est choisi aléatoirement et un des deux joueurs commence à jouer. Le déroulement d'un tour de jeu est décrit dans la suite de ce rapport. Un des joueurs peut perdre ses unités durant le tour, la partie s'arrête alors et l'autre joueur gagne. À la fin du nombre de tours, si aucun joueur n'a perdu avant, on calcule le nombre de points de chaque joueur pour déterminer le vainqueur. Le diagramme d'activité ci-dessous (\textsc{Figure \ref{fig:actpartie}}) illustre le processus de déroulement d'une partie. L'état "Lancement de la partie" a été détaillé dans le diagramme d'activité de création d'une partie tandis que l'état "Tour du joueur" sera détaille par la suite.
 
 	\vspace*{1cm}
 	\begin{figure}[ht!]
@@ -150,7 +150,7 @@
 
 	\subsection{Déroulement d'un tour de jeu}
 		\vspace*{0.5cm}
-		Lorsqu'un joueur peut jouer, il peut déplacer toutes chacune des unités suivant son nombre de point de mouvement ou choisir de passer son tour. Une unité combattante peut engager un combat si elle se déplace sur une case ennemie. Lorsqu'un joueur à fini son tour, il clique sur le bouton "Fin du tour". Le tour peut cependant être arrêté prématurement si un des joueurs perd un combat et n'a plus d'unité, le jeu se termine alors.
+		Lorsqu'un joueur peut jouer, il peut déplacer toutes chacune des unités suivant son nombre de points de mouvement ou choisir de passer son tour. Une unité combattante peut engager un combat si elle se déplace sur une case ennemie. Lorsqu'un joueur à finit son tour, il clique sur le bouton "Fin du tour". Le tour peut cependant être arrêté prématurément si un des joueurs perd un combat et n'a plus d'unité, le jeu se termine alors.
 		\vspace*{0.5cm}
 
 		\subsubsection{Diagramme de cas d'utilisation}
@@ -160,7 +160,7 @@
 				\label{fig:uctour}
 			\end{figure}
 			\vspace*{1cm}
-			Le diagramme de cas d'utilisation ci-dessus (\textsc{Figure \ref{fig:uctour}}) illustre le déroulement d'un tour de jeu du point de vue utilisateur. Lorsque que c'est à son tour de jouer, l'utilisateur doit choisir une action pour chacune de ses unités. Il a la possibilité de ne rien faire, déplacer l'unité dans une case vide ou d'attaquer le peuple ennemi. A tout moment le joueur peut décider de finir le tour ou de quitter la partie.
+			Le diagramme de cas d'utilisation ci-dessus (\textsc{Figure \ref{fig:uctour}}) illustre le déroulement d'un tour de jeu du point de vue utilisateur. Lorsque c'est à son tour de jouer, l'utilisateur doit choisir une action pour chacune de ses unités. Il a la possibilité de ne rien faire, déplacer l'unité dans une case vide ou d'attaquer le peuple ennemi. À  tout moment, le joueur peut décider de finir le tour ou de quitter la partie.
 			\newpage
 
 		\subsubsection{Diagrammes d'activités}
@@ -170,7 +170,7 @@
 				\label{fig:acttour}
 				\end{figure}
 			\vspace*{1cm}
-			Le diagramme d'activité ci-dessus (\textsc{Figure \ref{fig:acttour}}) illustre le processus du déroulement d'un tour de jeu. Un tour est en cours, si le joueur n'appuie pas sur le bouton "Fin du tour", il doit sélectionner une unité. Il y a alors deux possibilités : soit l'unité passe son tour et on en sélectionne une nouvelle, soit l'unité se déplace. Si l'unité se déplace, on doit sélectionner la case d'arrivée. Si cette case d'arrivée est vide ou alliée, on déplace l'unité sélectionnée, sinon, un combat se déroule. En cas de défaite ou de match nul, on revient au début du processus tour de jeu si le joueur n'a plus d'unité pour continuer le jeu ou s'il décide d'arrêter, le tour est fini, sinon, on retourne dans le processus de sélection d'une unité. D'un autre côté, si l'unité gagne et si il n'y a plus d'unité dans la case attaquée elle est déplacée sur cette case.
+			Le diagramme d'activité ci-dessus (\textsc{Figure \ref{fig:acttour}}) illustre le processus du déroulement d'un tour de jeu. Un tour est en cours, si le joueur n'appuie pas sur le bouton "Fin du tour", il doit sélectionner une unité. Il y a alors deux possibilités : soit l'unité passe son tour et on en sélectionne une nouvelle, soit l'unité se déplace. Si l'unité se déplace, on doit sélectionner la case d'arrivée. Si cette case d'arrivée est vide ou alliée, on déplace l'unité sélectionnée, sinon, un combat se déroule. En cas de défaite ou de match nul, on revient au début du processus tour de jeu si le joueur n'a plus d'unité pour continuer le jeu ou s'il décide d'arrêter, le tour est fini, sinon, on retourne dans le processus de sélection d'une unité. D'un autre côté, si l'unité gagne et s'il n'y a plus d'unité dans la case attaquée elle est déplacée sur cette case.
 			\newpage
 
 		\subsubsection{Diagrammes de séquence}
@@ -190,7 +190,7 @@
 			\label{fig:actcombat}
 		\end{figure}
 		\vspace*{1cm}
-		Le diagramme d'activité ci-dessus (\textsc{Figure \ref{fig:actcombat}}) illustre le processus du déroulement d'un combat. Une unité attaque une case ennemie, si cette case contient plusieurs unités, on choisit la meilleure unité défensive puis on calcule aléatoirement le nombre de combat. On rentre ensuite dans le processus du combat. Tant que le nombre de combat déterminé précedement n'a pas été atteint et que les deux unités ont encore des points de vie, on résout l'algorithme du combat puis l'attaquant ou le défenseur perd un point de vie.
+		Le diagramme d'activité ci-dessus (\textsc{Figure \ref{fig:actcombat}}) illustre le processus du déroulement d'un combat. Une unité attaque une case ennemie, si cette case contient plusieurs unités, on choisit la meilleure unité défensive puis on calcule aléatoirement le nombre de combat. On rentre ensuite dans le processus du combat. Tant que le nombre de combat déterminé précédement n'a pas été atteint et que les deux unités ont encore des points de vie, on résout l'algorithme du combat puis l'attaquant ou le défenseur perd un point de vie.
 		\newpage
 
 \section{Diagramme de classe}
