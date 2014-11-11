@@ -214,7 +214,13 @@
 			
 \section{Diagramme de classe}
 	\vspace*{0.5cm}
-	\lipsum[1]
+	Le diagramme de classe ci-dessous illustre l’ensemble de nos classes ainsi que l’ensemble des relations entre celles-ci. Ce diagramme fait abstraction des aspects temporels et dynamiques. Chaque classe décrit les responsabilités, le comportement et le type d’un ensemble d’objets. Au sein même de ce diagramme nous observons différentes parties significatives de notre jeu : 
+•	Une partie consacrée à la création d’une partie et à la modélisation de la carte sous forme d’un patron de conception : un monteur. On retrouve également une Stratégie permettant le choix du type de carte.
+•	Une seconde partie représente  l’ensemble des classes liées à la Carte. Elles sont visibles sous la forme d’un poids-mouche. Nous observons plusieurs types de cases (Plaine, Désert, Montagne et Forêt) héritant de la classe CaseImpl et créé à partir de la classe FabriquecaseImpl.La classe CarteImpl est composée de plusieurs objets de la classe CaseImpl.
+•	Nous retrouvons une partie dédié aux objets appartenant aux joueurs. Un joueur possède un peuple. Il existe trois types de peuples (Orc, Nain ou Elfe). Un joueur possède également des unités. Ces unités peuvent être de trois types différents en fonction du peuple.
+•	Une dernière partie rassemble les classes se rapportant au jeu. La classe JeuImpl  possède l’ensemble des méthodes permettant l’accès aux joueurs, au gagnant, au calcul des points, etc. La classe TourImpl possède l’ensemble des méthodes permettant de gérer le tour de jeu d’un joueur (combattre, déplacer ou sélectionner les unités).
+Dans la suite, nous détaillerons l’ensemble des patrons de conception utilisés.
+
 	\vspace*{0.5cm}
 	\begin{figure}[ht!]
 		\includegraphics[height=13cm,width=15cm]{Diagrammes/Classe/classe.png}
@@ -230,7 +236,7 @@
 			\label{fig:fabrique}
 		\end{figure}
 		\vspace*{1cm}
-		\lipsum[1]
+		Afin de gérer la création des peuples au sein de notre jeu, nous avons mis en place dans le diagramme de classe une fabrique consacrée à la manipulation des peuples. Le but de notre fabrique est de définir un objet (ici un peuple) dédié à la création d’autres (nain, orc ou elfe). Nous pouvons ainsi au sein même de notre fabrique fournir des opérations de constructions au nom explicite.
 		\newpage
 
 	\subsection{Monteur}
@@ -240,7 +246,7 @@
 			\label{fig:monteur}
 		\end{figure}
 		\vspace*{1cm}
-		\lipsum[1]
+		Nous avons choisi d’utiliser un monteur pour faciliter l’implémentation de la création d’une partie ou de la création d’une partie enregistrée. La classe CreateurPartie définit le processus de création. Quant aux deux classes NouvellePartie et PartieEnregistree, elles héritent de la classe MonteurPartieImpl et constituent différentes implémentations de création. En sachant le type de partie que l’utilisateur veut créer, la mise en place de celle-ci se fera différemment. En effet, le remplissage des cases se fera de façon aléatoire lors d’une création d’une nouvelle partie alors qu’il sera défini dans le cas d’un chargement d’une partie enregistrée.
 		\newpage
 
 	\subsection{Poids-mouche}
@@ -250,7 +256,7 @@
 		\label{fig:poidmouche}
 		\end{figure}
 		\vspace*{1cm}
-		\lipsum[1]
+		Pour la modélisation de la carte, nous avons mis en place un poids-mouche. En effet, dans notre cas nous devons instancier un grand nombre d’objets (cases) ce qui s’avère coûteux en mémoire. Grâce au poids-mouche, il est possible de réduire le nombre d’objets à instancier si tous les objets sont semblables et se différencient seulement sur quelques paramètres. Ici, notre carte se compose de plusieurs cases de types différents. La mise en place du poids-mouche va nous permettre d’obtenir un coût en mémoire plus faible.
 		\newpage
 
 	\subsection{Stratégie}
@@ -260,12 +266,17 @@
 		\label{fig:strategie}
 	\end{figure}
 	\vspace*{1cm}
-	\lipsum[1]
+	Stratégie :
+Nous voulons que e comportement de notre carte évolue en fonction du contexte choisi par le joueur. En effet, en fonction que le joueur choisisse une carte démo, une petite carte ou une carte normale, on ne créera pas la carte de la même façon. C’est pourquoi nous avons mis en place une Stratégie.
+
 	\newpage
 
 \section*{Conclusion}
 	\addcontentsline{toc}{section}{Conclusion}
-	\lipsum[1-2]
+	La modélisation du jeu par le biais de différents diagrammes UML nous a permis de mieux appréhender la réalisation de l’implémentation du jeu. En effet, grâce à ces diagrammes nous avons pu séparer les parties importantes de notre jeu en différentes classes. Nous avons pu réfléchir à comment le jeu va fonctionner, et comment nous allons implémenter chaque classe du jeu.
+Le fait d’utiliser des diagrammes différents a pu mettre en évidence une vision globale du comportement fonctionnel du système, les interactions entre les acteurs et le système selon un ordre chronologique et le déclenchement des différents évènements en fonction des états du système. L’utilisation de patrons de conception aura pour effet de simplifier la partie implémentation du jeu et améliorera par conséquent cette implémentation.
+A partir de ce travail sur la modélisation du jeu, nous pouvons d’ors et déjà générer le code lié à nos diagrammes. Nous aurons dans ce cas une base sur lequel nous allons nous appuyer pour débuter la partie programmation de notre jeu.
+
 	\newpage
 	\listoffigures
 
