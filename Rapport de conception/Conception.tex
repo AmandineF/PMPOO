@@ -46,7 +46,7 @@
 \huge \@title
 \end{flushleft}
 \par
-\hrule height 4pt
+\hrule height 2pt
 \par
 \begin{flushright}
 \usefont{OT1}{phv}{m}{n}
@@ -74,7 +74,7 @@
 \author{Frank \textsc{Chassing} et Amandine \textsc{Fouillet}}
 \location{Rennes}
 \blurb{%
-\large{INSA de Rennes\\
+\Large{INSA de Rennes\\
 \textbf{Rapport de conception}}
 }%
 
@@ -86,6 +86,7 @@
 
 \begin{document}
 \maketitle
+\newpage
 \tableofcontents
 \newpage
 
@@ -163,7 +164,7 @@
 			Le diagramme de cas d'utilisation ci-dessus (\textsc{Figure \ref{fig:uctour}}) illustre le déroulement d'un tour de jeu du point de vue utilisateur. Lorsque c'est à son tour de jouer, le joueur doit choisir une action pour chacune de ses unités. Il a la possibilité de ne rien faire, déplacer l'unité dans une case vide ou d'attaquer le peuple ennemi. À  tout moment, le joueur peut décider de finir le tour ou de quitter la partie.
 			\newpage
 
-		\subsubsection{Diagramme d'activités}
+		\subsubsection{Diagramme d'activité}
 			\begin{figure}[ht!]
 				\includegraphics{Diagrammes/Tour/actTourDeJeu.png}
 				\caption{Diagramme d'activité - Déroulement d'un tour de jeu}
@@ -175,7 +176,7 @@
 
 		\subsubsection{Diagramme de séquence}
 			\begin{figure}[ht!]
-				\includegraphics{Diagrammes/Tour/actTourDeJeu.png}
+				\includegraphics{Diagrammes/Tour/sqTourDeJeu.png}
 				\caption{Diagramme de séquence - Déroulement d'un tour de jeu}
 				\label{fig:seqtour}
 				\end{figure}
@@ -214,21 +215,24 @@
 			
 \section{Diagramme de classe}
 	\vspace*{0.5cm}
-	Le diagramme de classe ci-dessous illustre l’ensemble de nos classes ainsi que l’ensemble des relations entre celles-ci. Ce diagramme fait abstraction des aspects temporels et dynamiques. Chaque classe décrit les responsabilités, le comportement et le type d’un ensemble d’objets. Au sein même de ce diagramme nous observons différentes parties significatives de notre jeu : 
-•	Une partie consacrée à la création d’une partie et à la modélisation de la carte sous forme d’un patron de conception : un monteur. On retrouve également une Stratégie permettant le choix du type de carte.
-•	Une seconde partie représente  l’ensemble des classes liées à la Carte. Elles sont visibles sous la forme d’un poids-mouche. Nous observons plusieurs types de cases (Plaine, Désert, Montagne et Forêt) héritant de la classe CaseImpl et créé à partir de la classe FabriquecaseImpl.La classe CarteImpl est composée de plusieurs objets de la classe CaseImpl.
-•	Nous retrouvons une partie dédié aux objets appartenant aux joueurs. Un joueur possède un peuple. Il existe trois types de peuples (Orc, Nain ou Elfe). Un joueur possède également des unités. Ces unités peuvent être de trois types différents en fonction du peuple.
-•	Une dernière partie rassemble les classes se rapportant au jeu. La classe JeuImpl  possède l’ensemble des méthodes permettant l’accès aux joueurs, au gagnant, au calcul des points, etc. La classe TourImpl possède l’ensemble des méthodes permettant de gérer le tour de jeu d’un joueur (combattre, déplacer ou sélectionner les unités).
+	Le diagramme de classe ci-dessous  (\textsc{Figure \ref{fig:classe}})  illustre l’ensemble de nos classes ainsi que l’ensemble des relations entre celles-ci. Ce diagramme fait abstraction des aspects temporels et dynamiques. Chaque classe décrit les responsabilités, le comportement et le type d’un ensemble d’objets. Au sein même de ce diagramme nous observons différentes parties significatives de notre jeu : 
+	\begin{itemize}
+\item Une partie consacrée à la création d’une partie et à la modélisation de la carte sous forme d’un patron de conception : un monteur. On retrouve également une Stratégie permettant le choix du type de carte.
+\item	Une seconde partie représente  l’ensemble des classes liées à la Carte. Elles sont visibles sous la forme d’un poids-mouche. Nous observons plusieurs types de cases (Plaine, Désert, Montagne et Forêt) héritant de la classe CaseImpl et créé à partir de la classe FabriquecaseImpl.La classe CarteImpl est composée de plusieurs objets de la classe CaseImpl.
+\item	Nous retrouvons une partie dédié aux objets appartenant aux joueurs. Un joueur possède un peuple. Il existe trois types de peuples (Orc, Nain ou Elfe). Un joueur possède également des unités. Ces unités peuvent être de trois types différents en fonction du peuple.
+\item	Une dernière partie rassemble les classes se rapportant au jeu. La classe JeuImpl  possède l’ensemble des méthodes permettant l’accès aux joueurs, au gagnant, au calcul des points, etc. La classe TourImpl possède l’ensemble des méthodes permettant de gérer le tour de jeu d’un joueur (combattre, déplacer ou sélectionner les unités). \\
+
 Dans la suite, nous détaillerons l’ensemble des patrons de conception utilisés.
+\end{itemize}
 
 	\vspace*{0.5cm}
 	\begin{figure}[ht!]
-		\includegraphics[height=13cm,width=15cm]{Diagrammes/Classe/classe.png}
+		\includegraphics[height=10cm,width=15cm]{Diagrammes/Classe/classe.png}
 		\caption{Diagramme de classe - Modélisation globale}
 		\label{fig:classe}
 	\end{figure}
 	\newpage
-
+\newpage
 	\subsection{Fabrique}
 		\begin{figure}[ht!]
 			\includegraphics[height=12cm,width=14cm]{Diagrammes/Classe/fabrique.png}
@@ -266,15 +270,16 @@ Dans la suite, nous détaillerons l’ensemble des patrons de conception utilis�
 		\label{fig:strategie}
 	\end{figure}
 	\vspace*{1cm}
-	Stratégie :
-Nous voulons que e comportement de notre carte évolue en fonction du contexte choisi par le joueur. En effet, en fonction que le joueur choisisse une carte démo, une petite carte ou une carte normale, on ne créera pas la carte de la même façon. C’est pourquoi nous avons mis en place une Stratégie.
+Nous voulons que le comportement de notre carte évolue en fonction du contexte choisi par le joueur. En effet, en fonction que le joueur choisisse une carte démo, une petite carte ou une carte normale, on ne créera pas la carte de la même façon. C’est pourquoi nous avons mis en place une Stratégie.
 
 	\newpage
 
 \section*{Conclusion}
 	\addcontentsline{toc}{section}{Conclusion}
-	La modélisation du jeu par le biais de différents diagrammes UML nous a permis de mieux appréhender la réalisation de l’implémentation du jeu. En effet, grâce à ces diagrammes nous avons pu séparer les parties importantes de notre jeu en différentes classes. Nous avons pu réfléchir à comment le jeu va fonctionner, et comment nous allons implémenter chaque classe du jeu.
-Le fait d’utiliser des diagrammes différents a pu mettre en évidence une vision globale du comportement fonctionnel du système, les interactions entre les acteurs et le système selon un ordre chronologique et le déclenchement des différents évènements en fonction des états du système. L’utilisation de patrons de conception aura pour effet de simplifier la partie implémentation du jeu et améliorera par conséquent cette implémentation.
+	La modélisation du jeu par le biais de différents diagrammes UML nous a permis de mieux appréhender la réalisation de l’implémentation du jeu. En effet, grâce à ces diagrammes nous avons pu séparer les parties importantes de notre jeu en différentes classes. Nous avons pu réfléchir à comment le jeu va fonctionner, et comment nous allons implémenter chaque classe du jeu.\\
+	
+Le fait d’utiliser des diagrammes différents a pu mettre en évidence une vision globale du comportement fonctionnel du système, les interactions entre les acteurs et le système selon un ordre chronologique et le déclenchement des différents évènements en fonction des états du système. L’utilisation de patrons de conception aura pour effet de simplifier la partie implémentation du jeu et améliorera par conséquent cette implémentation.\\
+
 A partir de ce travail sur la modélisation du jeu, nous pouvons d’ors et déjà générer le code lié à nos diagrammes. Nous aurons dans ce cas une base sur lequel nous allons nous appuyer pour débuter la partie programmation de notre jeu.
 
 	\newpage
