@@ -21,21 +21,26 @@ namespace SmallWorld
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Jeu jeu;
         public MainWindow()
         {
             InitializeComponent();
-            CreateurPartie dieu = new CreateurPartie(4);
-            this.jeu = dieu.creerPartie("Amandine", new PeupleNain(), "Frank", new PeupleOrc());
-            this.jeu.getCarte().Dessin();
+           
         }
-
-        private void ButtonCloseClicked(object sender, RoutedEventArgs e)
+        private void Button_Click1(object sender, RoutedEventArgs e)
         {
-            FenetreCarte frm = new FenetreCarte(this.jeu);
-            frm.Show();
+            ConfigJoueur Fenetre = new ConfigJoueur();
+            this.Content = Fenetre.Content;
+        }
+        private void Button_Click2(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("A faire ...");
+        }
+        private void Button_Click3(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Etes-vous sûr de vouloir quitter le jeu ?");
             this.Close();
         }
+
 
     }
 }

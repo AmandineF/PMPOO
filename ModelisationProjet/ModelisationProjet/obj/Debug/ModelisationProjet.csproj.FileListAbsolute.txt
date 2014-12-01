@@ -8,3 +8,8 @@ C:\Users\afouille\Downloads\ModelisationProjet\ModelisationProjet\ModelisationPr
 \\psf\Home\Desktop\ModelisationProjet\ModelisationProjet\bin\Debug\ModelisationProjet.dll
 \\psf\Home\Desktop\ModelisationProjet\ModelisationProjet\bin\Debug\ModelisationProjet.pdb
 \\psf\Home\Desktop\ModelisationProjet\ModelisationProjet\obj\Debug\ModelisationProjet.csprojResolveAssemblyReference.cache
+C:\Users\Frank\Documents\GitHub\PMPOO\ModelisationProjet\ModelisationProjet\bin\Debug\ModelisationProjet.dll
+C:\Users\Frank\Documents\GitHub\PMPOO\ModelisationProjet\ModelisationProjet\bin\Debug\ModelisationProjet.pdb
+C:\Users\Frank\Documents\GitHub\PMPOO\ModelisationProjet\ModelisationProjet\obj\Debug\ModelisationProjet.csprojResolveAssemblyReference.cache
+C:\Users\Frank\Documents\GitHub\PMPOO\ModelisationProjet\ModelisationProjet\obj\Debug\ModelisationProjet.dll
+C:\Users\Frank\Documents\GitHub\PMPOO\ModelisationProjet\ModelisationProjet\obj\Debug\ModelisationProjet.pdb

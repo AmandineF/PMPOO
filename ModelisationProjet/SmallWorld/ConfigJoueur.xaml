@@ -1,0 +1,30 @@
+﻿<Window x:Class="SmallWorld.ConfigJoueur"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ConfigJoueur" Height="700" Width="1191">
+    <Grid >
+        <Image Source="SmallWorld/bin/Debug/Ressources/Accueil/background_sanstitre.jpg" Height="669" VerticalAlignment="Bottom"  />
+        <TextBlock Height="60" HorizontalAlignment="Center" FontFamily="Jokerman" FontSize="30" Foreground="White" Margin="391,10,408,599"> Configuration des joueurs</TextBlock>
+        <GroupBox Name="Fieldset1" Margin="43,96,640,184"  BorderThickness="0" >
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center">Joueur 1</TextBlock>
+                <TextBlock Margin="0,30,0,0"><Run Text="Pseudo :"/></TextBlock>
+                <TextBox Margin="194,-10,114,-10" Height="30" />
+            </StackPanel>
+        </GroupBox>
+
+        <Image Source="SmallWorld/bin/Debug/Ressources/Accueil/nain_config_joueur.jpg" Height="50" Margin="81,279,671,340" />
+        <Image Source="SmallWorld/bin/Debug/Ressources/Accueil/orc_config_joueur.jpg" Height="50" Margin="-15,334,576,285"  />
+
+        <GroupBox Name="Fieldset2"  Margin="612,96,71,184"  BorderThickness="0">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center">Joueur 1</TextBlock>
+                <TextBlock Margin="0,30,0,0"><Run Text="Pseudo :"/></TextBlock>
+                <TextBox Margin="194,-10,113,-10" Height="30"/>
+            </StackPanel>
+        </GroupBox>
+        <Button Content="Valider"  Cursor="Hand" Width="304" Height="60" Click="Button_Click1"  Margin="0,400,0,0" />
+        <Image Source="SmallWorld/bin/Debug/Ressources/Accueil/orc_config_joueur.jpg" Height="50" Margin="577,334,10,285"  />
+        <Image Source="SmallWorld/bin/Debug/Ressources/Accueil/nain_config_joueur.jpg" Height="50" Margin="659,279,93,340" />
+    </Grid>
+</Window>
