@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ModelisationProjet
+{
+    public interface Joueur
+    {
+        Peuple getPeuple();
+
+        int calculerPoints();
+
+        string getPseudo();
+
+        int getNbUnite();
+
+        Unite getUnite(int i);
+    }
+}
