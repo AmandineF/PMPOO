@@ -19,7 +19,7 @@ namespace SmallWorld
         private BitmapImage casePlaine = null;
         private BitmapImage vide = null;
         private BitmapImage nain = null;
-        private BitmapImage nain2 = null;
+        private BitmapImage nain4 = null;
         private BitmapImage elf = null;
         private BitmapImage orc = null;
         private static FabriqueImage INSTANCE = new FabriqueImage();
@@ -32,7 +32,7 @@ namespace SmallWorld
             this.casePlaine = new BitmapImage(new Uri(@"Ressources/Cases/Map2/casePlaine.png", UriKind.Relative));
             
             this.nain = new BitmapImage(new Uri(@"Ressources/Unites/nainN1.png", UriKind.Relative));
-            this.nain2 = new BitmapImage(new Uri(@"Ressources/Unites/nain2.png", UriKind.Relative));
+            this.nain4 = new BitmapImage(new Uri(@"Ressources/Unites/nain4.png", UriKind.Relative));
             this.elf = new BitmapImage(new Uri(@"Ressources/Unites/elf.png", UriKind.Relative));
             this.orc = new BitmapImage(new Uri(@"Ressources/Unites/orcN1.png", UriKind.Relative));
 
@@ -79,7 +79,7 @@ namespace SmallWorld
             {
                 if (nbUnite > 2)
                 {
-                    brush.ImageSource = this.nain2;
+                    brush.ImageSource = this.nain4;
                 }
                 else 
                 {
@@ -91,7 +91,7 @@ namespace SmallWorld
             {
                 if (nbUnite > 2)
                 {
-                    brush.ImageSource = this.nain2;
+                    brush.ImageSource = this.nain4;
                 }
                 else
                 {

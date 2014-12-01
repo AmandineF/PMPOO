@@ -23,9 +23,9 @@ namespace SmallWorld
     {
         public MainWindow()
         {
-            InitializeComponent();
-           
+            InitializeComponent();        
         }
+
         private void Button_Click1(object sender, RoutedEventArgs e)
         {
             ConfigJoueur Fenetre = new ConfigJoueur();

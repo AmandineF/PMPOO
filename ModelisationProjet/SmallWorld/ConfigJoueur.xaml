@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ConfigJoueur" Height="700" Width="1191">
     <Grid >
-        <Image Source="SmallWorld/bin/Debug/Ressources/Accueil/background_sanstitre.jpg" Height="669" VerticalAlignment="Bottom"  />
+        <Image Source="/SmallWorld;component/Ressources/Accueil/background_sanstitre.jpg" Height="669" VerticalAlignment="Bottom"  />
         <TextBlock Height="60" HorizontalAlignment="Center" FontFamily="Jokerman" FontSize="30" Foreground="White" Margin="391,10,408,599"> Configuration des joueurs</TextBlock>
         <GroupBox Name="Fieldset1" Margin="43,96,640,184"  BorderThickness="0" >
             <StackPanel>
