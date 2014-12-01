@@ -143,6 +143,63 @@
   <ItemGroup>
     <Resource Include="Ressources\Accueil\orc_config_joueur.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map1\caseDesert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map1\caseForet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map1\caseMontagne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map1\casePlaine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\caseDesert.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\caseDesertclaire.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\caseForet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\caseForetclaire.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\caseMontagne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\caseMontagneclaire.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\casePlaine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Cases\Map2\casePlaineclaire.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Unites\nain1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Unites\nain2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Unites\nain3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Unites\nain4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Unites\nainN1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Unites\nainn2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\Unites\orcN1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

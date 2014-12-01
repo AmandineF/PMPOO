@@ -23,10 +23,10 @@ namespace SmallWorld
         {
             InitializeComponent();
         }
-        private void Button_Click1(object sender, RoutedEventArgs e)
+        private void Button_valider_joueur(object sender, RoutedEventArgs e)
         {
-            ConfigMap Fenetre = new ConfigMap();
-            this.Content = Fenetre.Content;
+           ConfigMap Fenetre = new ConfigMap();
+           this.Content = Fenetre.Content; 
 
         }
     }
