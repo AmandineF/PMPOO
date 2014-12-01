@@ -5,7 +5,9 @@
         
         Title="SmallWorld" Height="700" Width="1191">
     <Grid >
-
+        <Grid.Background>
+            <ImageBrush ImageSource="/SmallWorld;component/Ressources/Accueil/background.jpg" />
+        </Grid.Background >
         <Image Name="Back"/>
         <StackPanel Margin="0,0,40,0" Cursor="Hand" >
             <Button Content="Nouvelle Partie"   Width="304" Height="60" Click="Button_Click1" Margin="0,230,0,0" />

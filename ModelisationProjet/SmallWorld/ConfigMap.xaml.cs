@@ -31,8 +31,7 @@ namespace SmallWorld
         private void ButtonCloseClicked(object sender, RoutedEventArgs e)
         {
             FenetreCarte frm = new FenetreCarte(this.jeu);
-            frm.Show();
-            this.Close();
+            this.Content = frm.Content;
         }
     }
 }

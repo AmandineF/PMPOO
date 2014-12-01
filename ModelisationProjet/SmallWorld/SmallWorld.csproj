@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -120,6 +121,27 @@
       <Project>{fe43266d-55a6-4932-8fb0-6735b4612a55}</Project>
       <Name>ModelisationProjet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Accueil\background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Accueil\background_sanstitre.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Accueil\carte_demo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Accueil\carte_moyenne.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Accueil\carte_petite.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Accueil\nain_config_joueur.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ressources\Accueil\orc_config_joueur.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
