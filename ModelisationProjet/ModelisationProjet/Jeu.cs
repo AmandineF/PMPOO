@@ -43,6 +43,16 @@ namespace ModelisationProjet
            return this.joueur2;
         }
 
+        public Joueur getPremierJoueur()
+        {
+            Random r = new Random();
+            int rand = r.Next(1, 3);
+            if (rand == 1)
+                return this.joueur1;
+            else
+                return this.joueur2;
+        }
+
         public Joueur getGagnant()
         {
             if (this.joueur1.calculerPoints() > this.joueur2.calculerPoints())
@@ -85,6 +95,8 @@ namespace ModelisationProjet
         Joueur getJoueur1();
 
         Joueur getJoueur2();
+
+        Joueur getPremierJoueur();
 
         Carte getCarte();
 

@@ -31,6 +31,11 @@ namespace ModelisationProjet
         {
             this.uniteSelect = u;
         }
+
+        public Unite getUniteSelect()
+        {
+            return this.uniteSelect;
+        }
         public void selectionnerUnite(Unite u, int x, int y)
         {
             this.uniteSelect = u;
@@ -48,17 +53,17 @@ namespace ModelisationProjet
             bool deplacement = true;
             if (this.uniteSelect == null)
             {
-                Console.WriteLine("Aucune unité sélectionnée");
+               // Console.WriteLine("Aucune unité sélectionnée");
                 deplacement = false;
             }
             else if (this.uniteSelect.getMouvement() < 1)
             {
-                Console.WriteLine("Pas assez de point de mouvement");
+                //Console.WriteLine("Pas assez de point de mouvement");
                 deplacement = false;
             }
             else if (this.positionXdest > this.positionXselect + 1 || this.positionYdest > this.positionYselect + 1)
             {
-                Console.WriteLine("La case de destination est trop loin par rapport à la case actuelle");
+                //Console.WriteLine("La case de destination est trop loin par rapport à la case actuelle");
                 deplacement = false;
             }
             else if (this.uniteSelect is UniteNain && this.jeu.getCarte().getCase(positionXselect, positionYselect) is CaseMontagne)
@@ -67,12 +72,15 @@ namespace ModelisationProjet
             }
             else if (this.uniteSelect.getMouvement() < 1)
             {
-                Console.WriteLine("L'unité sélectionnée n'a pas assez de points de mouvement pour se déplacer");
+               // Console.WriteLine("L'unité sélectionnée n'a pas assez de points de mouvement pour se déplacer");
                 deplacement = false;
             }
             else if (this.uniteSelect is UniteElf && this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest) is CaseDesert && this.uniteSelect.getMouvement() < 2)
             {
-                Console.WriteLine("Un Elf doit avoir plus de 2 points de mouvement pour se déplacer sur une case Desert");
+                //Console.WriteLine("Un Elf doit avoir plus de 2 points de mouvement pour se déplacer sur une case Desert");
+                deplacement = false;
+            }
+            else if (this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).estCaseEnnemie(this.joueur)) {
                 deplacement = false;
             }
             return deplacement;
@@ -129,16 +137,12 @@ namespace ModelisationProjet
 
         public void deplacementUnite()
         {
-            bool personne = true;
             if (this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).estCaseEnnemie(this.joueur))
             {
-                personne = false;
                 combattre(this.uniteSelect);
-                if (this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).estCaseEnnemie(this.joueur))
-                    personne = false;
             }
 
-            if (personne && deplacementPossible())
+            if (deplacementPossible())
             {
                 this.jeu.getCarte().getCase(this.positionXselect, this.positionYselect).supprimeUnite(this.uniteSelect);
                 this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).ajoutUnite(this.uniteSelect);
@@ -218,6 +222,10 @@ namespace ModelisationProjet
 
         void deplacementUnite();
 
+        bool deplacementPossible();
+
         void deselectionnerUnite();
+
+        Unite getUniteSelect();
     }
 }

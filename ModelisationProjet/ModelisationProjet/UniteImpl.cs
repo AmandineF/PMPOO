@@ -10,7 +10,7 @@ namespace ModelisationProjet
         private const int POINTS_VIE_INITIAL = 5;
         private const int POINTS_ATTAQUE_INITIAL = 2;
         private const int POINTS_DEFENSE_INITIAL = 1;
-        private const int POINTS_MVT_INITIAL = 1;
+        private const int POINTS_MVT_INITIAL = 2;
         private int ptVie;
         private int ptAttaque;
         private int ptDefense;

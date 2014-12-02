@@ -32,8 +32,11 @@ namespace ModelisationProjet
         public bool estCaseEnnemie(Joueur j) 
         {
             bool res = false;
-            if (this.listeUnite[1].getJoueur() != j)
-                res = true;
+            if (this.listeUnite.Count() > 0)
+            {
+                if (this.listeUnite[1].getJoueur() != j)
+                    res = true;
+            }
             return res;
         }
 

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="SmallWorld.FenetreCarte"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SmallWorld" Loaded="creerCarte" Height="600" Width="900">
+        Title="TourDeJeu" Loaded="creerCarte" Height="600" Width="900">
     <Window.Resources>
         <Style x:Key="menuStyle" TargetType="MenuItem">
             <Setter Property="FontSize" Value="20" />
@@ -12,16 +12,12 @@
         </Style>
 
     </Window.Resources>
-    <DockPanel>
-        <Menu IsMainMenu="True" DockPanel.Dock="Top" Background="Transparent" HorizontalAlignment="Center">
-            <MenuItem Header="Small World" Style="{StaticResource menuStyle}" Height="40" Click="MenuItem_Click"/>
-        </Menu>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Canvas>
-                <Canvas HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,50,50,10" Name="mapGrid"/>
-                 
-            </Canvas>
-        </ScrollViewer >
 
-    </DockPanel>
+        <!--<Menu IsMainMenu="True" DockPanel.Dock="Top" Background="Transparent" HorizontalAlignment="Center">
+            <MenuItem Header="Small World" Style="{StaticResource menuStyle}" Height="40" Click="MenuItem_Click"/>
+        </Menu>-->
+    <Grid Name ="sp">
+    </Grid >
+
+      
 </Window>
