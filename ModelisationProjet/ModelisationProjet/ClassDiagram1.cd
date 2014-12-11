@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Poids-mouche">
+    <Position X="5.281" Y="9.065" Height="0.385" Width="1.054" />
+  </Comment>
+  <Comment CommentText="Fabrique associé au joueur quand il choisit son peuple">
+    <Position X="17.578" Y="3.146" Height="0.909" Width="1.527" />
+  </Comment>
+  <Comment CommentText="Monteur">
+    <Position X="4.385" Y="15.24" Height="0.291" Width="0.731" />
+  </Comment>
+  <Comment CommentText="Strategie">
+    <Position X="8.479" Y="14.073" Height="0.333" Width="0.752" />
+  </Comment>
+  <Class Name="ModelisationProjet.CarteImpl">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAIACAAAAAAAAAABAAAAAAAAIAAAA=</HashCode>
+      <FileName>Carte.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.CaseImpl">
+    <Position X="3.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAABAAAAAAAQAAAAIAEAQAAAAAAA=</HashCode>
+      <FileName>Case.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="ModelisationProjet.CasePlaine">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <InheritanceLine Type="ModelisationProjet.CaseImpl" FixedFromPoint="true">
+      <Path>
+        <Point X="4" Y="5.515" />
+        <Point X="4" Y="6.125" />
+        <Point X="1.25" Y="6.125" />
+        <Point X="1.25" Y="6.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CasePlaine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.CaseDesert">
+    <Position X="2.25" Y="6.5" Width="1.5" />
+    <InheritanceLine Type="ModelisationProjet.CaseImpl" FixedFromPoint="true">
+      <Path>
+        <Point X="4" Y="5.515" />
+        <Point X="4" Y="6.125" />
+        <Point X="3" Y="6.125" />
+        <Point X="3" Y="6.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CaseDesert.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.CaseMontagne">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CaseMontagne.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.PeupleImpl">
+    <Position X="15.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PeupleImpl.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.JoueurImpl">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgEAAAAUAAABAAABABAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>JoueurImpl.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.1" />
+  </Class>
+  <Class Name="ModelisationProjet.UniteOrc">
+    <Position X="8.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UniteOrc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.UniteNain">
+    <Position X="10.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UniteNain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.UniteElf">
+    <Position X="12" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UniteElf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.FabriqueCaseImpl">
+    <Position X="3" Y="8.5" Width="1.5" />
+    <AssociationLine Name="caseMontagne" Type="ModelisationProjet.CaseMontagne" FixedToPoint="true">
+      <Path>
+        <Point X="4.188" Y="8.5" />
+        <Point X="4.188" Y="7.733" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.317" Y="0.664" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="caseDesert" Type="ModelisationProjet.CaseDesert" FixedToPoint="true">
+      <Path>
+        <Point X="3.375" Y="8.5" />
+        <Point X="3.375" Y="7.732" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="casePlaine" Type="ModelisationProjet.CasePlaine" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="8.938" />
+        <Point X="1.25" Y="8.938" />
+        <Point X="1.25" Y="7.733" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="caseForet" Type="ModelisationProjet.CaseForet" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="8.938" />
+        <Point X="6.5" Y="8.938" />
+        <Point X="6.5" Y="7.732" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IAAAIEAAAAAAAAABAAAAAAQAEAAAAgAAEAAAAQAcAAA=</HashCode>
+      <FileName>FabriqueCase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="caseMontagne" />
+      <Field Name="caseDesert" />
+      <Field Name="casePlaine" />
+      <Field Name="caseForet" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.Vue">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <AssociationLine Name="CarteImpl" Type="ModelisationProjet.CarteImpl">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.937" Y="0.349" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Vue.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CarteImpl" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ModelisationProjet.CarteDemo">
+    <Position X="9" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CarteDemo.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.CartePetite">
+    <Position X="10.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CartePetite.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.CarteNormale">
+    <Position X="12.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CarteNormale.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.CreateurPartie">
+    <Position X="0.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAIAABAAACAgAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CreateurPartie.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="monteurPartie" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ModelisationProjet.MonteurPartieImpl">
+    <Position X="4" Y="13.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAEAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>MonteurPartie.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="StrategieCarte" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.NouvellePartie">
+    <Position X="2.75" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MonteurNouvellePartie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.PartieEnregistree">
+    <Position X="5.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PartieEnregistree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.CaseForet">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CaseForet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.UniteImpl">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgEAQAAAAAAgAAQCQAGAAEACAADCABCAIDwAGEAAYA=</HashCode>
+      <FileName>UniteImpl.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.JeuImpl">
+    <Position X="15.75" Y="10" Width="1.5" />
+    <AssociationLine Name="joueur2" Type="ModelisationProjet.Joueur">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.11" Y="0.267" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="joueur1" Type="ModelisationProjet.Joueur">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.799" Y="0.28" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAEiABAAAAAQAAgAAAACAAAIABAAAQAA=</HashCode>
+      <FileName>Jeu.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="joueur2" />
+      <Field Name="joueur1" />
+      <Field Name="carte" />
+    </ShowAsAssociation>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="ModelisationProjet.TourImpl">
+    <Position X="10.25" Y="9.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAEEAAAAAACAIAAAQAAAAAAAAAAAKAgAAA=</HashCode>
+      <FileName>Tour.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ModelisationProjet.PeupleOrc">
+    <Position X="15.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PeupleOrc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.PeupleNain">
+    <Position X="14" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PeupleNain.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelisationProjet.PeupleElf">
+    <Position X="17.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PeupleElf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ModelisationProjet.Peuple">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Peuple.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.Joueur">
+    <Position X="15.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAEAAABAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Joueur.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.Case">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAEAQAAAAAAA=</HashCode>
+      <FileName>Case.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.StrategieCarte">
+    <Position X="8" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StrategieCarte.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.MonteurPartie">
+    <Position X="0.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MonteurPartie.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.Unite">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAQCQAGAAAACAAAAAACAICQAGAAAYA=</HashCode>
+      <FileName>Unite.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.FabriqueCase">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAEAAAAAAAAABAAAAAAQAAAAAAAAAEAAAAAAcAAA=</HashCode>
+      <FileName>FabriqueCase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.Jeu">
+    <Position X="17.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACABAAAAAQAAAAAAACAAAIABAAAQAA=</HashCode>
+      <FileName>Jeu.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.Carte">
+    <Position X="13.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Carte.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ModelisationProjet.Tour">
+    <Position X="8" Y="10.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAKAAAAA=</HashCode>
+      <FileName>Tour.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

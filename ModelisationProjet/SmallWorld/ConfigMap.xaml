@@ -1,0 +1,58 @@
+﻿<Window x:Class="SmallWorld.ConfigMap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ConfigJoueur" Height="710" Width="1260">
+  
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/SmallWorld;component/Resources/background6.jpg"/>
+        </Grid.Background>
+
+        <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Jokerman" FontSize="30" Foreground="#272b4f"> Choix de la carte</TextBlock>
+        <DockPanel Margin="60,100,60,200">
+            <GroupBox Width="350" Margin="0,0,40,-33" Header="" BorderThickness="0" Name="demo" Cursor="Hand" MouseLeftButtonDown="ChoixDemoCarte">
+
+                <StackPanel HorizontalAlignment="Center" Width="270">
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,25,22,0" Width="136"><Run Text="Carte Démo"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,225,0,0"><Run Text="4 unités"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="10 tours"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="Du fun !"/></TextBlock>
+                </StackPanel>
+            </GroupBox >
+            <GroupBox Width="350" Margin="0,0,40,-33" Header="" BorderThickness="0" Name="petite" Cursor="Hand" MouseLeftButtonDown="ChoixPetiteCarte">
+                <StackPanel Width="270" HorizontalAlignment="Center">
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,25,0,0" Width="160"><Run Text="Petite Carte"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,225,0,0"><Run Text="6 unités"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="20 tours"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="Du Délire !"/></TextBlock>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Width="350" BorderThickness="0" Header="" Name="normale" Cursor="Hand" MouseLeftButtonDown="ChoixNormaleCarte" Margin="0,0,0,-33">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,25,0,0" Width="180"><Run Text="Carte Normale"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,225,0,0"><Run Text="8 unités"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="30 tours"/></TextBlock>
+                    <TextBlock  HorizontalAlignment="Center" Margin="0,0,0,0"><Run Text="Démentiel !"/></TextBlock>
+                </StackPanel>
+            </GroupBox>
+        </DockPanel>
+
+        <Rectangle Height="131" Width="235" VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonDown="ChoixDemoCarte"  Margin="129,221,888,327">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/map_36.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Height="131" Width="235" VerticalAlignment="Center"  MouseLeftButtonDown="ChoixPetiteCarte" Cursor="Hand" Margin="518,215,500,333">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/map_100.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Height="131" Width="235" VerticalAlignment="Center"  MouseLeftButtonDown="ChoixNormaleCarte" Cursor="Hand" Margin="904,215,113,333">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/map_256.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Button Content="Valider"  Cursor="Hand" Click="ButtonCloseClicked" Width="200" Height="59"  Margin="530,543,522,77" />
+    </Grid>
+</Window>

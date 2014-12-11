@@ -1,0 +1,1 @@
+\\psf\Home\Desktop\ModelisationProjet\SmallWorld\bin\Release\SmallWorld.exe.config

@@ -1,0 +1,134 @@
+﻿<Window x:Class="SmallWorld.ConfigJoueur"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ConfigJoueur" Height="700" Width="1250">
+    <Grid >
+        <Grid.Background>
+            <ImageBrush ImageSource="/SmallWorld;component/Resources/background6.jpg"/>
+        </Grid.Background>
+        <TextBlock Height="60" HorizontalAlignment="Center" FontFamily="Jokerman" FontSize="30" Foreground="#272b4f" Margin="391,10,408,599"> Configuration des joueurs</TextBlock>
+        <GroupBox Name="Fieldset1" Margin="82,96,670,150"  BorderThickness="0" >
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center"  Margin="0,20,0,0">Joueur 1</TextBlock>
+                <WrapPanel>
+                    <TextBlock Margin="20,25,0,0"><Run Text="Pseudo :"/></TextBlock>
+                    <TextBox  x:Name="pseudoJ1"  Margin="35,25,0,0" Height="30" Width="180" Text="Frank"  />
+                </WrapPanel>
+
+            </StackPanel>
+        </GroupBox>
+        <Rectangle Margin="251,353,831,157" Name="ElfeJ1" MouseLeftButtonDown="ChoixElfeJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/elf.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Elfes</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Forêt est divisé par deux.</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Désert est multiplié par deux.</TextBlock>
+                        <TextBlock>- Une unité Elfe a 50% de chance de se replier lors d'un combat perdu (provoqué ou subit)</TextBlock>
+                        <TextBlock>  devant normalement conduire à la destruction de l'unité : l'unité survit avec 1 point de vie.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Rectangle Margin="91,224,991,278" Name="NainJ1" MouseLeftButtonDown="ChoixNainJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/nain.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Nains</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Plaine est divisé par deux.</TextBlock>
+                        <TextBlock>- Une unité Nain n'acquière aucun point sur les cases Plaine.</TextBlock>
+                        <TextBlock>- Lorsqu'elle se trouve sur une Case Montagne, une unité Nain a la capacité de se déplacer</TextBlock>
+                        <TextBlock>  sur n'importe quelle case Montagne de la carte à condition qu'elle ne soit occupée par une unité adverse.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Rectangle Margin="388,226,689,273" Name="OrcJ1" MouseLeftButtonDown="ChoixOrcJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/orc.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Orcs</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Plaine est divisé par deux.</TextBlock>
+                        <TextBlock>- Une unité Orc n'acquière aucun point de victoire sur les cases de type Forêt.</TextBlock>
+                        <TextBlock>- Lorsqu'une unité Orc détruit une autre unité, elle possède alors 1 point de victoire supplémentaire.</TextBlock>
+                        <TextBlock>  Cet effet est cumulable et est lié à chaque unité (i.e si l'unité ayant le bonus meurt, le bonus disparaît).</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+
+        <GroupBox Name="Fieldset2"  Margin="682,96,100,150"  BorderThickness="0">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0"><Run Text="Joueur 2"/></TextBlock>
+                <WrapPanel>
+                    <TextBlock Margin="20,25,0,0"><Run Text="Pseudo :"/></TextBlock>
+                    <TextBox  x:Name="pseudoJ2"  Margin="35,25,0,0" Height="30" Width="180" Text="Amandine" />
+                </WrapPanel>
+
+            </StackPanel>
+        </GroupBox>
+
+        <Rectangle Margin="843,346,239,157" Name="ElfeJ2" MouseLeftButtonDown="ChoixElfeJ2" Cursor="Hand"  ToolTipService.ShowDuration="60000">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/elf.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Elfes</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Forêt est divisé par deux.</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Désert est multiplié par deux.</TextBlock>
+                        <TextBlock>- Une unité Elfe a 50% de chance de se replier lors d'un combat perdu (provoqué ou subit)</TextBlock>
+                        <TextBlock>  devant normalement conduire à la destruction de l'unité : l'unité survit avec 1 point de vie.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Rectangle Margin="693,218,389,278" Name="NainJ2" MouseLeftButtonDown="ChoixNainJ2" Cursor="Hand" ToolTipService.ShowDuration="60000">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/nain.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Nains</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Plaine est divisé par deux.</TextBlock>
+                        <TextBlock>- Une unité Nain n'acquière aucun point de victoire sur les cases Plaines.</TextBlock>
+                        <TextBlock>- Lorsqu'elle se trouve sur une Case Montagne, une unité Nain a la capacité de se déplacer</TextBlock>
+                        <TextBlock>  sur n'importe quelle case Montagne de la carte à condition qu'elle ne soit occupée par une unité adverse.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Rectangle Margin="968,218,108,281" Name="OrcJ2" MouseLeftButtonDown="ChoixOrcJ2" Cursor="Hand" ToolTipService.ShowDuration="60000" RenderTransformOrigin="0.566,0.518">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/orc.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Orcs</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Plaine est divisé par deux.</TextBlock>
+                        <TextBlock>- Une unité Orc n'acquière aucun point de victoire sur les cases de type Forêt.</TextBlock>
+                        <TextBlock>- Lorsqu'une unité Orc détruit une autre unité, elle possède alors 1 point de victoire supplémentaire.</TextBlock>
+                        <TextBlock>  Cet effet est cumulable et est lié à chaque unité (i.e si l'unité ayant le bonus meurt, le bonus disparaît).</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+
+
+
+        <Button Content="Valider"  Cursor="Hand" Width="200" Height="59" Click="Valider_joueur"  Margin="531,558,511,52" />
+
+    </Grid>
+</Window>
