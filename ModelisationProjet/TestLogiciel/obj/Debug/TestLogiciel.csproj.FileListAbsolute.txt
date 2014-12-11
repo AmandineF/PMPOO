@@ -1,9 +1,0 @@
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\TestLogiciel.dll
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\TestLogiciel.pdb
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\ModelisationProjet.dll
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\ModelisationProjet.pdb
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.csprojResolveAssemblyReference.cache
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.dll
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.pdb
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\SmallWorld.exe
-\\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\SmallWorld.pdb
