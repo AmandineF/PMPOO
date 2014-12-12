@@ -247,13 +247,13 @@ namespace ModelisationProjet
                 {
                     //Attaque gagne
                     defense.setVie(defense.getVie() - 1);
-                    affichage += "Tour " + nbRound + " : défaite de la défense (" + defense.getJoueur().getNomPeuple() + ").\n";
+                    affichage += "Round " + nbRound + " : défaite de la défense (" + defense.getJoueur().getNomPeuple() + ").\n";
                 }
                 else
                 {
                     //Défense gagne
                     attaque.setVie(attaque.getVie() - 1);
-                    affichage += "Tour " + nbRound + " : défaite de l'attaque (" + attaque.getJoueur().getNomPeuple() + ").\n";
+                    affichage += "Round " + nbRound + " : défaite de l'attaque (" + attaque.getJoueur().getNomPeuple() + ").\n";
                 }
                 nbRound++;
             }
@@ -267,6 +267,7 @@ namespace ModelisationProjet
                 defense.getJoueur().decNbUnite();
                 attaque.setPtVictoire(attaque.getPtVictoire() + 1);
                 affichage += "Dèces de la défense (" + defense.getJoueur().getNomPeuple() + "). \nL'attaque gagne 1 point de victoire.\n";
+                defense.getJoueur().removeUnite(defense);
             }
             else if(!attaque.estVivante())
             {

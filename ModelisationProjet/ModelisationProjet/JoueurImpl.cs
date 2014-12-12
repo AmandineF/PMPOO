@@ -59,6 +59,11 @@ namespace ModelisationProjet
             return this.listeUnite[i];
         }
 
+        public void removeUnite(Unite u)
+        {
+            this.listeUnite.Remove(u);
+        }
+
         /// <summary>
         /// Donne le peuple du joueur
         /// </summary>

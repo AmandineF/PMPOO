@@ -13,6 +13,8 @@ namespace ModelisationProjet
 
         string getPseudo();
 
+        void removeUnite(Unite u);
+
         int getNbUnite();
 
         Unite getUnite(int i);

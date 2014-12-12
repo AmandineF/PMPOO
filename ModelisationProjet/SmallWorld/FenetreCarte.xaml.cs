@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-//using System.Drawing;
 using ModelisationProjet;
 
 namespace SmallWorld
@@ -87,7 +86,7 @@ namespace SmallWorld
                 t = t + 75;
             }
 
-            mapGrid.Margin = new Thickness(0, 60, 0, 0);
+            mapGrid.Margin = new Thickness(0, 80, 0, 0);
             this.FinTour.Margin = new Thickness(0, (this.jeu.getCarte().getTaille() * 80) + 30, 0, 0);
             sp.Children.Add(mapGrid);
             ajoutUnite();
@@ -102,13 +101,13 @@ namespace SmallWorld
             this.pseudoJ1.Text = this.jeu.getJoueur1().getPseudo();
             peuple = "Peuple " + this.jeu.getJoueur1().getNomPeuple() + "\n";
             uniteRestantes = this.jeu.getJoueur1().getNbUnite() + " unités restantes\n";
-            pointVictoire = this.jeu.getJoueur1().getPtVictoire() + " points de victoire\n";
+            pointVictoire = this.jeu.getJoueur1().getPtVictoire() + " points.\n";
             this.infoJ1.Text = peuple + uniteRestantes + pointVictoire;
 
             this.pseudoJ2.Text = this.jeu.getJoueur2().getPseudo();
             peuple = "Peuple " + this.jeu.getJoueur2().getNomPeuple() + "\n";
             uniteRestantes = this.jeu.getJoueur2().getNbUnite() + " unités restantes\n";
-            pointVictoire = this.jeu.getJoueur2().getPtVictoire() + " points de victoire\n";
+            pointVictoire = this.jeu.getJoueur2().getPtVictoire() + " points.\n";
             this.infoJ2.Text = peuple + uniteRestantes + pointVictoire;
         }
 
