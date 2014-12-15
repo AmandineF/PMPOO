@@ -52,8 +52,23 @@ namespace ModelisationProjet
             this.caseForet = new CaseForet();
             return caseForet;
         }
+        public CaseImpl faireCase(int type)
+        {
+            switch (type)
+            {
+                case 1:
+                    return this.creerDesert();
+                case 2:
+                    return this.creerForet();
+                case 3:
+                    return this.creerMontagne();
+                case 4:
+                    return this.creerPlaine();
+                default:
+                    return this.creerForet();
+            }
+        }
     }
-
     public interface FabriqueCase
     {
         
@@ -64,5 +79,6 @@ namespace ModelisationProjet
         CaseDesert creerDesert();
 
         CasePlaine creerPlaine();
+        CaseImpl faireCase(int type);
     }
 }

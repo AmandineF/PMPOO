@@ -7,3 +7,5 @@
 \\psf\Home\Desktop\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.pdb
 \\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\SmallWorld.exe
 \\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\SmallWorld.pdb
+C:\Users\Frank\Downloads\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.csprojResolveAssemblyReference.cache
+C:\Users\Frank\Downloads\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.dll

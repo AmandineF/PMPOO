@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\SmallWorld\obj\Debug\
+C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\obj\Debug\
 SmallWorld
 none
 false
 DEBUG;TRACE
-\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\SmallWorld\App.xaml
+C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\App.xaml
 4-524882596
 
 9531044738
-151435295515
+1665562038
 ConfigJoueur.xaml;ConfigMap.xaml;FenetreCarte.xaml;MainWindow.xaml;
 
 False

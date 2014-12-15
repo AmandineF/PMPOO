@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Wrapper;
+
 
 namespace ModelisationProjet
 {
@@ -16,54 +18,25 @@ namespace ModelisationProjet
         /// Créer une carte de manière aléatoire
         /// </summary>
         /// <param name="t">La taille de la matrice qui représentera la carte</param>
-        public CarteImpl(int t)
+        unsafe public CarteImpl(int t)
         {
             this.taille = t;
             this.carte = new CaseImpl[taille, taille];
-            int i, j, rand, cptDesert, cptMontagne, cptForet, cptPlaine;
+            int i, j;
             this.fabrique = new FabriqueCaseImpl();
-            cptDesert = 0;
-            cptMontagne = 0;
-            cptForet = 0;
-            cptPlaine = 0;
-            Random r = new Random();
-            bool b = true;
-            for (i = 0; i < this.taille; i++)
+            WrapperAlgo wp = new WrapperAlgo();
+            int** typeCase = wp.generationMap(taille);
+            carte = new Case[taille, taille];
+
+            for ( i = 0; i < taille; i++)
             {
-                for (j = 0; j < this.taille; j++)
+                for ( j = 0; j < taille; j++)
                 {
-                    while (b)
-                    {
-                        rand = r.Next(1, 5);
-                        if (rand == 1 && (cptDesert < ((this.taille * this.taille) / 4)))
-                        {
-                            carte[i, j] = fabrique.creerDesert();
-                            cptDesert++;
-                            b = false;
-                        }
-                        if (rand == 2 && (cptForet < ((this.taille * this.taille) / 4)))
-                        {
-                            carte[i, j] = fabrique.creerForet();
-                            cptForet++;
-                            b = false;
-                        }
-                        if (rand == 3 && (cptMontagne < ((this.taille * this.taille) / 4)))
-                        {
-                            carte[i, j] = fabrique.creerMontagne();
-                            cptMontagne++;
-                            b = false;
-                        }
-                        if (rand == 4 && (cptPlaine < ((this.taille * this.taille) / 4)))
-                        {
-                            carte[i, j] = fabrique.creerPlaine();
-                            cptPlaine++;
-                            b = false;
-                        }           
-                    }
-                    b = true;
+                    carte[i, j] = fabrique.faireCase(typeCase[i][j]);
+                   // Console.Write("Case (" + i + " ; " + j + ") = " + carte[i, j] + "---------");
                 }
             }
-           
+         
         }
 
         /// <summary>
@@ -74,6 +47,7 @@ namespace ModelisationProjet
         /// <returns></returns>
         public Case getCase(int x, int y)
         {
+           // Console.Write("x :" + y + " et y : " + y);
             return this.carte[x, y];
         }
 

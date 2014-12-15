@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Wrapper;
 
 namespace ModelisationProjet
 {
@@ -43,6 +44,7 @@ namespace ModelisationProjet
             this.uniteSelect = u;
             this.positionXselect = x;
             this.positionYselect = y;
+
         }
 
         /// <summary>
@@ -65,15 +67,15 @@ namespace ModelisationProjet
             bool deplacement = true;
             if (this.uniteSelect == null)
             {
-               // Console.WriteLine("Aucune unité sélectionnée");
+                // Console.WriteLine("Aucune unité sélectionnée");
                 deplacement = false;
             }
-             if (this.uniteSelect.getMouvement() < 1)
+            if (this.uniteSelect.getMouvement() < 1)
             {
                 //Console.WriteLine("Pas assez de point de mouvement");
                 deplacement = false;
             }
-             if (this.positionXdest > this.positionXselect + 1 || this.positionYdest > this.positionYselect + 1 || this.positionXdest < this.positionXselect - 1 || this.positionYdest < this.positionYselect - 1)
+            if (this.positionXdest > this.positionXselect + 1 || this.positionYdest > this.positionYselect + 1 || this.positionXdest < this.positionXselect - 1 || this.positionYdest < this.positionYselect - 1)
             {
                 //Console.WriteLine("La case de destination est trop loin par rapport à la case actuelle");
                 deplacement = false;
@@ -105,7 +107,7 @@ namespace ModelisationProjet
                     this.uniteSelect.setMouvement(this.uniteSelect.getMouvement() - 0.5);
                 }
                 //Le coût de déplacement sur une case Désert est multipliée par deux pour les Elfes
-                else if (this.jeu.getCarte().getCase(x,y) is CaseDesert)
+                else if (this.jeu.getCarte().getCase(x, y) is CaseDesert)
                 {
                     this.uniteSelect.setMouvement(this.uniteSelect.getMouvement() - 2);
                 }
@@ -175,7 +177,7 @@ namespace ModelisationProjet
                 this.jeu.getCarte().getCase(this.positionXselect, this.positionYselect).supprimeUnite(this.uniteSelect);
                 this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).ajoutUnite(this.uniteSelect);
                 consequenceDeplacement(this.positionXdest, this.positionYdest);
-                affichage += "Déplacement de l'unité sélectionnée sur la case (" + this.positionXdest + " - " + this.positionYdest + ").\n"; 
+                affichage += "Déplacement de l'unité sélectionnée sur la case (" + this.positionXdest + " - " + this.positionYdest + ").\n";
             }
 
             deselectionnerUnite();
@@ -191,11 +193,11 @@ namespace ModelisationProjet
             Unite res = null;
             List<Unite> u = this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).getUnite();
             res = u[0];
-            for (int i = 1; i < u.Count ; i++)
+            for (int i = 1; i < u.Count; i++)
             {
                 if (res.getVie() < u[i].getVie())
                 {
-                        res = u[i];
+                    res = u[i];
                 }
             }
             return res;
@@ -219,10 +221,10 @@ namespace ModelisationProjet
             //tant que le nombre de combat n'a pas été atteint et qu'aucune des unités n'est morte
             affichage = "Le combat dure " + nbCombat + " tours.\n";
             int nbRound = 0;
-            while(nbRound < nbCombat && attaque.estVivante() && defense.estVivante()) 
+            while (nbRound < nbCombat && attaque.estVivante() && defense.estVivante())
             {
                 //algorithme
-                double ratioVieAttaque =(double)attaque.getVie() / (double)attaque.defautPointsVie;     
+                double ratioVieAttaque = (double)attaque.getVie() / (double)attaque.defautPointsVie;
                 double ratioVieDefense = (double)defense.getVie() / (double)defense.defautPointsVie;
                 double ptAttaque = (double)ratioVieAttaque * (double)attaque.getAttaque();
                 double ptDefense = (double)ratioVieDefense * (double)defense.getDefense();
@@ -241,7 +243,7 @@ namespace ModelisationProjet
                 {
                     ratioChanceDef = ratioAttDef / 2;
                 }
-                
+
                 double res = (double)((double)randCombat.Next(100) / 100);
                 if (ratioChanceDef >= res)
                 {
@@ -269,7 +271,7 @@ namespace ModelisationProjet
                 affichage += "Dèces de la défense (" + defense.getJoueur().getNomPeuple() + "). \nL'attaque gagne 1 point de victoire.\n";
                 defense.getJoueur().removeUnite(defense);
             }
-            else if(!attaque.estVivante())
+            else if (!attaque.estVivante())
             {
                 this.jeu.getCarte().getCase(this.positionXselect, this.positionYselect).supprimeUnite(attaque);
                 attaque.getJoueur().decNbUnite();
@@ -284,24 +286,75 @@ namespace ModelisationProjet
             return affichage;
         }
 
+        unsafe public int[][] creerCarteElement(int taille)
+        {
+            taille = this.jeu.getCarte().getTaille();
+            int[][] carteElement = new int[taille][];
+            for (int k = 0; k < taille; k++)
+            {
+                carteElement[k] = new int[taille];
+            }
+            for (int i = 0; i < taille; i++)
+            {
+                for (int j = 0; j < taille; j++)
+                {
+                    if (this.jeu.getCarte().getCase(i, j) is CaseMontagne)
+                    {
+                        carteElement[i][j] = 1; // Montagne
+                    }
+                    else if (this.jeu.getCarte().getCase(i, j) is CasePlaine)
+                    {
+                        carteElement[i][j] = 2; // Plaine
+                    }
+                    else if (this.jeu.getCarte().getCase(i, j) is CaseForet)
+                    {
+                        carteElement[i][j] = 3; // Foret
+                    }
+                    else if (this.jeu.getCarte().getCase(i, j) is CaseDesert)
+                    {
+                        carteElement[i][j] = 4; // Desert
+                    }
+                }
+            }
+            return carteElement;
+        }
+
+        unsafe public bool** recupererCarteSuggestion()
+        {
+            int type = 0;
+            if(uniteSelect is UniteNain){
+                type = 1;
+            }else if(uniteSelect is UniteElf) {
+                type = 2;
+            }else if(uniteSelect is UniteOrc) {
+                type = 3;
+            }
+
+            int[][] carteElement = creerCarteElement(this.jeu.getCarte().getTaille());
+            WrapperAlgo wp = new WrapperAlgo();
+            bool** carteBool = wp.suggestion(this.jeu.getCarte().getTaille(), this.positionXselect, this.positionYselect, type, carteElement, uniteSelect.getMouvement());
+            return carteBool;
+        }
+
     }
+        unsafe public interface Tour
+        {
+            void selectionnerUnite(Unite u, int x, int y);
 
-    public interface Tour
-    {
-        void selectionnerUnite(Unite u, int x, int y);
+            void selectionnerDestination(int x, int y);
 
-        void selectionnerDestination(int x, int y);
+            string combattre(Unite attaque);
 
-        string combattre(Unite attaque);
+            Unite meilleureUnite();
 
-        Unite meilleureUnite();
+            string deplacementUnite();
 
-        string deplacementUnite();
+            bool deplacementPossible();
 
-        bool deplacementPossible();
+            void deselectionnerUnite();
 
-        void deselectionnerUnite();
-
-        Unite getUniteSelect();
+            Unite getUniteSelect();
+            int[][] creerCarteElement(int taille);
+            bool** recupererCarteSuggestion();
+        }
     }
-}

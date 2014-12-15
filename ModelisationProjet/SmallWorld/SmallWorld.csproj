@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -124,6 +125,10 @@
     <ProjectReference Include="..\ModelisationProjet\ModelisationProjet.csproj">
       <Project>{fe43266d-55a6-4932-8fb0-6735b4612a55}</Project>
       <Name>ModelisationProjet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wrapper\Wrapper.vcxproj">
+      <Project>{195b813c-99b3-44e2-855d-c5a247e7e941}</Project>
+      <Name>Wrapper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

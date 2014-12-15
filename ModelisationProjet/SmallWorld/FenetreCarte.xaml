@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="TourDeJeu" Loaded="creerCarte" Height="750" Width="1191"
         WindowStartupLocation="CenterScreen"
+        Closing="FenetreCarte_Closing"
         WindowState="Maximized">
     
 <Window.Resources>

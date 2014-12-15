@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ModelisationProjet;
+using System.ComponentModel; //CancelEventsArg
+using Wrapper;
 
 namespace SmallWorld
 {
@@ -54,7 +56,7 @@ namespace SmallWorld
             this.nbTourInit = 1;
             this.Menu.Text = "Tour n°" + this.nbTourInit + " - " + this.joueur.getPseudo();
             this.deuxJoueursTour = false;
-            informationsJoueur();       
+            informationsJoueur();
         }
 
         private void creerCarte(object sender, RoutedEventArgs e)
@@ -300,7 +302,7 @@ namespace SmallWorld
         }
 
 
-        //Quand on clique sur une cas qui contient des unités
+        //Quand on clique sur une case qui contient des unités
         private void afficherUniteCase(List<Unite> lunite) {
             string vie = "";
             string attaque = "";
@@ -381,7 +383,7 @@ namespace SmallWorld
 
 
         //Quand on clique sur une des unités de la barre d'information
-        private void MouseLeftMapUnite(object sender, MouseButtonEventArgs e)
+        unsafe private void MouseLeftMapUnite(object sender, MouseButtonEventArgs e)
         {
             effacerSelection();
             //Si le joueur essaye de sélectionner des unités qui ne sont pas à lui
@@ -407,6 +409,30 @@ namespace SmallWorld
 
                     //On enregistre l'unité sélectionnée
                     this.tour.selectionnerUnite(this.uniteSelect[ligne,colonne], this.caseSelectX, this.caseSelectY);
+
+                    //On "entoure" les cases où l'unité peut se déplacer
+                    int i,j;
+                    int tailleMap = this.jeu.getCarte().getTaille();
+                    bool** carteBool = this.tour.recupererCarteSuggestion();
+                    for (i = 0; i < tailleMap; i++){
+                        for (j = 0; j < tailleMap; j++){
+                            if (carteBool[i][j] == true)
+                            {
+                                Console.Write("Case :" + i +" ; " + j + "------------");
+                                var suggere = new Rectangle();
+                                suggere.Fill = FabriqueImage.getInstance().getSelection(this.joueur.getPeuple());
+                                suggere.Width = tailleCase;
+                                suggere.Height = tailleCase;
+                                int x = 75 * i;
+                                int y = 100 * j;
+                                if ((i % 2) != 0)
+                                    y += 50;
+                                Canvas.SetLeft(suggere, y);
+                                Canvas.SetTop(suggere, x);
+                                this.mapGrid.Children.Add(suggere);
+                            }
+                        }
+                    }
 
                     //On enregistre la grille et la bordure sélectionnée 
                     this.borderSelect = bordure;
@@ -468,6 +494,44 @@ namespace SmallWorld
                 {
                     MessageBox.Show("Fin de la partie - Égalité.");
                 }
+            }
+        }
+        bool isDataSaved = false;
+        public void FenetreCarte_Closing(object sender, CancelEventArgs e)
+        {
+            if (!isDataSaved)
+            {
+                MessageBoxResult res1 = MessageBox.Show("Voulez-vous sauvegarder la partie avant de quitter ?", "Sauver ?", MessageBoxButton.YesNo);
+                if (res1 == MessageBoxResult.Yes)
+                {
+                    //sauvegarder();
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    MessageBoxResult res2 = MessageBox.Show("Etes-vous sûr de vouloir quitter le jeu quand même ?", "Quitter ?", MessageBoxButton.YesNo);
+                    if (res2 == MessageBoxResult.No)
+                    {
+                        e.Cancel = true;
+                    }
+                    else
+                    {
+                        Application.Current.Shutdown();
+                    }
+                }
+            }
+            else
+            {
+                MessageBoxResult res3 = MessageBox.Show("Etes-vous sûr de vouloir quitter le jeu ?", "Quitter ?", MessageBoxButton.YesNo);
+                if (res3 == MessageBoxResult.No)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
+
             }
         }
 
