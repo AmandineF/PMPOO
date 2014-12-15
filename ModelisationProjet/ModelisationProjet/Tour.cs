@@ -277,6 +277,7 @@ namespace ModelisationProjet
                 attaque.getJoueur().decNbUnite();
                 defense.setPtVictoire(defense.getPtVictoire() + 1);
                 affichage += "Dèces de l'attaque (" + attaque.getJoueur().getNomPeuple() + "). \nLa défense gagne un point de victoire\n";
+                attaque.getJoueur().removeUnite(attaque);
             }
             else
             {
