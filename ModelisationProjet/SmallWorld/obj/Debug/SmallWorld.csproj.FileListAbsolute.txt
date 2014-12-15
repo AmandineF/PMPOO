@@ -120,3 +120,5 @@ C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\obj\Debug\SmallWorld.Prop
 C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\obj\Debug\SmallWorld.csproj.GenerateResource.Cache
 C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.dll
 C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.pdb
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.dll
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.pdb

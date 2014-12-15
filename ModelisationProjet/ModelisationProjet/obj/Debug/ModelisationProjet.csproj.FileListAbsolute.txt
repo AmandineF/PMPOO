@@ -25,3 +25,5 @@ C:\Users\Frank\Downloads\ModelisationProjet\ModelisationProjet\obj\Debug\Modelis
 C:\Users\Frank\Downloads\ModelisationProjet\ModelisationProjet\obj\Debug\ModelisationProjet.pdb
 C:\Users\Frank\Downloads\ModelisationProjet\ModelisationProjet\bin\Debug\Wrapper.dll
 C:\Users\Frank\Downloads\ModelisationProjet\ModelisationProjet\bin\Debug\Wrapper.pdb
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\ModelisationProjet\bin\Debug\Wrapper.dll
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\ModelisationProjet\bin\Debug\Wrapper.pdb

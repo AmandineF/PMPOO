@@ -59,40 +59,6 @@ namespace ModelisationProjet
         }
 
         /// <summary>
-        /// On vérifie si le déplacement de la case sélectionnée vers la case de destination est possible
-        /// </summary>
-        /// <returns>Vrai si le déplacement est possible, faux sinon</returns>
-        public bool deplacementPossible()
-        {
-            bool deplacement = true;
-            if (this.uniteSelect == null)
-            {
-                // Console.WriteLine("Aucune unité sélectionnée");
-                deplacement = false;
-            }
-            if (this.uniteSelect.getMouvement() < 1)
-            {
-                //Console.WriteLine("Pas assez de point de mouvement");
-                deplacement = false;
-            }
-            if (this.positionXdest > this.positionXselect + 1 || this.positionYdest > this.positionYselect + 1 || this.positionXdest < this.positionXselect - 1 || this.positionYdest < this.positionYselect - 1)
-            {
-                //Console.WriteLine("La case de destination est trop loin par rapport à la case actuelle");
-                deplacement = false;
-            }
-            if ((this.uniteSelect is UniteNain) && (this.jeu.getCarte().getCase(positionXselect, positionYselect) is CaseMontagne) && (this.jeu.getCarte().getCase(positionXdest, positionYdest) is CaseMontagne))
-            {
-                deplacement = true;
-            }
-            if (this.uniteSelect is UniteElf && this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest) is CaseDesert)
-            {
-                //Console.WriteLine("Un Elf doit avoir plus de 2 points de mouvement pour se déplacer sur une case Desert");
-                deplacement = false;
-            }
-            return deplacement;
-        }
-
-        /// <summary>
         /// On enlève des points de mouvement à l'unité déplacée
         /// </summary>
         /// <param name="x">L'abscisse de la case sur laquelle l'unité s'est déplacée</param>
@@ -172,7 +138,7 @@ namespace ModelisationProjet
                 }
             }
 
-            if (personne && deplacementPossible())
+            if (personne && deplacementPossible(this.positionXdest, this.positionYdest))
             {
                 this.jeu.getCarte().getCase(this.positionXselect, this.positionYselect).supprimeUnite(this.uniteSelect);
                 this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).ajoutUnite(this.uniteSelect);
@@ -320,6 +286,15 @@ namespace ModelisationProjet
             return carteElement;
         }
 
+        /// <summary>
+        /// On vérifie si le déplacement de la case sélectionnée vers la case de destination est possible
+        /// </summary>
+        /// <returns>Vrai si le déplacement est possible, faux sinon</returns>
+        unsafe public bool deplacementPossible(int x, int y)
+        {
+            return recupererCarteSuggestion()[x][y];
+        }
+
         unsafe public bool** recupererCarteSuggestion()
         {
             int type = 0;
@@ -350,7 +325,7 @@ namespace ModelisationProjet
 
             string deplacementUnite();
 
-            bool deplacementPossible();
+            bool deplacementPossible(int x, int y);
 
             void deselectionnerUnite();
 

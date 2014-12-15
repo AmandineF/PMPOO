@@ -38,12 +38,14 @@ namespace SmallWorld
         private Rectangle caseSelect;
         private Grid gridSelect;
         private Boolean deuxJoueursTour;
+        private Rectangle[,] plateauConseil;
 
         public FenetreCarte(Jeu j, Joueur p)
         {
             InitializeComponent();
             this.gridSelect = new Grid();
             this.jeu = j;
+            this.plateauConseil = new Rectangle[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.plateau = new Rectangle[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.plateauUnite = new Border[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.uniteSelect = new Unite[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
@@ -205,7 +207,7 @@ namespace SmallWorld
                             coordY += 50;
 
                         var select = new Rectangle();
-                        select.Fill = FabriqueImage.getInstance().getSelection(this.joueur.getPeuple());
+                        select.Fill = FabriqueImage.getInstance().getSelection(true);
                         select.Width = tailleCase;
                         select.Height = tailleCase;
                         Canvas.SetLeft(select, coordY);
@@ -219,6 +221,21 @@ namespace SmallWorld
             this.caseSelectX = posX;
             this.caseSelectY = posY;
             nomAtrouver(sender,e);
+        }
+
+        //Effacement des selection 
+        private void effacementSelection()
+        {
+            for (int x = 0; x < this.plateau.GetLength(0); x++)
+            {
+                for (int y = 0; y < this.plateau.GetLength(1); y++)
+                {
+                    if (plateauConseil[x, y] != null)
+                    {
+                        this.mapGrid.Children.Remove(plateauConseil[x, y]);
+                    }
+                }
+            }
         }
 
         //Quand on clique sur un hexagone qui ne contient pas d'unité
@@ -236,7 +253,7 @@ namespace SmallWorld
             //On détermine les coordonnées de la case sélectionnée
             for (int x = 0; x < this.plateau.GetLength(0); x++) {
                 for (int y = 0; y < this.plateau.GetLength(1); y++) {
-                    if (this.plateau[x, y] == rectangle) {
+                    if (this.plateauConseil[x, y] == rectangle || this.plateau[x,y] == rectangle) {
                         posX = x;
                         posY = y;
                         coordX = 75 * posX;
@@ -245,7 +262,7 @@ namespace SmallWorld
                             coordY += 50;
 
                         var select = new Rectangle();
-                        select.Fill = FabriqueImage.getInstance().getSelection(this.joueur.getPeuple());
+                        select.Fill = FabriqueImage.getInstance().getSelection(true);
                         select.Width = tailleCase;
                         select.Height = tailleCase;
                         Canvas.SetLeft(select, coordY);
@@ -270,7 +287,7 @@ namespace SmallWorld
                 this.tour.selectionnerDestination(this.caseSelectX, this.caseSelectY);
             
                 //On regarde si le déplacement est possible
-                if (this.tour.deplacementPossible())
+                if (this.tour.deplacementPossible(this.caseSelectX, this.caseSelectY))
                 {
                     //On déplace l'unité
                     string affichage = this.tour.deplacementUnite();
@@ -280,6 +297,7 @@ namespace SmallWorld
                     //On met à jour la map
                     ajoutUnite();
                     effacerSelection();
+                    effacementSelection();
 
                     //On met à jour la grille de la case sélectionnée
                     afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
@@ -289,6 +307,7 @@ namespace SmallWorld
                     System.Windows.MessageBox.Show("Cette unité ne peut être déplacée en " + this.caseSelectX + "-" + this.caseSelectY + ".");
                     //A voir si on fait autrement : soit on deselectionne automatique soit on laisse l'utilisateur la retoucher pour deselectionner
                     effacerSelection();
+                    effacementSelection();
                     this.tour.deselectionnerUnite();
                     afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
                     //intégrer un système de message pour dire pourquoi?
@@ -297,6 +316,7 @@ namespace SmallWorld
              else
              {
                  effacerSelection();
+                 effacementSelection();
                  afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
              }
         }
@@ -418,11 +438,12 @@ namespace SmallWorld
                         for (j = 0; j < tailleMap; j++){
                             if (carteBool[i][j] == true)
                             {
-                                Console.Write("Case :" + i +" ; " + j + "------------");
+                                //Console.Write("Case :" + i +" ; " + j + "------------");
                                 var suggere = new Rectangle();
-                                suggere.Fill = FabriqueImage.getInstance().getSelection(this.joueur.getPeuple());
+                                suggere.Fill = FabriqueImage.getInstance().getSuggere();
                                 suggere.Width = tailleCase;
                                 suggere.Height = tailleCase;
+                                suggere.MouseLeftButtonDown += new MouseButtonEventHandler(this.MouseLeftMapRectangle);
                                 int x = 75 * i;
                                 int y = 100 * j;
                                 if ((i % 2) != 0)
@@ -430,6 +451,7 @@ namespace SmallWorld
                                 Canvas.SetLeft(suggere, y);
                                 Canvas.SetTop(suggere, x);
                                 this.mapGrid.Children.Add(suggere);
+                                this.plateauConseil[i, j] = suggere;
                             }
                         }
                     }

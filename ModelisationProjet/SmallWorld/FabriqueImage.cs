@@ -26,6 +26,7 @@ namespace SmallWorld
         private BitmapImage selectJ1 = null;
         private BitmapImage selectJ2 = null;
         private BitmapImage selectJ3 = null;
+        private BitmapImage suggere = null;
 
         private static FabriqueImage INSTANCE = new FabriqueImage();
 
@@ -47,7 +48,7 @@ namespace SmallWorld
             this.selectJ1 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ1.png", UriKind.Relative));
             this.selectJ2 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ2.png", UriKind.Relative));
             this.selectJ3 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ3.png", UriKind.Relative));
-
+            this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selection.png", UriKind.Relative));
 
         }
 
@@ -56,21 +57,24 @@ namespace SmallWorld
             return INSTANCE;
         }
 
-        public Brush getSelection(Peuple p)
+        public Brush getSuggere()
         {
             ImageBrush brush = new ImageBrush();
-            if (p is PeupleElf)
+            brush.ImageSource = this.suggere;
+            return brush;
+        }
+        public Brush getSelection(bool b)
+        {
+            ImageBrush brush = new ImageBrush();
+            if (b)
             {
                 brush.ImageSource = this.selectJ1;
             }
-            else if (p is PeupleNain)
+            else
             {
                 brush.ImageSource = this.selectJ2;
             }
-            else if (p is PeupleOrc) 
-            {
-                brush.ImageSource = this.selectJ3;
-            }
+
             return brush;
         }
         public Brush getBrushCase(Case c)
