@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
+
+using System.Runtime.Serialization;
 
 namespace ModelisationProjet
 {
+    [Serializable()]
     public class JeuImpl : Jeu
     {
+
         private int nbTours;
         private Joueur joueur2;
         private Joueur joueur1;
@@ -26,6 +31,21 @@ namespace ModelisationProjet
             this.joueur2 = j2;
             this.carte = c;
         }
+        public JeuImpl(SerializationInfo info, StreamingContext context) {
+            this.joueur1 = (Joueur)info.GetValue("Joueur1", typeof(Joueur));
+            this.joueur2 = (Joueur)info.GetValue("Joueur2", typeof(Joueur));
+            this.carte = (Carte)info.GetValue("Carte", typeof(Carte));
+            this.nbTours = (int)info.GetValue("NbTours", typeof(int));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Player1", this.joueur1);
+            info.AddValue("Player2", this.joueur2);
+            info.AddValue("Carte", this.carte);
+            info.AddValue("NbTours", this.nbTours);
+        }
+        public JeuImpl() {}
 
         /// <summary>
         /// Donne le nombre de tour restant du jeu
@@ -44,7 +64,7 @@ namespace ModelisationProjet
         {
             return this.carte;
         }
-
+      
         /// <summary>
         /// Décrémente le nombre de tours du jeu
         /// </summary>

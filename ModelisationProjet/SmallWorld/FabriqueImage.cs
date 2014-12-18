@@ -17,6 +17,7 @@ namespace SmallWorld
         private BitmapImage caseForet = null;
         private BitmapImage caseMontagne = null;
         private BitmapImage casePlaine = null;
+        private BitmapImage caseMer = null;
         private BitmapImage nain = null;
         private BitmapImage elf = null;
         private BitmapImage orc = null;
@@ -28,6 +29,7 @@ namespace SmallWorld
         private BitmapImage selectJ3 = null;
         private BitmapImage suggere = null;
 
+
         private static FabriqueImage INSTANCE = new FabriqueImage();
 
         private FabriqueImage()
@@ -35,6 +37,7 @@ namespace SmallWorld
             this.caseDesert = new BitmapImage(new Uri(@"Ressources/Cases/Map3/caseDesert.png", UriKind.Relative));
             this.caseForet = new BitmapImage(new Uri(@"Ressources/Cases/Map3/caseForet.png", UriKind.Relative));
             this.caseMontagne = new BitmapImage(new Uri(@"Ressources/Cases/Map3/caseMontagne.png", UriKind.Relative));
+            this.caseMer = new BitmapImage(new Uri(@"Ressources/Cases/Map3/caseMer.png", UriKind.Relative));
             this.casePlaine = new BitmapImage(new Uri(@"Ressources/Cases/Map3/casePlaine.png", UriKind.Relative));
 
             
@@ -95,6 +98,10 @@ namespace SmallWorld
             else if (c is CasePlaine)
             {
                 brush.ImageSource = this.casePlaine;
+            }
+            else if (c is CaseMer)
+            {
+                brush.ImageSource = this.caseMer;
             }
             return brush;
         }

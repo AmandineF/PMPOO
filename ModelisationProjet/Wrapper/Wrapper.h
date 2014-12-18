@@ -11,8 +11,9 @@ using namespace System;
 namespace Wrapper {
 	public ref class WrapperAlgo{
 	private:
-		Algo* algo;
+		
 	public:
+		Algo* algo;
 		int** generationMap(int taille){ return algo->generationMap(taille); }
 		int* placementJoueur(int taille){ return algo->placementJoueur(taille); }
 		bool** suggestionCase(int taille, int xActuel, int yActuel, int type, int** carteElement, double ptMouvement){

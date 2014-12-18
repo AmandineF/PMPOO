@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ModelisationProjet
 {
+    [Serializable()]
     public class PeupleElf : PeupleImpl
     {
     }

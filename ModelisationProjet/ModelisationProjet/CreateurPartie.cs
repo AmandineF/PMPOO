@@ -21,7 +21,7 @@ namespace ModelisationProjet
         {
             this.carte = c;
 
-            if (this.carte.getTaille() == 6)
+            if (this.carte.getTaille() == 5)
             {
                 this.nbUnites = 4;
                 this.nbTours = 10;

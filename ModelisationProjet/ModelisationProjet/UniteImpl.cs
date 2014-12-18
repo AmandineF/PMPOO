@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Runtime.Serialization;
+
 namespace ModelisationProjet
 {
-    public abstract class UniteImpl : Unite
+    [Serializable()]
+    public abstract class UniteImpl : Unite, ISerializable
     {
         private const int POINTS_VIE_INITIAL = 5;
         private const int POINTS_ATTAQUE_INITIAL = 2;
@@ -30,6 +33,23 @@ namespace ModelisationProjet
             this.ptMouvement = POINTS_MVT_INITIAL;
             this.ptVictoire = 0;
             this.proprietaire = j;
+        }
+
+         public UniteImpl(SerializationInfo info, StreamingContext context) {
+            this.ptVie = (int)info.GetValue("ptVie", typeof(int));
+            this.ptVictoire = (int)info.GetValue("ptVictoire", typeof(int));
+            this.ptAttaque = (int)info.GetValue("ptAttaque", typeof(int));
+            this.ptDefense = (int)info.GetValue("ptDefense", typeof(int));
+            this.ptMouvement = (double)info.GetValue("ptDefense", typeof(double));
+            this.proprietaire = (Joueur)info.GetValue("proprio", typeof(Joueur));
+        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) {
+            info.AddValue("ptVie", this.ptVie);
+            info.AddValue("ptVictoire", this.ptVictoire);
+            info.AddValue("ptAttaque", this.ptAttaque);
+            info.AddValue("ptDefense", this.ptDefense);
+            info.AddValue("ptMouvement", this.ptMouvement);
+            info.AddValue("proprio", this.proprietaire);
         }
 
         /// <summary>

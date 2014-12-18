@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ModelisationProjet
 {
+    [Serializable()]
     public abstract class PeupleImpl : Peuple
     {
 

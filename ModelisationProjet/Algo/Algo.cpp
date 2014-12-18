@@ -6,12 +6,13 @@
 #include <list>
 
 
-int** Algo::generationMap(int taille){ 
-	int i, j, Resrand, cptDesert, cptMontagne, cptForet, cptPlaine;
+int** Algo::generationMap(int taille){
+	int i, j, Resrand, cptDesert, cptMontagne, cptForet, cptPlaine,cptMer;
 	cptDesert = 0;
 	cptMontagne = 0;
 	cptForet = 0;
 	cptPlaine = 0;
+	cptMer = 0;
 	int** carte = new int*[taille];
 	for (i = 0; i<taille; i++) {
 		carte[i] = new int[taille];
@@ -24,29 +25,36 @@ int** Algo::generationMap(int taille){
 		{
 			while (b)
 			{
-				Resrand = rand() % 4 + 1;
-				if (Resrand == 1 && (cptDesert < ((taille * taille) / 4)))
+				Resrand = rand() % 5 + 1;
+				if (Resrand == 1 && (cptDesert < ((taille * taille) / 5)))
 				{
 					carte[i][j] = Resrand;
 					cptDesert++;
 					b = false;
 				}
-				if (Resrand == 2 && (cptForet < ((taille * taille) / 4)))
+				if (Resrand == 2 && (cptForet < ((taille * taille) / 5)))
 				{
 					carte[i][j] = Resrand;
 					cptForet++;
 					b = false;
 				}
-				if (Resrand == 3 && (cptMontagne < ((taille * taille) / 4)))
+				if (Resrand == 3 && (cptMontagne < ((taille * taille) / 5)))
 				{
 					carte[i][j] = Resrand;
 					cptMontagne++;
 					b = false;
 				}
-				if (Resrand == 4 && (cptPlaine < ((taille * taille) / 4)))
+				if (Resrand == 4 && (cptPlaine < ((taille * taille) / 5)))
 				{
 					carte[i][j] = Resrand;
 					cptPlaine++;
+					b = false;
+				}
+				
+				if (Resrand == 5 && (cptMer < ((taille * taille) / 5)))
+				{
+					carte[i][j] = Resrand;
+					cptMer++;
 					b = false;
 				}
 			}

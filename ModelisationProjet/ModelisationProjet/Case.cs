@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Runtime.Serialization;
+
 namespace ModelisationProjet
 {
-    public abstract class CaseImpl : Case
+    [Serializable()]
+    public abstract class CaseImpl : Case, ISerializable
     {
         public List<Unite> listeUnite;
 
@@ -17,6 +20,14 @@ namespace ModelisationProjet
             this.listeUnite = new List<Unite>();
         }
 
+        public CaseImpl(SerializationInfo info, StreamingContext context)
+        {
+            this.listeUnite = (List<Unite>)info.GetValue("listeUnite", typeof(List<Unite>));
+        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("listeUnite", this.listeUnite);
+        }
         /// <summary>
         /// Permet de retourner les unités présentes sur la case
         /// </summary>

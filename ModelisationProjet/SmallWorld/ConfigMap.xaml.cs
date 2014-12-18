@@ -24,7 +24,6 @@ namespace SmallWorld
     {
         private Jeu jeu;
         private Carte carte;
-        private Joueur joueur;
         private Peuple peuple1;
         private Peuple peuple2;
         private string pseudo1;
@@ -97,9 +96,8 @@ namespace SmallWorld
             else
             {
                 CreateurPartie dieu = new CreateurPartie(this.carte);
-                this.jeu = dieu.creerPartie(this.pseudo1, this.peuple1, this.pseudo2, this.peuple2);
-                this.joueur = this.jeu.getPremierJoueur();
-                FenetreCarte frm = new FenetreCarte(this.jeu, this.joueur);
+                this.jeu = dieu.creerPartie(this.pseudo1, this.peuple1, this.pseudo2, this.peuple2);    
+                FenetreCarte frm = new FenetreCarte(this.jeu);
                 this.mwindow.Close();
                 frm.Show();
             }

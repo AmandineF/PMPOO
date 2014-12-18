@@ -35,7 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\terre.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,11 +99,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -110,7 +106,7 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -135,9 +131,6 @@
     <None Include="bin\Debug\Ressources\Cases\BackG.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\terre.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\BackG.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\elf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\girlplayer.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\map_36.png" />
@@ -165,10 +161,46 @@
     <Resource Include="Resources\orc.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\girlplayer.png" />
+    <Resource Include="Resources\player.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\player.png" />
+    <Resource Include="Resources\player1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\player12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\terre.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

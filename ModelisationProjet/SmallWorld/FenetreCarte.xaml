@@ -5,8 +5,8 @@
         WindowStartupLocation="CenterScreen"
         Closing="FenetreCarte_Closing"
         WindowState="Maximized">
-    
-<Window.Resources>
+
+    <Window.Resources>
         <Style x:Key="menuStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontFamily" Value="Jokerman" />
@@ -14,110 +14,150 @@
             <Setter Property="Margin" Value="10"/>
         </Style>
     </Window.Resources>
-<Window.Background>
-        <ImageBrush ImageSource="/SmallWorld;component/Resources/BackG.jpg"/></Window.Background>
+    <Window.Background>
+        <ImageBrush ImageSource="/SmallWorld;component/Resources/BackG.jpg"/>
+    </Window.Background>
 
-<DockPanel>
+    <DockPanel>
         <Grid DockPanel.Dock="Left" Width="400" Name="barreInfo">
             <Grid.Background>
-            <SolidColorBrush>
-                <SolidColorBrush.Color>
-                        <Color A ="150" R="244" G="234" B="229"/>
-                    </SolidColorBrush.Color>
-            </SolidColorBrush>
-        </Grid.Background>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="9*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5*" />
-            <RowDefinition Height="3*" />
-            <RowDefinition Height="2*" />
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" Grid.Column="0">
-            <Border.Background>
                 <SolidColorBrush>
                     <SolidColorBrush.Color>
-                        <Color A ="255" R="6" G="106" B="168"/>
+                        <Color A ="100" R="244" G="234" B="229"/>
                     </SolidColorBrush.Color>
                 </SolidColorBrush>
-            </Border.Background>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Showcard Gothic">
-                <TextBlock.LayoutTransform>
-                    <TransformGroup>
-                        <RotateTransform Angle="-90"></RotateTransform>
-                    </TransformGroup>
-                </TextBlock.LayoutTransform>
-                    Unités
-            </TextBlock>
-        </Border>
-        <Border Grid.Row="1" Grid.Column="0">
-            <Border.Background>
-                <SolidColorBrush>
-                    <SolidColorBrush.Color>
-                        <Color A ="255" R="255" G="238" B="96"/>
-                    </SolidColorBrush.Color>
-                </SolidColorBrush>
-            </Border.Background>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Showcard Gothic">
-                <TextBlock.LayoutTransform>
-                    <TransformGroup>
-                        <RotateTransform Angle="-90"></RotateTransform>
-                    </TransformGroup>
-                </TextBlock.LayoutTransform>
-                    Informations
-            </TextBlock>
-        </Border>
-        <Border Grid.Row="2" Grid.Column="0">
-            <Border.Background>
-                <SolidColorBrush>
-                    <SolidColorBrush.Color>
-                        <Color A ="255" R="128" G="223" B="98"/>
-                    </SolidColorBrush.Color>
-                </SolidColorBrush>
-            </Border.Background>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Showcard Gothic">
-                <TextBlock.LayoutTransform>
-                    <TransformGroup>
-                        <RotateTransform Angle="-90"></RotateTransform>
-                    </TransformGroup>
-                </TextBlock.LayoutTransform>
-                    Joueurs
-            </TextBlock>
-        </Border>
-            
-        <TextBlock Name="deroulement" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Grid.Column="1" Grid.Row="1">
-            
-        </TextBlock>
-        <Grid Grid.Column="1" Grid.Row="2">
+            </Grid.Background>
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="9*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
                 <RowDefinition Height="5*" />
-                <RowDefinition Height="5*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.Column="0">
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <Color A ="255" R="6" G="106" B="168"/>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Showcard Gothic">
+                    <TextBlock.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </TransformGroup>
+                    </TextBlock.LayoutTransform>
+                    Unités
+                </TextBlock>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="0">
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <Color A ="255" R="255" G="238" B="96"/>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Showcard Gothic">
+                    <TextBlock.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </TransformGroup>
+                    </TextBlock.LayoutTransform>
+                    Informations
+                </TextBlock>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="0">
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <Color A ="255" R="128" G="223" B="98"/>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="Showcard Gothic">
+                    <TextBlock.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </TransformGroup>
+                    </TextBlock.LayoutTransform>
+                    Joueurs
+                </TextBlock>
+            </Border>
+            <Border Grid.Row="3" Grid.Column="0">
+                <Border.Background>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <Color A ="255" R="255" G="255" B="255"/>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Border.Background>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="Showcard Gothic">
+                    <TextBlock.LayoutTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="-90"></RotateTransform>
+                        </TransformGroup>
+                    </TextBlock.LayoutTransform>
+                    Zoom
+                </TextBlock>
+            </Border>
+            <Slider Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    Name="uiScaleSlider"
+                    ToolTip="Determines the UI scale factor."
+                    Value="1" Minimum="0.5" Maximum="4"
+                    Width="300" Height="30"
+                />
+            <TextBlock Name="deroulement" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" Grid.Column="1" Grid.Row="1">
+
+            </TextBlock>
+            <Grid Grid.Column="1" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="5*" />
+                    <RowDefinition Height="5*" />
+                </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="pseudoJ1">Joueur 2</TextBlock>
-                <Image Source="/SmallWorld;component/Resources/player.png" Grid.Column="0" Grid.Row="1" Width="70" Height="69"/>
+                <Rectangle Name="ImgJ1" Grid.Column="0" Grid.Row="1" Width="63" Height="63" MouseLeftButtonDown="changementImgJoueur1"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Name="infoJ1"/>
                 <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="pseudoJ2">Joueur 2</TextBlock>
-                <Image Source="/SmallWorld;component/Resources/girlplayer.png" Grid.Column="1" Grid.Row="1" Width="96" Height="96"/>
+                <Rectangle Name="ImgJ2" Grid.Column="1" Grid.Row="1" Width="63" Height="63" MouseLeftButtonDown="changementImgJoueur2"/>
                 <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Name="infoJ2"/>
+            </Grid>
+
         </Grid>
 
-    </Grid>
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <StackPanel DockPanel.Dock="Right" Width="762">
-            <TextBlock Margin="0,20,0,0" Name="Menu" Style="{StaticResource menuStyle}" HorizontalAlignment="Center" Height="70"/>
-            <Grid Name ="sp">
-            </Grid >
-                <Button x:Name="FinTour"  HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="0,30,0,0">Fin du tour</Button>
-            </StackPanel>
-    </ScrollViewer>
-</DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="15*" />
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="0.5*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="1" Margin="0,0,0,0" Name="Menu" Style="{StaticResource menuStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Height="70"/>
+            <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <Canvas Name="mapGrid">
+                    <Canvas.LayoutTransform>
+                        <ScaleTransform
+                        CenterX="0" CenterY="0"
+                        ScaleX="{Binding ElementName=uiScaleSlider,Path=Value}"
+                        ScaleY="{Binding ElementName=uiScaleSlider,Path=Value}"
+                     />
+                    </Canvas.LayoutTransform>
+                </Canvas>
+            </ScrollViewer>
+            <Button Grid.Row="3" x:Name="FinTour"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="303,20,300,10" Height="60">Fin du tour</Button>
+        </Grid>
+
+    </DockPanel>
 
 </Window>

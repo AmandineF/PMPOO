@@ -122,3 +122,5 @@ C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.dll
 C:\Users\Frank\Downloads\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.pdb
 \\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.dll
 \\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.pdb
+C:\Users\Frank\Documents\GitHub\PMPOO\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.dll
+C:\Users\Frank\Documents\GitHub\PMPOO\ModelisationProjet\SmallWorld\bin\Debug\Wrapper.pdb

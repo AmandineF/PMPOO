@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Runtime.Serialization;
+
 namespace ModelisationProjet
 {
-    public class JoueurImpl : Joueur
+    [Serializable()]
+    public class JoueurImpl : Joueur, ISerializable
     {
         private string pseudo;
         private Peuple peuple;
@@ -48,7 +51,22 @@ namespace ModelisationProjet
                 }
             }
         }
-
+        public JoueurImpl(SerializationInfo info, StreamingContext context) {
+            this.pseudo = (string)info.GetValue("Pseudo", typeof(string));
+            this.ptVictoire = (int)info.GetValue("Points", typeof(int));
+            this.peuple = (Peuple)info.GetValue("Peuple", typeof(Peuple));
+            this.nbUnite = (int)info.GetValue("NbUnite", typeof(int));
+            this.listeUnite = (List<Unite>)info.GetValue("ListUnite", typeof(List<Unite>));
+            
+        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Pseudo", this.pseudo);
+            info.AddValue("Points", this.ptVictoire);
+            info.AddValue("Peuple", this.peuple);
+            info.AddValue("NbUnite", this.nbUnite);
+            info.AddValue("ListUnite", this.listeUnite);
+        }
         /// <summary>
         /// Donne une des unités que possède le joueur
         /// </summary>

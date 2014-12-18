@@ -14,6 +14,11 @@ using System.Windows.Shapes;
 using ModelisationProjet;
 using System.ComponentModel; //CancelEventsArg
 using Wrapper;
+using System.IO;
+using Wrapper;
+using System.Runtime.Serialization.Formatters.Binary;
+using Microsoft.Win32;
+using System.Runtime.Serialization;
 
 namespace SmallWorld
 {
@@ -22,8 +27,9 @@ namespace SmallWorld
     {
         private Jeu jeu;
         private Tour tour;
-
-        private Rectangle[,] plateau;
+        private const int numMaxImg = 12;
+        private int numImgJ1;
+        private int numImgJ2;
         private Border[,] plateauUnite;
         private Unite[,] uniteSelect;
         private Grid[,] gridsSelect;
@@ -31,7 +37,7 @@ namespace SmallWorld
         private int caseSelectX;
         private int caseSelectY;
         private Grid uniteGrid;
-        private Canvas mapGrid;
+        // private Canvas mapGrid;
         private Border borderSelect;
         private Joueur joueur;
         private int nbTourInit;
@@ -40,38 +46,84 @@ namespace SmallWorld
         private Boolean deuxJoueursTour;
         private Border[,] plateauConseil;
         private Border caseClic;
-        private Dictionary<Border, Unite> findUnite;
-        public FenetreCarte(Jeu j, Joueur p)
+
+        private string nomDuFichier;
+
+        public FenetreCarte(Jeu j)
         {
             InitializeComponent();
-            this.findUnite = new Dictionary<Border,Unite>();
+            this.numImgJ1 = 1;
+            this.numImgJ2 = 2 ;
             this.gridSelect = new Grid();
             this.jeu = j;
             this.plateauConseil = new Border[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
-            this.plateau = new Rectangle[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.plateauUnite = new Border[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.uniteSelect = new Unite[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.gridsSelect = new Grid[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
-            this.joueur = p;
+            this.joueur = this.jeu.getPremierJoueur();
             this.tour = new TourImpl(this.jeu, this.joueur);
             this.caseSelectX = -1;
             this.caseSelectY = -1;
             this.borderSelect = null;
             this.nbTourInit = 1;
-            this.Menu.Text = "Tour n°" + this.nbTourInit + " - " + this.joueur.getPseudo();
+            this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1) + " \n " + this.joueur.getPseudo();
             this.deuxJoueursTour = false;
             this.caseClic = null;
-            this.mapGrid = new Canvas();
+            //this.mapGrid = new Canvas();
+            this.KeyDown += new KeyEventHandler(this.gestionClavier);
             this.mapGrid.MouseLeave += new MouseEventHandler(this.echapCase);
-           // this.barreInfo.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(this.flecheAction);
             informationsJoueur();
+            this.mapGrid.Focus();
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ1 + ".png", UriKind.Relative));
+            this.ImgJ1.Fill = brush;
+            this.ImgJ2.Fill = brush;
+            if (this.jeu.getCarte() is CarteNormale)
+            {
+                this.uiScaleSlider.Value = 0.5;
+            }
+            else if (this.jeu.getCarte() is CartePetite)
+            {
+                this.uiScaleSlider.Value = 0.7;
+            }
+            else
+            {
+                //this.mapGrid.Margin = new Thickness(200, 200, 0, 0);
+            }
         }
-       
+
+        public void initialisation()
+        {
+            Border bordure = new Border();
+            bordure.Background = FabriqueImage.getInstance().getSelection(true);
+            bordure.Width = tailleCase;
+            bordure.Height = tailleCase;
+            bordure.Cursor = Cursors.Hand;
+            if (this.jeu.getCarte().getCase(0, 0).estCase(this.joueur))
+            {
+                this.caseSelectX = 0;
+                this.caseSelectY = 0;
+                Canvas.SetLeft(bordure, 0);
+                Canvas.SetTop(bordure, 0);
+            }
+            else
+            {
+                this.caseSelectX = this.jeu.getCarte().getTaille() - 1;
+                this.caseSelectY = this.jeu.getCarte().getTaille() - 1;
+                Canvas.SetLeft(bordure, (this.jeu.getCarte().getTaille() - 1) * 100 + 50);
+                Canvas.SetTop(bordure, (this.jeu.getCarte().getTaille() - 1) * 75);
+            }
+
+            this.mapGrid.Children.Add(bordure);
+            this.caseClic = bordure;
+        }
+
+
         private void creerCarte(object sender, RoutedEventArgs e)
         {
             int t = 0;
             int l = 0;
-            
+
             for (int x = 0; x < this.jeu.getCarte().getTaille(); x++)
             {
                 if ((x % 2) != 0)
@@ -87,29 +139,31 @@ namespace SmallWorld
                     Canvas.SetTop(hexagone, t);
                     hexagone.Width = tailleCase;
                     hexagone.Height = tailleCase;
-                    //plateau[x, y] = hexagone;
+                    hexagone.Cursor = Cursors.Hand;
                     hexagone.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
                     hexagone.MouseEnter += new MouseEventHandler(this.survolCase);
-                    //hexagone.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(this.flecheAction);
-                    //hexagone.MouseLeave += new MouseEventHandler(this.echapCase);
                     this.mapGrid.Children.Add(hexagone);
                     l = l + 100;
                 }
                 t = t + 75;
             }
 
-            this.mapGrid.Margin = new Thickness(0, 80, 0, 0);
-            KeyboardNavigation.SetTabNavigation(this.mapGrid, KeyboardNavigationMode.Cycle);
-            this.FinTour.Margin = new Thickness(0, (this.jeu.getCarte().getTaille() * 80) + 30, 0, 0);
-            sp.Children.Add(mapGrid);
+            this.mapGrid.Width = this.jeu.getCarte().getTaille() * 100;
+            this.mapGrid.Height = this.jeu.getCarte().getTaille() * 75;
+            this.mapGrid.HorizontalAlignment = HorizontalAlignment.Center;
+            this.mapGrid.VerticalAlignment = VerticalAlignment.Center;
+            //this.mapGrid.Margin = new Thickness(10,10, 0, 0);
+            //this.FinTour.Margin = new Thickness(0, (this.jeu.getCarte().getTaille() * 80) + 30, 0, 0);
+            //sp.Children.Add(mapGrid);
             ajoutUnite();
+            initialisation();
         }
 
         private void ajoutUnite()
         {
             int t = 0;
             int l = 10;
-            
+
             for (int x = 0; x < this.plateauUnite.GetLength(0); x++)
             {
                 for (int y = 0; y < this.plateauUnite.GetLength(1); y++)
@@ -117,7 +171,7 @@ namespace SmallWorld
                     this.mapGrid.Children.Remove(this.plateauUnite[x, y]);
                 }
             }
-            
+
             for (int x = 0; x < this.plateauUnite.GetLength(0); x++)
             {
                 if ((x % 2) != 0)
@@ -146,10 +200,10 @@ namespace SmallWorld
                         hexagoneUnite.Child = unitText;
                         Canvas.SetLeft(hexagoneUnite, l);
                         Canvas.SetTop(hexagoneUnite, t);
+                        hexagoneUnite.Cursor = Cursors.Hand;
+
                         hexagoneUnite.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
                         hexagoneUnite.MouseEnter += new MouseEventHandler(this.survolCase);
-                        //hexagoneUnite.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(this.flecheAction);
-                        //hexagoneUnite.MouseLeave += new MouseEventHandler(this.echapCase);
                         this.plateauUnite[x, y] = hexagoneUnite;
                         this.mapGrid.Children.Add(hexagoneUnite);
                     }
@@ -170,41 +224,35 @@ namespace SmallWorld
         {
             if (coordX == 0)
                 return 0;
-            if ((coordX % 2) != 0)
+            if ((coordX % 100) != 0)
                 coordX -= 50;
             return (int)(coordX / 100);
         }
 
+
         private void clicGaucheCase(object sender, MouseButtonEventArgs e)
         {
             var selection = sender as Border;
-            if (this.tour.getUniteSelect() == null)
-            {
-                if (this.caseClic != null)
-                    this.mapGrid.Children.Remove(this.caseClic);
+            if (this.caseClic != null)
+                this.mapGrid.Children.Remove(this.caseClic);
 
-                Border bordure = new Border();
-                bordure.Background = FabriqueImage.getInstance().getSelection(true);
-                bordure.Width = tailleCase;
-                bordure.Height = tailleCase;
-                Canvas.SetLeft(bordure, Canvas.GetLeft(selection));
-                Canvas.SetTop(bordure, Canvas.GetTop(selection));
+            Border bordure = new Border();
+            bordure.Background = FabriqueImage.getInstance().getSelection(true);
+            bordure.Width = tailleCase;
+            bordure.Height = tailleCase;
+            bordure.Cursor = Cursors.Hand;
+            bordure.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
+            Canvas.SetLeft(bordure, Canvas.GetLeft(selection));
+            Canvas.SetTop(bordure, Canvas.GetTop(selection));
+            this.mapGrid.Children.Add(bordure);
 
-                bordure.Focusable = true;
-                //bordure.IsVisible = true;
-               // bordure.KeyDown += new KeyEventHandler(this.flecheAction);
-                bordure.KeyDown += new KeyEventHandler(this.flecheAction);
-               // bordure.GotKeyboardFocus += new KeyboardFocusChangedEventHandler(this.flecheAction);
-                this.mapGrid.Children.Add(bordure);
-                this.caseClic = bordure;
-                this.caseSelectX = this.getX(Canvas.GetLeft(selection));
-                this.caseSelectY = this.getY(Canvas.GetTop(selection));
-                afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
-            }
-            else
+
+            this.caseClic = bordure;
+            this.caseSelectY = this.getX(Canvas.GetLeft(selection));
+            this.caseSelectX = this.getY(Canvas.GetTop(selection));
+
+            if (this.tour.getUniteSelect() != null)
             {
-                this.caseSelectY = this.getX(Canvas.GetLeft(selection));
-                this.caseSelectX = this.getY(Canvas.GetTop(selection));
                 this.tour.selectionnerDestination(this.caseSelectX, this.caseSelectY);
                 if (this.tour.deplacementPossible(this.caseSelectX, this.caseSelectY))
                 {
@@ -212,67 +260,145 @@ namespace SmallWorld
                     effacerSelection();
                     effacerSuggestion();
                     ajoutUnite();
-                    this.clicGaucheCase(sender, e);
-                    
                 }
                 else
                 {
                     MessageBox.Show("Impossible de se déplacer en (" + this.caseSelectX + " - " + this.caseSelectY + ")");
                 }
-
             }
-            
+            afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
+            Keyboard.Focus(this.mapGrid);
+
         }
+
+
+        private void gestionClavier(object sender, KeyEventArgs e)
+        {
+            if (this.caseClic != null)
+                this.mapGrid.Children.Remove(this.caseClic);
+
+            switch (e.Key)
+            {
+                case Key.A:
+                    if (this.caseSelectX > 0)
+                        this.caseSelectX = this.caseSelectX - 1;
+                    else
+                        this.caseSelectX = this.jeu.getCarte().getTaille() - 1;
+                    break;
+                case Key.B:
+                    if (this.caseSelectX < this.jeu.getCarte().getTaille() - 1)
+                        this.caseSelectX = this.caseSelectX + 1;
+                    else
+                        this.caseSelectX = 0;
+                    break;
+                case Key.C:
+                    if (this.caseSelectY > 0)
+                        this.caseSelectY = this.caseSelectY - 1;
+                    else
+                        this.caseSelectY = this.jeu.getCarte().getTaille() - 1;
+                    break;
+                case Key.D:
+                    if (this.caseSelectY < this.jeu.getCarte().getTaille() - 1)
+                        this.caseSelectY = this.caseSelectY + 1;
+                    else
+                        this.caseSelectY = 0;
+                    break;
+                case Key.Left:
+                    if (this.caseSelectX > 0)
+                        this.caseSelectX = this.caseSelectX - 1;
+                    else
+                        this.caseSelectX = this.jeu.getCarte().getTaille() - 1;
+                    break;
+                case Key.Right:
+                    if (this.caseSelectX < this.jeu.getCarte().getTaille() - 1)
+                        this.caseSelectX = this.caseSelectX + 1;
+                    else
+                        this.caseSelectX = 0;
+                    break;
+                case Key.Up:
+                    if (this.caseSelectY > 0)
+                        this.caseSelectY = this.caseSelectY - 1;
+                    else
+                        this.caseSelectY = this.jeu.getCarte().getTaille() - 1;
+                    break;
+                case Key.Down:
+                    if (this.caseSelectY < this.jeu.getCarte().getTaille() - 1)
+                        this.caseSelectY = this.caseSelectY + 1;
+                    else
+                        this.caseSelectY = 0;
+                    break;
+                case Key.Enter:
+                    FinTour_Click(sender, e);
+                    break;
+                case Key.OemPlus:
+                    this.uiScaleSlider.Value -= 0.1;
+                    break;
+                case Key.U:
+                    this.uiScaleSlider.Value += 0.1;
+                    break;
+                default:
+                    return;
+            }
+
+            Border bordure = new Border();
+            bordure.Background = FabriqueImage.getInstance().getSelection(true);
+            bordure.Width = tailleCase;
+            bordure.Height = tailleCase;
+            bordure.Cursor = Cursors.Hand;
+            bordure.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
+            bordure.MouseEnter += new MouseEventHandler(this.survolCase);
+            int ligne = 0;
+            if (this.caseSelectY % 2 != 0)
+            {
+                ligne = (this.caseSelectX * 100) + 50;
+            }
+            else
+            {
+                ligne = this.caseSelectX * 100;
+            }
+            Canvas.SetLeft(bordure, ligne);
+            Canvas.SetTop(bordure, this.caseSelectY * 75);
+            this.mapGrid.Children.Add(bordure);
+            this.caseClic = bordure;
+            afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
+        }
+
 
         private void survolCase(object sender, MouseEventArgs e)
         {
             if (this.caseSelect != null)
                 this.mapGrid.Children.Remove(this.caseSelect);
+
             var selection = sender as Border;
             Border bordure = new Border();
             bordure.Background = FabriqueImage.getInstance().getSelection(true);
             bordure.Width = tailleCase;
             bordure.Height = tailleCase;
+            bordure.Cursor = Cursors.Hand;
+            bordure.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
             Canvas.SetLeft(bordure, Canvas.GetLeft(selection));
             Canvas.SetTop(bordure, Canvas.GetTop(selection));
-            bordure.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
             this.mapGrid.Children.Add(bordure);
             this.caseSelect = bordure;
-            List<Unite> listeUnite = this.jeu.getCarte().getCase(this.getX(Canvas.GetLeft(selection)), this.getY(Canvas.GetTop(selection))).getUnite();
+
+            List<Unite> listeUnite = this.jeu.getCarte().getCase(this.getY(Canvas.GetTop(selection)), this.getX(Canvas.GetLeft(selection))).getUnite();
             if (listeUnite.Count() > 0)
             {
                 afficherUniteCase(listeUnite);
             }
-            else if(this.caseClic != null)
+            else if (this.caseClic != null)
             {
                 afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
             }
-            
+
         }
-        
+
         private void echapCase(object sender, MouseEventArgs e)
         {
             if (this.caseSelect != null)
                 this.mapGrid.Children.Remove(this.caseSelect);
-        }
-        
-        private void flecheAction(object sender, KeyboardEventArgs e)
-        {
-            MessageBox.Show("oui");
-            var selection = sender as Border;
-           
-                Border bordure = new Border();
-                bordure.Background = FabriqueImage.getInstance().getSelection(true);
-                bordure.Width = tailleCase;
-                bordure.Height = tailleCase;
-                this.caseSelectY = this.getX(Canvas.GetLeft(selection));
-                if (this.caseSelectY > 0)
-                    this.caseSelectY += 75;
-                Canvas.SetLeft(bordure, this.caseSelectY);
-                Canvas.SetTop(bordure, Canvas.GetTop(selection));
-                bordure.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
-                this.mapGrid.Children.Add(bordure);
-                this.caseSelect = bordure;
+            if (this.caseClic == null && (this.caseClic != null && this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite().Count() == 0))
+                effacementGrilleUnite();
 
         }
 
@@ -310,17 +436,16 @@ namespace SmallWorld
 
         }
 
-            
+
         //Quand on clique sur une case qui contient des unités
         private void afficherUniteCase(List<Unite> lunite)
         {
             string vie = "";
-            string attaque = "";
-            string defense = "";
+            //string attaque = "";
+            //string defense = "";
             string mouvement = "";
             int i = 0;
             int j = 0;
-            int k = 0;
             int cpt = 0;
             effacementGrilleUnite();
             if (lunite.Count() > 0)
@@ -343,12 +468,8 @@ namespace SmallWorld
                         {
                             //Mise en place de la grille interne
                             Grid grille = new Grid();
-
-                            //grille.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(10, GridUnitType.Star) });
-                            for (k = 0; k < 2; k++)
-                            {
-                                grille.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(3, GridUnitType.Star) });
-                            }
+                            grille.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(3, GridUnitType.Star) });
+                            grille.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(2, GridUnitType.Star) });
                             Grid.SetRow(grille, i);
                             Grid.SetColumn(grille, j);
                             grille.MouseLeftButtonDown += new MouseButtonEventHandler(this.MouseLeftMapUnite);
@@ -357,8 +478,9 @@ namespace SmallWorld
                             //Ajout de l'image de l'unité à la grille interne
                             Rectangle image = new Rectangle();
                             image.Fill = FabriqueImage.getInstance().getBrushUnite(lunite[cpt]);
-                            image.Width = 96;
-                            image.Height = 96;
+                            image.Width = tailleCase;
+                            image.Height = tailleCase;
+                            image.HorizontalAlignment = HorizontalAlignment.Center;
                             Grid.SetRow(image, 0);
                             Grid.SetColumn(image, 0);
                             grille.Children.Add(image);
@@ -367,10 +489,11 @@ namespace SmallWorld
                             TextBlock texte = new TextBlock();
                             texte.TextAlignment = TextAlignment.Center;
                             vie = "Vie - " + lunite[cpt].getVie();
-                            attaque = "Attaque - " + lunite[cpt].getAttaque();
-                            defense = "Defense - " + lunite[cpt].getDefense();
+                            //attaque = "Attaque - " + lunite[cpt].getAttaque();
+                            //defense = "Defense - " + lunite[cpt].getDefense();
                             mouvement = "Mouvement - " + lunite[cpt].getMouvement();
-                            texte.Text = vie + "\n" + attaque + "\n" + defense + "\n" + mouvement;
+                            //texte.Text = vie + "\n" + attaque + "\n" + defense + "\n" + mouvement;
+                            texte.Text = "\n" + vie + "\n" + mouvement;
                             Grid.SetRow(texte, 1);
                             Grid.SetColumn(texte, 0);
                             grille.Children.Add(texte);
@@ -501,7 +624,8 @@ namespace SmallWorld
                     this.joueur = this.jeu.getJoueur1();
                 }
                 this.tour = new TourImpl(this.jeu, this.joueur);
-                this.Menu.Text = "Tour n°" + this.nbTourInit + " - " + this.joueur.getPseudo();
+                this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1) + " \n " + this.joueur.getPseudo();
+                MessageBox.Show("C'est au tour de " + this.joueur.getPseudo() + " de jouer !");
                 informationsJoueur();
                 afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
 
@@ -530,19 +654,14 @@ namespace SmallWorld
                 MessageBoxResult res1 = MessageBox.Show("Voulez-vous sauvegarder la partie avant de quitter ?", "Sauver ?", MessageBoxButton.YesNo);
                 if (res1 == MessageBoxResult.Yes)
                 {
-                    //sauvegarder();
-                    Application.Current.Shutdown();
-                }
-                else
-                {
-                    MessageBoxResult res2 = MessageBox.Show("Etes-vous sûr de vouloir quitter le jeu quand même ?", "Quitter ?", MessageBoxButton.YesNo);
-                    if (res2 == MessageBoxResult.No)
+                    bool? res = sauvegarder();
+                    if (res == true)
                     {
-                        e.Cancel = true;
+                        Application.Current.Shutdown();
                     }
                     else
                     {
-                        Application.Current.Shutdown();
+                        e.Cancel = true;
                     }
                 }
             }
@@ -560,6 +679,47 @@ namespace SmallWorld
 
             }
         }
+        public bool? sauvegarder()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.DefaultExt = ".sw";
+            dialog.Filter = "SmallWorld (*.sw)|*.sw|All files (*.*)|*.*";
+            dialog.RestoreDirectory = true;
+            Nullable<bool> res = dialog.ShowDialog();
+            if (res == true)
+            {
+                this.nomDuFichier = dialog.FileName;
 
+                Stream stream = File.Open(this.nomDuFichier, FileMode.Create);
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, this.jeu);
+                stream.Close();
+            }
+            return res;
+        }
+
+        private void changementImgJoueur1(object sender, MouseButtonEventArgs e)
+        {
+            if (this.numImgJ1 < numMaxImg)
+                this.numImgJ1++;
+            else
+                this.numImgJ1 = 1;
+
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ1 + ".png", UriKind.Relative));
+            this.ImgJ1.Fill = brush;
+
+        }
+        private void changementImgJoueur2(object sender, MouseButtonEventArgs e)
+        {
+            if (this.numImgJ2 < numMaxImg)
+                this.numImgJ2++;
+            else
+                this.numImgJ2 = 1;
+
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ2 + ".png", UriKind.Relative));
+            this.ImgJ2.Fill = brush;
+        }
     }
 }

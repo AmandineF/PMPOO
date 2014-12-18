@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml;
 using Wrapper;
+
+using System.Runtime.Serialization;
 
 
 namespace ModelisationProjet
 {
-    public class CarteImpl : Carte
+    [Serializable()]
+    public class CarteImpl : Carte, ISerializable
     {
 
         private int taille;
@@ -37,6 +41,18 @@ namespace ModelisationProjet
                 }
             }
          
+        }
+        public CarteImpl() { }
+        public CarteImpl(SerializationInfo info, StreamingContext context) {
+            this.taille = (int)info.GetValue("Taille", typeof(int));
+            this.carte = (Case[,])info.GetValue("Carte", typeof(Case[,]));
+            this.fabrique = (FabriqueCaseImpl)info.GetValue("Fabrique", typeof(FabriqueCaseImpl));
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context) {
+            info.AddValue("Taille", this.taille);
+            info.AddValue("Carte", this.carte);
+            info.AddValue("Fabrique", this.fabrique);
         }
 
         /// <summary>

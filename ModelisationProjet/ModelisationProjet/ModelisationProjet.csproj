@@ -48,6 +48,7 @@
     <Compile Include="CartePetite.cs" />
     <Compile Include="Case.cs" />
     <Compile Include="CaseForet.cs" />
+    <Compile Include="CaseMer.cs" />
     <Compile Include="CreateurPartie.cs" />
     <Compile Include="CaseDesert.cs" />
     <Compile Include="FabriqueCase.cs" />

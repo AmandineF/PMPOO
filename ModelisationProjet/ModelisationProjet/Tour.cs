@@ -6,6 +6,7 @@ using Wrapper;
 
 namespace ModelisationProjet
 {
+    [Serializable()]
     public class TourImpl : Tour
     {
         private Jeu jeu;

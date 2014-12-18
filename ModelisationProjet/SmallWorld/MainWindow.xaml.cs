@@ -13,6 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModelisationProjet;
+using System.Xml;
+using System.Xml.Serialization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using Microsoft.Win32;
 
 namespace SmallWorld
 {
@@ -27,22 +32,38 @@ namespace SmallWorld
             
         }
 
-        private void Button_Click1(object sender, RoutedEventArgs e)
+        private void BoutonNouvellePartie(object sender, RoutedEventArgs e)
         {
             ConfigJoueur Fenetre = new ConfigJoueur(this);
             this.Content = Fenetre.Content;
         }
-        private void Button_Click2(object sender, RoutedEventArgs e)
+        private void BoutonChargerPartie(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("A faire ...");
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.DefaultExt = ".sw";
+            dialog.Filter = "SmallWorld (*.sw) | *.sw | All files (*.*) | *.*";
+            dialog.RestoreDirectory = true;
+            Nullable<bool> res = dialog.ShowDialog();
+            if (res == true)
+            {
+                this.chargerPartie(dialog.FileName);
+            }
         }
-        private void Button_Click3(object sender, RoutedEventArgs e)
+        private void BoutonQuitter(object sender, RoutedEventArgs e)
         {
-                this.Close();
+            this.Close();
+            Application.Current.Shutdown();
         }
-       
 
-
+        public void chargerPartie(string nomDuFichier)
+        {
+            Stream stream = File.Open(nomDuFichier, FileMode.Open);
+            BinaryFormatter formatter = new BinaryFormatter();
+            Jeu partieSauvee = (Jeu)formatter.Deserialize(stream);
+            stream.Close();
+            new FenetreCarte(partieSauvee).Show();
+            this.Close();
+        }
     }
 }
 
