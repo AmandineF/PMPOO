@@ -88,7 +88,7 @@ int* Algo::placementJoueur(int taille){
 	return tableauJoueur;
 
 }
-// type = 1 -> Nain ; type = 2 -> Elfe ; type = 3 -> Orc
+// type = 1 -> Nain ; type = 2 -> Elfe ; type = 3 -> Orc ; type = 4 -> Pirate
 bool** Algo::suggestionCase(int tailleMap, int xActuel, int yActuel, int type, int** carteElement, double ptMouvement){
 	int i, j;
 
@@ -341,7 +341,7 @@ bool** Algo::suggestionCase(int tailleMap, int xActuel, int yActuel, int type, i
 				}
 			}
 			//Cas case en haut a droite
-			if (ptMouvement == 1 && (xActuel - 1) >= 0 && (yActuel + 1) < tailleMap && carteElement[xActuel - 1][yActuel + 1] != 4){
+			if ((xActuel - 1) >= 0 && (yActuel + 1) < tailleMap && carteElement[xActuel - 1][yActuel + 1] != 4){
 				if (ptMouvement == 1){
 					carteBool[xActuel - 1][yActuel + 1] = true;
 				}
@@ -351,6 +351,123 @@ bool** Algo::suggestionCase(int tailleMap, int xActuel, int yActuel, int type, i
 			}
 		}
 		break;
+
+		//L'unité sélectionné est un Pirate (case 4)
+		case 4:
+			if (xActuel % 2 == 0){
+				//Cas case en haut a gauche
+				if ((xActuel - 1) >= 0 && (yActuel - 1) >= 0){
+					if (ptMouvement == 1){
+						carteBool[xActuel - 1][yActuel - 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel - 1][yActuel - 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel - 1][yActuel - 1] = true;
+					}
+				}
+				//Cas case a gauche
+				if ((yActuel - 1) >= 0){
+					if (ptMouvement == 1){
+						carteBool[xActuel][yActuel - 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel][yActuel - 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel][yActuel - 1] = true;
+					}
+				}
+				//Cas case en bas a gauche
+				if ((xActuel + 1) < tailleMap && (yActuel - 1) >= 0){
+					if (ptMouvement == 1){
+						carteBool[xActuel + 1][yActuel - 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel + 1][yActuel - 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel + 1][yActuel - 1] = true;
+					}
+				}
+				//Cas case en bas a droite
+				if ((xActuel + 1) < tailleMap){
+					if (ptMouvement == 1){
+						carteBool[xActuel + 1][yActuel] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel + 1][yActuel] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel + 1][yActuel] = true;
+					}
+				}
+				//Cas case a droite
+				if ((yActuel + 1) < tailleMap ){
+					if (ptMouvement == 1){
+						carteBool[xActuel][yActuel + 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel][yActuel + 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel][yActuel + 1] = true;
+					}
+				}
+				//Cas case en haut a droite
+				if ((xActuel - 1) >= 0){
+					if (ptMouvement == 1){
+						carteBool[xActuel - 1][yActuel] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel - 1][yActuel] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel - 1][yActuel] = true;
+					}
+				}
+			}
+			else
+			{
+				//Cas case en haut a gauche
+				if ((xActuel - 1) >= 0){
+					if (ptMouvement == 1){
+						carteBool[xActuel - 1][yActuel] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel - 1][yActuel] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel - 1][yActuel] = true;
+					}
+				}
+				//Cas case a gauche
+				if ((yActuel - 1) >= 0){
+					if (ptMouvement == 1){
+						carteBool[xActuel][yActuel - 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel][yActuel - 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel][yActuel - 1] = true;
+					}
+				}
+				//Cas case en bas a gauche
+				if ((xActuel + 1) < tailleMap){
+					if (ptMouvement == 1){
+						carteBool[xActuel + 1][yActuel] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel + 1][yActuel] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel + 1][yActuel] = true;
+					}
+				}
+				//Cas case en bas a droite
+				if ((xActuel + 1) < tailleMap && (yActuel + 1) < tailleMap ){
+					if (ptMouvement == 1){
+						carteBool[xActuel + 1][yActuel + 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel + 1][yActuel + 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel + 1][yActuel + 1] = true;
+					}
+				}
+				//Cas case a droite
+				if ((yActuel + 1) < tailleMap){
+					if (ptMouvement == 1){
+						carteBool[xActuel][yActuel + 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel][yActuel + 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel][yActuel + 1] = true;
+					}
+				}
+				//Cas case en haut a droite
+				if ((xActuel - 1) >= 0 && (yActuel + 1) < tailleMap){
+					if (ptMouvement == 1){
+						carteBool[xActuel - 1][yActuel + 1] = true;
+					}
+					else if (ptMouvement == 0 && carteElement[xActuel - 1][yActuel + 1] == 5 && carteElement[xActuel][yActuel] == 5){
+						carteBool[xActuel - 1][yActuel + 1] = true;
+					}
+				}
+			}
+			break;
 	default: break;
 	}
 

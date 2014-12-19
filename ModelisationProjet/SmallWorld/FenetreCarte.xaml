@@ -135,7 +135,7 @@
 
         </Grid>
 
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*" />
                 <RowDefinition Height="2*" />
@@ -145,7 +145,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="1" Margin="0,0,0,0" Name="Menu" Style="{StaticResource menuStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Height="70"/>
             <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                <Canvas Name="mapGrid">
+                <Canvas Name="mapGrid" MouseWheel="Grid_MouseWheel" >
                     <Canvas.LayoutTransform>
                         <ScaleTransform
                         CenterX="0" CenterY="0"
@@ -169,7 +169,10 @@
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" x:Name="FinTour"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="107,22,105,20" Height="60">Fin du tour</Button>
+                <Button x:Name="FinTour" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="381,22,222,20" Height="60" Grid.ColumnSpan="2">Fin du tour</Button>
+                <Button  Width="100" Name="RetourMenu" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RetourMenu_Click" Margin="0,22,10,20" Cursor="Hand" Grid.Column="1" >Menu</Button>
+                <Button  Width="100" Name="Save" VerticalAlignment="Center" HorizontalAlignment="Right" Click="Save_Click" Margin="0,22,117,20" Cursor="Hand" Grid.Column="1">Sauver</Button>
+
                 <!--<Grid Grid.Column="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="3*"/>
@@ -181,8 +184,8 @@
                     <Rectangle Grid.Column="2" Width="63" Height="63" Name="ImgPeupleActuel"/>
                 </Grid>-->
                 <TextBlock Grid.Column="0" Name="AuTourDeQui"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                
-                
+
+
             </Grid>
 
             <Rectangle Grid.Row="4">

@@ -65,6 +65,7 @@
     <Compile Include="PeupleNain.cs" />
     <Compile Include="PeupleOrc.cs" />
     <Compile Include="CasePlaine.cs" />
+    <Compile Include="PeuplePirate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StrategieCarte.cs" />
     <Compile Include="Tour.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="UniteImpl.cs" />
     <Compile Include="UniteNain.cs" />
     <Compile Include="UniteOrc.cs" />
+    <Compile Include="UnitePirate.cs" />
     <Compile Include="Vue.cs" />
   </ItemGroup>
   <ItemGroup>

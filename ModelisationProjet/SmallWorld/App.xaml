@@ -60,21 +60,8 @@
                                 <!-- Change the color of the outer rectangle when user          mouses over it. -->
                                 <Setter Property ="Rectangle.Stroke" TargetName="outerRectangle"
                                      Value="Blue" />
-
-                                <!-- Sets the glass opacity to 1, therefore, the          glass "appears" when user mouses over it. -->
-
-                                <!-- Makes the text slightly blurry as though you were          looking at it through blurry glass. -->
-                                <Setter Property="ContentPresenter.BitmapEffect"       TargetName="myContentPresenter">
-                                    <Setter.Value>
-                                        <BlurBitmapEffect Radius="1" />
-                                    </Setter.Value>
-                                </Setter>
                             </Trigger>
-                            <!-- Set properties when button has focus. -->
-                            <Trigger Property="IsFocused" Value="true">
-                                <Setter Property="Rectangle.Stroke" TargetName="outerRectangle"
-                                    Value="Blue" />
-                            </Trigger>
+                           
 
 
                         </ControlTemplate.Triggers>

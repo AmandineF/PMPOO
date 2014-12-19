@@ -50,6 +50,13 @@ namespace ModelisationProjet
                     this.listeUnite.Add(new UniteNain(this));
                 }
             }
+            else if (this.peuple is PeuplePirate)
+            {
+                for (i = 0; i < nbUnite; i++)
+                {
+                    this.listeUnite.Add(new UnitePirate(this));
+                }
+            }
         }
         public JoueurImpl(SerializationInfo info, StreamingContext context) {
             this.pseudo = (string)info.GetValue("Pseudo", typeof(string));
@@ -106,6 +113,10 @@ namespace ModelisationProjet
                 return "Nain";
             } else if(this.peuple is PeupleOrc) {
                 return "Orc";
+            }
+            else if (this.peuple is PeuplePirate)
+            {
+                return "Pirate";
             }
             return "";
         }

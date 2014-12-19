@@ -123,9 +123,9 @@ namespace SmallWorld.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap map_256 {
+        internal static System.Drawing.Bitmap map_225 {
             get {
-                object obj = ResourceManager.GetObject("map_256", resourceCulture);
+                object obj = ResourceManager.GetObject("map_225", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace SmallWorld.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap map_36 {
+        internal static System.Drawing.Bitmap map_25 {
             get {
-                object obj = ResourceManager.GetObject("map_36", resourceCulture);
+                object obj = ResourceManager.GetObject("map_25", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -166,6 +166,16 @@ namespace SmallWorld.Properties {
         internal static System.Drawing.Bitmap pirate {
             get {
                 object obj = ResourceManager.GetObject("pirate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pirate1 {
+            get {
+                object obj = ResourceManager.GetObject("pirate1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

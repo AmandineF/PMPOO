@@ -15,7 +15,6 @@ using ModelisationProjet;
 using System.ComponentModel; //CancelEventsArg
 using Wrapper;
 using System.IO;
-using Wrapper;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Win32;
 using System.Runtime.Serialization;
@@ -48,6 +47,8 @@ namespace SmallWorld
         private Border caseClic;
 
         private string nomDuFichier;
+        private bool BoutonMenu = false;
+        private bool BoutonAnnuler = false;
 
         public FenetreCarte(Jeu j)
         {
@@ -678,30 +679,42 @@ namespace SmallWorld
                 }
             }
         }
-        
+
         public void FenetreCarte_Closing(object sender, CancelEventArgs e)
         {
-            
-                MessageBoxResult res1 = MessageBox.Show("Voulez-vous sauvegarder la partie avant de quitter ?", "Sauver ?", MessageBoxButton.YesNo);
-                if (res1 == MessageBoxResult.Yes)
+
+            MessageBoxResult res1 = MessageBox.Show("Voulez-vous sauvegarder la partie avant de quitter ?", "Sauver ?", MessageBoxButton.YesNoCancel);
+            if (res1 == MessageBoxResult.Yes)
+            {
+                bool? res = sauvegarder();
+                if (res == true)
                 {
-                    bool? res = sauvegarder();
-                    if (res == true)
+                    if (BoutonMenu == false)
                     {
                         Application.Current.Shutdown();
-                    }
-                    else
-                    {
-                        e.Cancel = true;
                     }
                 }
                 else
                 {
+                    e.Cancel = true;
+                }
+            }
+            else if (res1 == MessageBoxResult.No)
+            {
+                if (BoutonMenu == false)
+                {
                     Application.Current.Shutdown();
                 }
             }
-        
-        public bool? sauvegarder()
+            else
+            {
+                BoutonAnnuler = true;
+                BoutonMenu = false;
+                e.Cancel = true;
+            }
+        }
+
+        public bool? sauvegarderEnTantQue()
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.DefaultExt = ".sw";
@@ -716,6 +729,23 @@ namespace SmallWorld
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(stream, this.jeu);
                 stream.Close();
+            }
+            return res;
+        }
+        private bool? sauvegarder()
+        {
+            bool? res;
+            if (this.nomDuFichier == null)
+            {
+                res = this.sauvegarderEnTantQue();
+            }
+            else
+            {
+                Stream stream = File.Open(this.nomDuFichier, FileMode.Create);
+                BinaryFormatter formatter = new BinaryFormatter();
+                formatter.Serialize(stream, this.jeu);
+                stream.Close();
+                res = true;
             }
             return res;
         }
@@ -751,6 +781,33 @@ namespace SmallWorld
             ImageBrush brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ2 + ".png", UriKind.Relative));
             this.ImgJ2.Fill = brush;
+        }
+        private void RetourMenu_Click(object sender, RoutedEventArgs e)
+        {
+            BoutonMenu = true;
+            this.Close();
+            if (BoutonAnnuler == false)
+            {
+                new MainWindow().Show();
+            }
+            BoutonAnnuler = false;
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            sauvegarder();
+        }
+
+        private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta < 0)
+            {
+                this.uiScaleSlider.Value += 0.1;
+            }
+            else if (e.Delta > 0)
+            {
+                this.uiScaleSlider.Value -= 0.1;
+            }
         }
     }
 }

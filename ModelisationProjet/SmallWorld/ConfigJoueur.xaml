@@ -17,7 +17,7 @@
 
             </StackPanel>
         </GroupBox>
-        <Rectangle Margin="251,353,831,157" Name="ElfeJ1" MouseLeftButtonDown="ChoixElfeJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
+        <Rectangle Margin="162,377,979,157" Name="ElfeJ1" MouseLeftButtonDown="ChoixElfeJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/SmallWorld;component/Resources/elf.png" />
             </Rectangle.Fill>
@@ -33,7 +33,23 @@
                 </ToolTip>
             </Rectangle.ToolTip>
         </Rectangle>
-        <Rectangle Margin="91,224,991,278" Name="NainJ1" MouseLeftButtonDown="ChoixNainJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
+        <Rectangle Margin="361,377,725,157" Name="PirateJ1" MouseLeftButtonDown="ChoixPirateJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/pirate.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Pirates</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Mer est nul si le pirate est déjà sur une case Mer.</TextBlock>
+                        <TextBlock>- Une unité Pirate n'acquière aucun point sur les cases Désert.</TextBlock>
+                        <TextBlock>- Lorsqu'une unité Pirate achève une unité ennemie, celui-ci regagne instantanément </TextBlock>
+                        <TextBlock>  tous ses points de vie.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Rectangle Margin="118,226,989,311" Name="NainJ1" MouseLeftButtonDown="ChoixNainJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/SmallWorld;component/Resources/nain.png" />
             </Rectangle.Fill>
@@ -49,7 +65,7 @@
                 </ToolTip>
             </Rectangle.ToolTip>
         </Rectangle>
-        <Rectangle Margin="388,226,689,273" Name="OrcJ1" MouseLeftButtonDown="ChoixOrcJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
+        <Rectangle Margin="364,230,725,311" Name="OrcJ1" MouseLeftButtonDown="ChoixOrcJ1" Cursor="Hand" ToolTipService.ShowDuration="60000">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/SmallWorld;component/Resources/orc.png" />
             </Rectangle.Fill>
@@ -77,7 +93,7 @@
             </StackPanel>
         </GroupBox>
 
-        <Rectangle Margin="843,346,239,157" Name="ElfeJ2" MouseLeftButtonDown="ChoixElfeJ2" Cursor="Hand"  ToolTipService.ShowDuration="60000">
+        <Rectangle Margin="759,377,379,157" Name="ElfeJ2" MouseLeftButtonDown="ChoixElfeJ2" Cursor="Hand"  ToolTipService.ShowDuration="60000">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/SmallWorld;component/Resources/elf.png" />
             </Rectangle.Fill>
@@ -93,7 +109,7 @@
                 </ToolTip>
             </Rectangle.ToolTip>
         </Rectangle>
-        <Rectangle Margin="693,218,389,278" Name="NainJ2" MouseLeftButtonDown="ChoixNainJ2" Cursor="Hand" ToolTipService.ShowDuration="60000">
+        <Rectangle Margin="718,226,390,311" Name="NainJ2" MouseLeftButtonDown="ChoixNainJ2" Cursor="Hand" ToolTipService.ShowDuration="60000">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/SmallWorld;component/Resources/nain.png" />
             </Rectangle.Fill>
@@ -109,7 +125,7 @@
                 </ToolTip>
             </Rectangle.ToolTip>
         </Rectangle>
-        <Rectangle Margin="968,218,108,281" Name="OrcJ2" MouseLeftButtonDown="ChoixOrcJ2" Cursor="Hand" ToolTipService.ShowDuration="60000" RenderTransformOrigin="0.566,0.518">
+        <Rectangle Margin="965,226,125,311" Name="OrcJ2" MouseLeftButtonDown="ChoixOrcJ2" Cursor="Hand" ToolTipService.ShowDuration="60000" RenderTransformOrigin="0.566,0.518">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="/SmallWorld;component/Resources/orc.png" />
             </Rectangle.Fill>
@@ -121,6 +137,22 @@
                         <TextBlock>- Une unité Orc n'acquière aucun point de victoire sur les cases de type Forêt.</TextBlock>
                         <TextBlock>- Lorsqu'une unité Orc détruit une autre unité, elle possède alors 1 point de victoire supplémentaire.</TextBlock>
                         <TextBlock>  Cet effet est cumulable et est lié à chaque unité (i.e si l'unité ayant le bonus meurt, le bonus disparaît).</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Rectangle.ToolTip>
+        </Rectangle>
+        <Rectangle Margin="965,377,125,157" Name="PirateJ2" MouseLeftButtonDown="ChoixPirateJ2" Cursor="Hand" ToolTipService.ShowDuration="60000">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/SmallWorld;component/Resources/pirate.png" />
+            </Rectangle.Fill>
+            <Rectangle.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock FontWeight="Bold">Caractéristiques des Pirates</TextBlock>
+                        <TextBlock>- Le coût de déplacement sur une case Mer est nul si le pirate est déjà sur une case Mer.</TextBlock>
+                        <TextBlock>- Une unité Pirate n'acquière aucun point sur les cases Désert.</TextBlock>
+                        <TextBlock>- Lorsqu'une unité Pirate achève une unité ennemie, celui-ci regagne instantanément</TextBlock>
+                        <TextBlock>  tous ses points de vie.</TextBlock>
                     </StackPanel>
                 </ToolTip>
             </Rectangle.ToolTip>

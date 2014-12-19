@@ -67,6 +67,7 @@ namespace SmallWorld
         {
             this.OrcJ1.StrokeThickness = 0;
             this.ElfeJ1.StrokeThickness = 0;
+            this.PirateJ1.StrokeThickness = 0;
             this.NainJ1.StrokeThickness = 2;
             this.NainJ1.Stroke = Brushes.White;
             this.choixPeupleJ1 = new PeupleNain();
@@ -75,6 +76,7 @@ namespace SmallWorld
         {
             this.NainJ1.StrokeThickness = 0;
             this.ElfeJ1.StrokeThickness = 0;
+            this.PirateJ1.StrokeThickness = 0;
             this.OrcJ1.StrokeThickness = 2;
             this.OrcJ1.Stroke = Brushes.White;
             this.choixPeupleJ1 = new PeupleOrc();
@@ -83,14 +85,25 @@ namespace SmallWorld
         {
             this.NainJ1.StrokeThickness = 0;
             this.OrcJ1.StrokeThickness = 0;
+            this.PirateJ1.StrokeThickness = 0;
             this.ElfeJ1.StrokeThickness = 2;
             this.ElfeJ1.Stroke = Brushes.White;
             this.choixPeupleJ1 = new PeupleElf();
+        }
+        private void ChoixPirateJ1(object sender, RoutedEventArgs e)
+        {
+            this.NainJ1.StrokeThickness = 0;
+            this.OrcJ1.StrokeThickness = 0;
+            this.ElfeJ1.StrokeThickness = 0;
+            this.PirateJ1.StrokeThickness = 2;
+            this.PirateJ1.Stroke = Brushes.White;
+            this.choixPeupleJ1 = new PeuplePirate(); 
         }
         private void ChoixNainJ2(object sender, RoutedEventArgs e)
         {
             this.OrcJ2.StrokeThickness = 0;
             this.ElfeJ2.StrokeThickness = 0;
+            this.PirateJ2.StrokeThickness = 0;
             this.NainJ2.StrokeThickness = 2;
             this.NainJ2.Stroke = Brushes.White;
             this.choixPeupleJ2 = new PeupleNain();
@@ -99,6 +112,7 @@ namespace SmallWorld
         {
             this.NainJ2.StrokeThickness = 0;
             this.ElfeJ2.StrokeThickness = 0;
+            this.PirateJ2.StrokeThickness = 0;
             this.OrcJ2.StrokeThickness = 2;
             this.OrcJ2.Stroke = Brushes.White;
             this.choixPeupleJ2 = new PeupleOrc();
@@ -107,9 +121,19 @@ namespace SmallWorld
         {
             this.NainJ2.StrokeThickness = 0;
             this.OrcJ2.StrokeThickness = 0;
+            this.PirateJ2.StrokeThickness = 0;
             this.ElfeJ2.StrokeThickness = 2;
             this.ElfeJ2.Stroke = Brushes.White;
             this.choixPeupleJ2 = new PeupleElf();
+        }
+        private void ChoixPirateJ2(object sender, RoutedEventArgs e)
+        {
+            this.NainJ2.StrokeThickness = 0;
+            this.OrcJ2.StrokeThickness = 0;
+            this.ElfeJ2.StrokeThickness = 0;
+            this.PirateJ2.StrokeThickness = 2;
+            this.PirateJ2.Stroke = Brushes.White;
+            this.choixPeupleJ2 = new PeuplePirate();
         }
        
 

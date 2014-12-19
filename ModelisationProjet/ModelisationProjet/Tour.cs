@@ -64,7 +64,7 @@ namespace ModelisationProjet
         /// </summary>
         /// <param name="x">L'abscisse de la case sur laquelle l'unité s'est déplacée</param>
         /// <param name="y">L'ordonnée de la case sur laquelle l'unité s'est déplacée</param>
-        public void consequenceDeplacement(int x, int y)
+        public void consequenceDeplacement(int x, int y, int oldx, int oldy)
         {
             if (this.uniteSelect is UniteElf)
             {
@@ -107,6 +107,13 @@ namespace ModelisationProjet
                     this.uniteSelect.setMouvement(this.uniteSelect.getMouvement() - 1);
                 }
             }
+            else if (this.uniteSelect is UnitePirate)
+            {
+                if (!(this.jeu.getCarte().getCase(oldx, oldy) is CaseMer && this.jeu.getCarte().getCase(x, y) is CaseMer))
+                {
+                    this.uniteSelect.setMouvement(this.uniteSelect.getMouvement() - 1);
+                }
+            }
         }
 
         /// <summary>
@@ -143,7 +150,7 @@ namespace ModelisationProjet
             {
                 this.jeu.getCarte().getCase(this.positionXselect, this.positionYselect).supprimeUnite(this.uniteSelect);
                 this.jeu.getCarte().getCase(this.positionXdest, this.positionYdest).ajoutUnite(this.uniteSelect);
-                consequenceDeplacement(this.positionXdest, this.positionYdest);
+                consequenceDeplacement(this.positionXdest, this.positionYdest, this.positionXselect, this.positionYselect);
                 affichage += "Déplacement de l'unité sélectionnée sur la case (" + this.positionXdest + " - " + this.positionYdest + ").\n";
             }
 
@@ -248,7 +255,7 @@ namespace ModelisationProjet
             }
             else
             {
-                consequenceDeplacement(this.positionXdest, this.positionYdest);
+                consequenceDeplacement(this.positionXdest, this.positionYdest, this.positionXselect, this.positionYselect);
                 affichage += "Aucun décès. \n";
             }
             return affichage;
@@ -282,6 +289,10 @@ namespace ModelisationProjet
                     {
                         carteElement[i][j] = 4; // Desert
                     }
+                    else if (this.jeu.getCarte().getCase(i, j) is CaseMer)
+                    {
+                        carteElement[i][j] = 5; // Mer
+                    }
                 }
             }
             return carteElement;
@@ -305,6 +316,8 @@ namespace ModelisationProjet
                 type = 2;
             }else if(uniteSelect is UniteOrc) {
                 type = 3;
+            }else if (uniteSelect is UnitePirate){
+                type = 4;
             }
 
             int[][] carteElement = creerCarteElement(this.jeu.getCarte().getTaille());

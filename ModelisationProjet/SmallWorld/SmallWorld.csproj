@@ -152,15 +152,6 @@
     <Resource Include="Resources\girlplayer.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\map_36.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\map_100.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\map_256.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\nain.png" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +201,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\pirate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\map_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\map_225.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\map_100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
