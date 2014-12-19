@@ -66,7 +66,13 @@ namespace SmallWorld
             this.caseSelectY = -1;
             this.borderSelect = null;
             this.nbTourInit = 1;
-            this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1) + " \n " + this.joueur.getPseudo();
+            this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1);
+            /*
+            this.AuTourDeQui.Text = "C'est au tour de " + this.joueur.getPseudo() + " de jouer avec le peuple " + this.joueur.getNomPeuple() + ".";
+            ImageBrush brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + numImgJoueur(this.joueur) + ".png", UriKind.Relative));
+            this.ImgJoueurActuel.Fill = brush;
+            this.ImgPeupleActuel.Fill = FabriqueImage.getInstance().getBrushUnite(this.joueur.getUnite(0)); */
             this.deuxJoueursTour = false;
             this.caseClic = null;
             //this.mapGrid = new Canvas();
@@ -74,10 +80,12 @@ namespace SmallWorld
             this.mapGrid.MouseLeave += new MouseEventHandler(this.echapCase);
             informationsJoueur();
             this.mapGrid.Focus();
-            ImageBrush brush = new ImageBrush();
-            brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ1 + ".png", UriKind.Relative));
-            this.ImgJ1.Fill = brush;
-            this.ImgJ2.Fill = brush;
+            ImageBrush brush1 = new ImageBrush();
+            brush1.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ1 + ".png", UriKind.Relative));
+            this.ImgJ1.Fill = brush1;
+            ImageBrush brush2 = new ImageBrush();
+            brush2.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ2 + ".png", UriKind.Relative));
+            this.ImgJ2.Fill = brush2;
             if (this.jeu.getCarte() is CarteNormale)
             {
                 this.uiScaleSlider.Value = 0.5;
@@ -263,7 +271,8 @@ namespace SmallWorld
                 }
                 else
                 {
-                    MessageBox.Show("Impossible de se déplacer en (" + this.caseSelectX + " - " + this.caseSelectY + ")");
+                    this.deroulement.Text ="Impossible de se déplacer en (" + this.caseSelectX + " - " + this.caseSelectY + ")";
+                    effacerSelection();
                 }
             }
             afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
@@ -327,9 +336,22 @@ namespace SmallWorld
                     else
                         this.caseSelectY = 0;
                     break;
-                case Key.Enter:
+                case Key.Escape:
                     FinTour_Click(sender, e);
                     break;
+                case Key.Enter:
+                    /*
+                    if (this.mapGrid.isFocused)
+                    {
+                        Keyboard.Focus(this.barreInfo);
+                        MessageBox.Show("Barre info");
+                    }
+                    else if (this.barreInfo.isFocused)
+                    {
+                        Keyboard.Focus(this.mapGrid);
+                        MessageBox.Show("Map");
+                    }*/
+                        
                 case Key.OemPlus:
                     this.uiScaleSlider.Value -= 0.1;
                     break;
@@ -338,6 +360,8 @@ namespace SmallWorld
                     break;
                 default:
                     return;
+
+                    
             }
 
             Border bordure = new Border();
@@ -399,6 +423,10 @@ namespace SmallWorld
                 this.mapGrid.Children.Remove(this.caseSelect);
             if (this.caseClic == null && (this.caseClic != null && this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite().Count() == 0))
                 effacementGrilleUnite();
+            if (this.caseClic != null)
+            {
+                afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
+            }
 
         }
 
@@ -432,7 +460,7 @@ namespace SmallWorld
         {
             this.tour.deselectionnerUnite();
             if (this.borderSelect != null)
-                this.borderSelect.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 244, 234, 229));
+                this.borderSelect.BorderBrush = new SolidColorBrush(Color.FromArgb(150, 244, 234, 229));
 
         }
 
@@ -488,10 +516,10 @@ namespace SmallWorld
                             //Ajout des caractéristiques de l'unité à la grille interne
                             TextBlock texte = new TextBlock();
                             texte.TextAlignment = TextAlignment.Center;
-                            vie = "Vie - " + lunite[cpt].getVie();
+                            vie = "Vie : " + lunite[cpt].getVie();
                             //attaque = "Attaque - " + lunite[cpt].getAttaque();
                             //defense = "Defense - " + lunite[cpt].getDefense();
-                            mouvement = "Mouvement - " + lunite[cpt].getMouvement();
+                            mouvement = "Mouvement : " + lunite[cpt].getMouvement();
                             //texte.Text = vie + "\n" + attaque + "\n" + defense + "\n" + mouvement;
                             texte.Text = "\n" + vie + "\n" + mouvement;
                             Grid.SetRow(texte, 1);
@@ -624,8 +652,12 @@ namespace SmallWorld
                     this.joueur = this.jeu.getJoueur1();
                 }
                 this.tour = new TourImpl(this.jeu, this.joueur);
-                this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1) + " \n " + this.joueur.getPseudo();
-                MessageBox.Show("C'est au tour de " + this.joueur.getPseudo() + " de jouer !");
+                this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1);
+                this.AuTourDeQui.Text = "C'est au tour de " + this.joueur.getPseudo() + " de jouer avec le peuple " + this.joueur.getNomPeuple() + ".";
+               /* ImageBrush brush = new ImageBrush();
+                brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + numImgJoueur(this.joueur) + ".png", UriKind.Relative));
+                this.ImgJoueurActuel.Fill = brush;
+                this.ImgPeupleActuel.Fill = FabriqueImage.getInstance().getBrushUnite(this.joueur.getUnite(0)); */
                 informationsJoueur();
                 afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
 
@@ -646,11 +678,10 @@ namespace SmallWorld
                 }
             }
         }
-        bool isDataSaved = false;
+        
         public void FenetreCarte_Closing(object sender, CancelEventArgs e)
         {
-            if (!isDataSaved)
-            {
+            
                 MessageBoxResult res1 = MessageBox.Show("Voulez-vous sauvegarder la partie avant de quitter ?", "Sauver ?", MessageBoxButton.YesNo);
                 if (res1 == MessageBoxResult.Yes)
                 {
@@ -664,21 +695,12 @@ namespace SmallWorld
                         e.Cancel = true;
                     }
                 }
-            }
-            else
-            {
-                MessageBoxResult res3 = MessageBox.Show("Etes-vous sûr de vouloir quitter le jeu ?", "Quitter ?", MessageBoxButton.YesNo);
-                if (res3 == MessageBoxResult.No)
-                {
-                    e.Cancel = true;
-                }
                 else
                 {
                     Application.Current.Shutdown();
                 }
-
             }
-        }
+        
         public bool? sauvegarder()
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -697,6 +719,15 @@ namespace SmallWorld
             }
             return res;
         }
+
+        /*
+        private int numImgJoueur(Joueur j)
+        {
+            if (j == this.jeu.getJoueur1())
+                return this.numImgJ1;
+            else
+                return this.numImgJ2;
+        }*/
 
         private void changementImgJoueur1(object sender, MouseButtonEventArgs e)
         {

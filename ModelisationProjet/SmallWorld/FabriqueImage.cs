@@ -43,15 +43,15 @@ namespace SmallWorld
             
             this.nain = new BitmapImage(new Uri(@"Ressources/Unites/nain.png", UriKind.Relative));
             this.elf = new BitmapImage(new Uri(@"Ressources/Unites/elf.png", UriKind.Relative));
-            this.orc = new BitmapImage(new Uri(@"Ressources/Unites/orc.png", UriKind.Relative));
+            this.orc = new BitmapImage(new Uri(@"Ressources/Unites/pirate.png", UriKind.Relative));
             this.nainInfos = new BitmapImage(new Uri(@"Ressources/Unites/nainInfos.png", UriKind.Relative));
             this.elfInfos = new BitmapImage(new Uri(@"Ressources/Unites/elfInfos.png", UriKind.Relative));
             this.orcInfos = new BitmapImage(new Uri(@"Ressources/Unites/orcInfos.png", UriKind.Relative));
 
-            this.selectJ1 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ1.png", UriKind.Relative));
+            this.selectJ1 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionRose.png", UriKind.Relative));
             this.selectJ2 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ2.png", UriKind.Relative));
             this.selectJ3 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ3.png", UriKind.Relative));
-            this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selection.png", UriKind.Relative));
+            this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionNoire.png", UriKind.Relative));
 
         }
 

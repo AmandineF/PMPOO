@@ -12,7 +12,7 @@ namespace ModelisationProjet
         /// <summary>
         /// Construit une carte 5 x 5
         /// </summary>
-        public CarteDemo():base(4){}
+        public CarteDemo():base(5){}
         public CarteDemo(SerializationInfo info, StreamingContext context): base(info, context) {
 
         }

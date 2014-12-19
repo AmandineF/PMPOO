@@ -23,7 +23,7 @@
             <Grid.Background>
                 <SolidColorBrush>
                     <SolidColorBrush.Color>
-                        <Color A ="100" R="244" G="234" B="229"/>
+                        <Color A ="150" R="244" G="234" B="229"/>
                     </SolidColorBrush.Color>
                 </SolidColorBrush>
             </Grid.Background>
@@ -126,10 +126,10 @@
                     <RowDefinition Height="5*" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="pseudoJ1">Joueur 2</TextBlock>
-                <Rectangle Name="ImgJ1" Grid.Column="0" Grid.Row="1" Width="63" Height="63" MouseLeftButtonDown="changementImgJoueur1"/>
+                <Rectangle Name="ImgJ1" Cursor="Hand" Grid.Column="0" Grid.Row="1" Width="63" Height="63" MouseLeftButtonDown="changementImgJoueur1"/>
                 <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Name="infoJ1"/>
                 <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Name="pseudoJ2">Joueur 2</TextBlock>
-                <Rectangle Name="ImgJ2" Grid.Column="1" Grid.Row="1" Width="63" Height="63" MouseLeftButtonDown="changementImgJoueur2"/>
+                <Rectangle Name="ImgJ2" Cursor="Hand" Grid.Column="1" Grid.Row="1" Width="63" Height="63" MouseLeftButtonDown="changementImgJoueur2"/>
                 <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Name="infoJ2"/>
             </Grid>
 
@@ -155,7 +155,45 @@
                     </Canvas.LayoutTransform>
                 </Canvas>
             </ScrollViewer>
-            <Button Grid.Row="3" x:Name="FinTour"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="303,20,300,10" Height="60">Fin du tour</Button>
+            <Rectangle Grid.Row="3">
+                <Rectangle.Fill>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <Color A ="150" R="244" G="234" B="229"/>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" x:Name="FinTour"  VerticalAlignment="Center" HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="107,22,105,20" Height="60">Fin du tour</Button>
+                <!--<Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Name="AuTourDeQui"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Rectangle Grid.Column="1" Width="43" Height="43" Name="ImgJoueurActuel"/>
+                    <Rectangle Grid.Column="2" Width="63" Height="63" Name="ImgPeupleActuel"/>
+                </Grid>-->
+                <TextBlock Grid.Column="0" Name="AuTourDeQui"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                
+                
+            </Grid>
+
+            <Rectangle Grid.Row="4">
+                <Rectangle.Fill>
+                    <SolidColorBrush>
+                        <SolidColorBrush.Color>
+                            <Color A ="150" R="244" G="234" B="229"/>
+                        </SolidColorBrush.Color>
+                    </SolidColorBrush>
+                </Rectangle.Fill>
+            </Rectangle>
         </Grid>
 
     </DockPanel>
