@@ -10,67 +10,35 @@ namespace TestLogiciel
         [TestMethod]
         public void TestGenerationCarte()
         {
-            int taille = 4;
-            CarteImpl c = new CarteImpl(taille);
+           
+            CarteImpl carte = new CarteDemo();
 
             PeupleElf p1 = new PeupleElf();
-            JoueurImpl j1 = new JoueurImpl(p1, taille, "Amandine");
+            JoueurImpl j1 = new JoueurImpl(p1,carte.getTaille(), "Amandine");
 
             PeupleNain p2 = new PeupleNain();
-            JoueurImpl j2 = new JoueurImpl(p2, taille, "Frank");
+            JoueurImpl j2 = new JoueurImpl(p2, carte.getTaille(), "Frank");
 
-
-            Random r = new Random();
-            int rand = 0;
-            int x1 = 0;
-            int x2 = 0;
-            int y1 = 0;
-            int y2 = 0;
-
-            rand = r.Next(1, 3);
-            if (rand == 1)
-            {
-                x1 = r.Next(0, taille);
-                x2 = x1;
-                y1 = r.Next(1, 3);
-                if (y1 == 1)
-                {
-                    y1 = 0;
-                    y2 = taille - 1;
-                }
-                else
-                {
-                    y1 = taille - 1;
-                    y2 = 0;
+            for(int i = 0; i < carte.getTaille(); i++) {
+                for(int j = 0; j < carte.getTaille(); j++) {
+                    Case tuile = carte.getCase(i, j);
+                    tuile.getUnite();
+                    bool estJ2 = tuile.estCaseEnnemie(j1);
+                    bool estJ1 = tuile.estCase(j1);
+                    if (estJ1 && estJ2)
+                    {
+                        Console.WriteLine("Problème");
+                    }
+                    Unite u = new UniteElf(j1);
+                    tuile.ajoutUnite(u);
+                    tuile.supprimeUnite(u);
                 }
             }
-            else
-            {
-                y1 = r.Next(0, taille);
-                y2 = y1;
-                x1 = r.Next(1, 3);
-                if (x1 == 1)
-                {
-                    x1 = 0;
-                    x2 = taille - 1;
-                }
-                else
-                {
-                    x1 = taille - 1;
-                    x2 = 0;
-                }
 
-            }
-            int i;
-            for (i = 0; i < j1.getNbUnite(); i++)
-            {
-                Unite u = j1.getUnite(i);
-                c.getCase(x1, y1).ajoutUnite(u);
-                Unite v = j2.getUnite(i);
-                c.getCase(x2, y2).ajoutUnite(v);
-            }
+            
+           carte.nbCasesColonisees(j1);
+            
                
-            c.Dessin();
         }
     }
 }

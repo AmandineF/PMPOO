@@ -143,6 +143,16 @@ namespace SmallWorld.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menu {
+            get {
+                object obj = ResourceManager.GetObject("menu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap nain {
             get {
                 object obj = ResourceManager.GetObject("nain", resourceCulture);
@@ -306,6 +316,16 @@ namespace SmallWorld.Properties {
         internal static System.Drawing.Bitmap player9 {
             get {
                 object obj = ResourceManager.GetObject("player9", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sauver {
+            get {
+                object obj = ResourceManager.GetObject("sauver", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

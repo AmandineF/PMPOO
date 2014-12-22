@@ -37,12 +37,11 @@ namespace ModelisationProjet
                 for ( j = 0; j < taille; j++)
                 {
                     carte[i, j] = fabrique.faireCase(typeCase[i][j]);
-                   // Console.Write("Case (" + i + " ; " + j + ") = " + carte[i, j] + "---------");
                 }
             }
          
         }
-        public CarteImpl() { }
+
         public CarteImpl(SerializationInfo info, StreamingContext context) {
             this.taille = (int)info.GetValue("Taille", typeof(int));
             this.carte = (Case[,])info.GetValue("Carte", typeof(Case[,]));
@@ -76,7 +75,11 @@ namespace ModelisationProjet
             return this.taille;
         }
 
-
+        /// <summary>
+        /// Donne le nombre de cases appartenant au joueur jo sur la carte
+        /// </summary>
+        /// <param name="jo">Le joueur dont on veut connaitre le nombre de cases</param>
+        /// <returns>le nombre de cases</returns>
         public int nbCasesColonisees(Joueur jo)
         {
             int total = 0;

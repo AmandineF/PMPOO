@@ -9,3 +9,14 @@
 \\psf\Home\Desktop\ModelisationProjet\TestLogiciel\bin\Debug\SmallWorld.pdb
 C:\Users\Frank\Downloads\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.csprojResolveAssemblyReference.cache
 C:\Users\Frank\Downloads\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.dll
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.csprojResolveAssemblyReference.cache
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.dll
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\TestLogiciel.dll
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\TestLogiciel.pdb
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\ModelisationProjet.dll
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\SmallWorld.exe
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\Wrapper.dll
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\ModelisationProjet.pdb
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\SmallWorld.pdb
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\bin\Debug\Wrapper.pdb
+\\psf\Home\Documents\Projets\PMPOO\ModelisationProjet\TestLogiciel\obj\Debug\TestLogiciel.pdb

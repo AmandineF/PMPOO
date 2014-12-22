@@ -26,9 +26,8 @@ namespace SmallWorld
         private BitmapImage elfInfos = null;
         private BitmapImage orcInfos = null;
         private BitmapImage pirateInfos = null;
-        private BitmapImage selectJ1 = null;
-        private BitmapImage selectJ2 = null;
-        private BitmapImage selectJ3 = null;
+        private BitmapImage select = null;
+        private BitmapImage selectBleue = null;
         private BitmapImage suggere = null;
 
 
@@ -52,10 +51,9 @@ namespace SmallWorld
             this.orcInfos = new BitmapImage(new Uri(@"Ressources/Unites/orcInfos.png", UriKind.Relative));
             this.pirateInfos = new BitmapImage(new Uri(@"Ressources/Unites/pirate.png", UriKind.Relative));
 
-            this.selectJ1 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionRose.png", UriKind.Relative));
-            this.selectJ2 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ2.png", UriKind.Relative));
-            this.selectJ3 = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ3.png", UriKind.Relative));
-            this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionNoire.png", UriKind.Relative));
+            this.select = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionNoire.png", UriKind.Relative));
+            this.selectBleue = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ1.png", UriKind.Relative));
+            this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionGrise.png", UriKind.Relative));
 
         }
 
@@ -75,13 +73,12 @@ namespace SmallWorld
             ImageBrush brush = new ImageBrush();
             if (b)
             {
-                brush.ImageSource = this.selectJ1;
+                brush.ImageSource = this.selectBleue;
             }
             else
             {
-                brush.ImageSource = this.selectJ2;
+                brush.ImageSource = this.select;
             }
-
             return brush;
         }
         public Brush getBrushCase(Case c)

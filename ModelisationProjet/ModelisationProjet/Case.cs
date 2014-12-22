@@ -42,7 +42,7 @@ namespace ModelisationProjet
         /// </summary>
         /// <param name="unite">L'unité à ajouter</param>
         public void ajoutUnite(Unite unite) 
-        {
+        {   
             this.listeUnite.Add(unite);
         }
 
