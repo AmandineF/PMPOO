@@ -8,7 +8,7 @@
 
     <Window.Resources>
         <Style x:Key="menuStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontSize" Value="24" />
             <Setter Property="FontFamily" Value="Jokerman" />
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Margin" Value="10"/>
@@ -144,6 +144,7 @@
                 <RowDefinition Height="0.5*" />
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="1" Margin="0,0,0,0" Name="Menu" Style="{StaticResource menuStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Height="70"/>
+
             <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
                 <Canvas Name="mapGrid" MouseWheel="Grid_MouseWheel" >
                     <Canvas.LayoutTransform>
@@ -166,25 +167,16 @@
             </Rectangle>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="5*"/>
                 </Grid.ColumnDefinitions>
-                <Button Focusable="False" x:Name="FinTour" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="381,22,222,20" Height="60" Grid.ColumnSpan="2">Fin du tour</Button>        
-                <Button Focusable="False" Width="100" Name="RetourMenu" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RetourMenu_Click" Margin="0,22,10,20" Cursor="Hand" Grid.Column="1" >Menu</Button>
-                <Button Focusable="False" Width="100" Name="Save" VerticalAlignment="Center" HorizontalAlignment="Right" Click="Save_Click" Margin="0,22,117,20" Cursor="Hand" Grid.Column="1">Sauver</Button>
-                <!--<Grid Grid.Column="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Name="AuTourDeQui"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Rectangle Grid.Column="1" Width="43" Height="43" Name="ImgJoueurActuel"/>
-                    <Rectangle Grid.Column="2" Width="63" Height="63" Name="ImgPeupleActuel"/>
-                </Grid>-->
-                <TextBlock Grid.Column="0" Name="AuTourDeQui"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-
+                <Rectangle MouseLeftButtonDown="donnerFocusMap" Cursor="Hand" Name="infoFocusMap" Grid.Column="0" Width="30" Height="30" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+                <Rectangle MouseLeftButtonDown="donnerFocusClavier" Cursor="Hand" Name="infoFocusClavier" Grid.Column="0" Width="30" Height="30" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <Button Focusable="False" x:Name="FinTour" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center" Click="FinTour_Click" Width="180" Margin="381,22,222,20" Height="60" Grid.ColumnSpan="3">Fin du tour</Button>        
+                <Button Focusable="False" Width="100" Name="RetourMenu" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RetourMenu_Click" Margin="0,22,10,20" Cursor="Hand" Grid.Column="2" >Menu</Button>
+                <Button Focusable="False" Width="100" Name="Save" VerticalAlignment="Center" HorizontalAlignment="Right" Click="Save_Click" Margin="0,22,117,20" Cursor="Hand" Grid.Column="2">Sauver</Button>
+                <TextBlock Margin="30,0,0,0" Grid.Column="1" Name="AuTourDeQui"  TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center"/>
             </Grid>
 
             <Rectangle Grid.Row="4">

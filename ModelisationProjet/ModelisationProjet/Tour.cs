@@ -224,6 +224,7 @@ namespace ModelisationProjet
                     //Attaque gagne
                     defense.setVie(defense.getVie() - 1);
                     affichage += "Round " + nbRound + " : défaite de la défense (" + defense.getJoueur().getNomPeuple() + ").\n";
+
                 }
                 else
                 {
@@ -234,8 +235,20 @@ namespace ModelisationProjet
                 nbRound++;
             }
 
-            defense.setDefense(defense.getDefense() - 1);
-            attaque.setAttaque(attaque.getAttaque() - 1);
+            if (!defense.estVivante() && defense is UniteElf)
+            {
+                Random repliElf = new Random();
+                int chanceElf = repliElf.Next(0,2);
+                if (chanceElf == 0)
+                {
+                    defense.setVie(1);
+                    affichage += "Grâce à son pouvoir, l'Elf se replie avec un point de vie. \n";
+                }
+                else
+                {
+                    affichage += "Le pouvoir de l'Elf a échoué. \n";
+                }
+            }
 
             if (!defense.estVivante())
             {
@@ -243,6 +256,16 @@ namespace ModelisationProjet
                 defense.getJoueur().decNbUnite();
                 attaque.setPtVictoire(attaque.getPtVictoire() + 1);
                 affichage += "Dèces de la défense (" + defense.getJoueur().getNomPeuple() + "). \nL'attaque gagne 1 point de victoire.\n";
+                if (attaque is UnitePirate)
+                {
+                    attaque.setVie(attaque.defautPointsVie);
+                    affichage += "Grâce à son pouvoir, les points de vie de l'attaque sont réinitialisés.\n";
+                }
+                else if(attaque is UniteOrc)
+                {
+                    attaque.incPtCase();
+                }
+
                 defense.getJoueur().removeUnite(defense);
             }
             else if (!attaque.estVivante())
@@ -251,6 +274,15 @@ namespace ModelisationProjet
                 attaque.getJoueur().decNbUnite();
                 defense.setPtVictoire(defense.getPtVictoire() + 1);
                 affichage += "Dèces de l'attaque (" + attaque.getJoueur().getNomPeuple() + "). \nLa défense gagne un point de victoire\n";
+                if (defense is UnitePirate)
+                {
+                    defense.setVie(defense.defautPointsVie);
+                    affichage += "Grâce à son pouvoir, les points de vie de la défense sont réinitialisés.\n";
+                }
+                else if (defense is UniteOrc)
+                {
+                    defense.incPtCase();
+                }
                 attaque.getJoueur().removeUnite(attaque);
             }
             else
@@ -319,7 +351,6 @@ namespace ModelisationProjet
             }else if (uniteSelect is UnitePirate){
                 type = 4;
             }
-
             int[][] carteElement = creerCarteElement(this.jeu.getCarte().getTaille());
             WrapperAlgo wp = new WrapperAlgo();
             bool** carteBool = wp.suggestion(this.jeu.getCarte().getTaille(), this.positionXselect, this.positionYselect, type, carteElement, uniteSelect.getMouvement());

@@ -14,6 +14,7 @@ namespace ModelisationProjet
         private const int POINTS_ATTAQUE_INITIAL = 2;
         private const int POINTS_DEFENSE_INITIAL = 1;
         private const int POINTS_MVT_INITIAL = 1;
+        private int ptCase;
         private int ptVie;
         private int ptVictoire;
         private int ptAttaque;
@@ -33,6 +34,7 @@ namespace ModelisationProjet
             this.ptMouvement = POINTS_MVT_INITIAL;
             this.ptVictoire = 0;
             this.proprietaire = j;
+            this.ptCase = 1;
         }
 
          public UniteImpl(SerializationInfo info, StreamingContext context) {
@@ -84,6 +86,21 @@ namespace ModelisationProjet
             get { return POINTS_DEFENSE_INITIAL; }
         }
 
+        /// <summary>
+        /// On incrémente le nombre de points de case que rapporte l'unité
+        /// </summary>
+        public void incPtCase()
+        {
+            this.ptCase++;
+        }
+
+        /// <summary>
+        /// On récupère le nombre de points de case que rapporte l'unité
+        /// </summary>
+        public int getPtCase()
+        {
+            return this.ptCase;
+        }
         /// <summary>
         /// Retourne le nombre de points de victoire
         /// </summary>

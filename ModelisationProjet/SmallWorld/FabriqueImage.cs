@@ -28,6 +28,10 @@ namespace SmallWorld
         private BitmapImage pirateInfos = null;
         private BitmapImage select = null;
         private BitmapImage suggere = null;
+        private BitmapImage clavier = null; 
+        private BitmapImage clavierFocus = null;
+        private BitmapImage map = null;
+        private BitmapImage mapFocus = null;
 
 
         private static FabriqueImage INSTANCE = new FabriqueImage();
@@ -53,6 +57,11 @@ namespace SmallWorld
             this.select = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionNoire.png", UriKind.Relative));
             this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionGrise.png", UriKind.Relative));
 
+
+            this.clavier = new BitmapImage(new Uri(@"Ressources/Focus/clavier.png", UriKind.Relative));
+            this.clavierFocus = new BitmapImage(new Uri(@"Ressources/Focus/clavierFocus.png", UriKind.Relative));
+            this.map = new BitmapImage(new Uri(@"Ressources/Focus/globe.png", UriKind.Relative));
+            this.mapFocus = new BitmapImage(new Uri(@"Ressources/Focus/globeFocus.png", UriKind.Relative));
         }
 
         public static FabriqueImage getInstance()
@@ -70,6 +79,32 @@ namespace SmallWorld
         {
             ImageBrush brush = new ImageBrush();
             brush.ImageSource = this.select;
+            return brush;
+        }
+        public Brush getFocusClavier(bool b)
+        {
+            ImageBrush brush = new ImageBrush();
+            if (b)
+            {
+                brush.ImageSource = this.clavierFocus;
+            }
+            else
+            {
+                brush.ImageSource = this.clavier;
+            }
+            return brush;
+        }
+        public Brush getFocusMap(bool b)
+        {
+            ImageBrush brush = new ImageBrush();
+            if (b)
+            {
+                brush.ImageSource = this.mapFocus;
+            }
+            else
+            {
+                brush.ImageSource = this.map;
+            }
             return brush;
         }
         public Brush getBrushCase(Case c)

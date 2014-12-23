@@ -14,6 +14,9 @@ namespace ModelisationProjet
 
         double getMouvement();
 
+        void incPtCase();
+
+        int getPtCase();
         int getVie();
 
         void setAttaque(int a);

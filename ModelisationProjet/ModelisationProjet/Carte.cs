@@ -89,7 +89,12 @@ namespace ModelisationProjet
                 {
                     if (this.carte[i,j].estCase(jo))
                     {
-                        total++;
+                        if (!(jo.getPeuple() is PeupleNain && this.carte[i, j] is CasePlaine) &&
+                            !(jo.getPeuple() is PeupleOrc && this.carte[i, j] is CaseForet) &&
+                            !(jo.getPeuple() is PeuplePirate && this.carte[i, j] is CaseDesert))
+                        {
+                            total += this.carte[i,j].getUnite()[0].getPtCase();
+                        }
                     }
                 }
             }
