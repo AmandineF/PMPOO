@@ -27,7 +27,6 @@ namespace SmallWorld
         private BitmapImage orcInfos = null;
         private BitmapImage pirateInfos = null;
         private BitmapImage select = null;
-        private BitmapImage selectBleue = null;
         private BitmapImage suggere = null;
 
 
@@ -52,7 +51,6 @@ namespace SmallWorld
             this.pirateInfos = new BitmapImage(new Uri(@"Ressources/Unites/pirate.png", UriKind.Relative));
 
             this.select = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionNoire.png", UriKind.Relative));
-            this.selectBleue = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionJ1.png", UriKind.Relative));
             this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionGrise.png", UriKind.Relative));
 
         }
@@ -71,14 +69,7 @@ namespace SmallWorld
         public Brush getSelection(bool b)
         {
             ImageBrush brush = new ImageBrush();
-            if (b)
-            {
-                brush.ImageSource = this.selectBleue;
-            }
-            else
-            {
-                brush.ImageSource = this.select;
-            }
+            brush.ImageSource = this.select;
             return brush;
         }
         public Brush getBrushCase(Case c)

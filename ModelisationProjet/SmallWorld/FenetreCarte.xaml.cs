@@ -26,7 +26,7 @@ namespace SmallWorld
     {
         private Jeu jeu;
         private Tour tour;
-        private const int numMaxImg = 12;
+        private const int numMaxImg = 11;
         private int numImgJ1;
         private int numImgJ2;
         private Border[,] plateauUnite;
@@ -36,7 +36,6 @@ namespace SmallWorld
         private int caseSelectX;
         private int caseSelectY;
         private Grid uniteGrid;
-        // private Canvas mapGrid;
         private Border borderSelect;
         private Joueur joueur;
         private int nbTourInit;
@@ -54,6 +53,7 @@ namespace SmallWorld
 
         public FenetreCarte(Jeu j)
         {
+            
             InitializeComponent();
             this.ligneSelect = 0;
             this.colonneSelect = 0;
@@ -97,7 +97,9 @@ namespace SmallWorld
             }
         }
 
-
+        /// <summary>
+        /// Mise en place de la carte
+        /// </summary>
         private void creerCarte(object sender, RoutedEventArgs e)
         {
             int t = 0;
@@ -112,6 +114,7 @@ namespace SmallWorld
 
                 for (int y = 0; y < this.jeu.getCarte().getTaille(); y++)
                 {
+                    //Création de la case et placement dans le canvas
                     Border hexagone = new Border();
                     hexagone.Background = FabriqueImage.getInstance().getBrushCase(this.jeu.getCarte().getCase(x, y));
                     Canvas.SetLeft(hexagone, l);
@@ -127,12 +130,16 @@ namespace SmallWorld
                 t = t + 75;
             }
 
+            //On détermine la taille du canvas pour pouvoir le centrer
             this.mapGrid.Width = this.jeu.getCarte().getTaille() * 100;
             this.mapGrid.Height = this.jeu.getCarte().getTaille() * 75;
             this.mapGrid.HorizontalAlignment = HorizontalAlignment.Center;
             this.mapGrid.VerticalAlignment = VerticalAlignment.Center;
 
+            //On ajoute les unitézs sur la carte
             ajoutUnite();
+
+            //On sélectionne la première case sélectionnée : celle qui contient toutes les unités du premier joueur qui va joueur
             if (this.jeu.getCarte().getCase(0, 0).estCase(this.joueur))
             {
                 this.caseSelectX = 0;
@@ -143,14 +150,18 @@ namespace SmallWorld
                 this.caseSelectX = this.jeu.getCarte().getTaille() - 1;
                 this.caseSelectY = this.jeu.getCarte().getTaille() - 1;
             }
-            selectionCase(false);
+            selectionCase();
         }
 
+        /// <summary>
+        /// Mise en place des unités sur la carte
+        /// </summary>
         private void ajoutUnite()
         {
             int t = 0;
             int l = 10;
 
+            //Suppression des anciennes unités pour une mise à jour
             for (int x = 0; x < this.plateauUnite.GetLength(0); x++)
             {
                 for (int y = 0; y < this.plateauUnite.GetLength(1); y++)
@@ -159,6 +170,7 @@ namespace SmallWorld
                 }
             }
 
+            
             for (int x = 0; x < this.plateauUnite.GetLength(0); x++)
             {
                 if ((x % 2) != 0)
@@ -172,13 +184,14 @@ namespace SmallWorld
 
                     if (units.Count() > 0)
                     {
-
+                        //Mise en place de l'image de l'unité
                         Border hexagoneUnite = new Border();
                         hexagoneUnite.Background = FabriqueImage.getInstance().getBrushUnite(units[0]);
                         TextBlock unitText = new TextBlock();
                         hexagoneUnite.Width = tailleCase;
                         hexagoneUnite.Height = tailleCase;
 
+                        //Mise en place de la zone de texte indiquant le nombre d'unités présentes sur la case
                         unitText.Margin = new Thickness(50, 30, 0, 0);
                         unitText.Text = "" + units.Count();
                         unitText.FontSize = 40;
@@ -188,7 +201,7 @@ namespace SmallWorld
                         Canvas.SetLeft(hexagoneUnite, l);
                         Canvas.SetTop(hexagoneUnite, t);
                         hexagoneUnite.Cursor = Cursors.Hand;
-
+                        
                         hexagoneUnite.MouseLeftButtonDown += new MouseButtonEventHandler(this.clicGaucheCase);
                         hexagoneUnite.MouseEnter += new MouseEventHandler(this.survolCase);
                         this.plateauUnite[x, y] = hexagoneUnite;
@@ -200,6 +213,12 @@ namespace SmallWorld
             }
         }
 
+
+        /// <summary>
+        /// Calcul de la coordonnée y d'une case en fonction de sa place sur le canvas
+        /// </summary>
+        /// <param name="coordY">La place sur le canvas de la case</param>
+        /// <returns>La coordonnée y de la case dans le tableau des cases de la carte</returns>
         private int getY(double coordY)
         {
             if (coordY == 0)
@@ -207,6 +226,11 @@ namespace SmallWorld
             return (int)(coordY / 75);
         }
 
+        /// <summary>
+        /// Calcul de la coordonnée x d'une case en fonction de sa place sur le canvas
+        /// </summary>
+        /// <param name="coordX">La place sur le canvas de la case</param>
+        /// <returns>La coordonnée x de la case dans le tableau des cases de la carte</returns>
         private int getX(double coordX)
         {
             if (coordX == 0)
@@ -217,40 +241,34 @@ namespace SmallWorld
         }
 
 
+        /// <summary>
+        /// Gestion du clic sur une case 
+        /// </summary>
+
         private void clicGaucheCase(object sender, MouseButtonEventArgs e)
         {
             var selection = sender as Border;
             
             this.caseSelectX = this.getX(Canvas.GetLeft(selection));
             this.caseSelectY = this.getY(Canvas.GetTop(selection));
-            if (this.caseClic == selection || this.tour.getUniteSelect() != null)
-            {
-                selectionCase(true);
-                deplacement();
-            }
-            else
-            {
-                selectionCase(false);
-            }
-            
-            
-        }
-        private void selectionCase(bool b)
-        {
+            selectionCase();
 
+            if (this.tour.getUniteSelect() != null) 
+                deplacement();            
+        }
+
+        /// <summary>
+        /// Gestion de la sélection d'une case
+        /// </summary>
+        private void selectionCase()
+        {
+            //On supprime la bordure de l'ancienne case sélectionnée
             if (this.caseClic != null)
                 this.mapGrid.Children.Remove(this.caseClic);
-
+            
+            //Mise en place de la bordure sur la nouvelle case sélectionnée
             Border bordure = new Border();
-            if (b)
-            {
-                bordure.Background = FabriqueImage.getInstance().getSelection(true);
-            }
-            else
-            {
-                bordure.Background = FabriqueImage.getInstance().getSelection(false);
-            }
-            //On sélectionne la case pour le déplacement
+            bordure.Background = FabriqueImage.getInstance().getSelection(true);
             bordure.Width = tailleCase;
             bordure.Height = tailleCase;
             bordure.Cursor = Cursors.Hand;
@@ -269,19 +287,28 @@ namespace SmallWorld
             Canvas.SetLeft(bordure, ligne1);
             Canvas.SetTop(bordure, this.caseSelectY * 75);
             this.mapGrid.Children.Add(bordure);
-            this.caseClic = bordure;
-           // if (this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
-                afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
+            this.caseClic = bordure;               
+            
+            //On affiche les unités de la case sélectionnée
+            afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
           
         }
 
+        /// <summary>
+        /// Gestion du déplacement des unités
+        /// </summary>
         private void deplacement()
         {
+            //On vérifie qu'une unité est bien sélectionnée
             if (this.tour.getUniteSelect() != null)
             {
+                //On sélectionné la destination
                 this.tour.selectionnerDestination(this.caseSelectY, this.caseSelectX);
+
+                //Si le déplacement est possible sur cette destination
                 if (this.tour.deplacementPossible(this.caseSelectY, this.caseSelectX))
                 {
+                    //On déplace l'unité et on met à jour les informations
                     this.deroulement.Text = this.tour.deplacementUnite();
                     effacerSelection();
                     effacerSuggestion();
@@ -289,22 +316,31 @@ namespace SmallWorld
                 }
                 else
                 {
+                    //Si le déplacement est impossible on l'indique au joueur
                     this.deroulement.Text = "Impossible de se déplacer en (" + this.caseSelectY + " - " + this.caseSelectX + ")";
                     effacerSelection();
                 }
+
+                //On affiche les unités de la case sélectionnée
                 if (this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                     afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
             }
 
         }
 
+        /// <summary>
+        /// Gestion des évenements clavier
+        /// </summary>
         private void gestionClavier(object sender, KeyEventArgs e)
         {
-
+            //On détecte la touche sélectionnée
             switch (e.Key)
             {
 
+                //Si c'est la touche entrée
                 case Key.Enter:
+
+                    //Premier cas : le focus est sur la barre d'information
                     if (this.mapInfo)
                     {
                         //On sélectionne l'unité
@@ -320,13 +356,16 @@ namespace SmallWorld
                         //On enregistre l'unité sélectionnée
                         this.tour.selectionnerUnite(this.uniteSelect[this.ligneSelect, this.ligneSelect], this.caseSelectX, this.caseSelectY);
                     }
+                    //Second cas : le focus est sur le canvas
                     else
                     {
-                        selectionCase(true);
+                        selectionCase();
                         deplacement();
                     }
                     break;
-                //Gestion des déplacements gauche
+
+
+                //Si c'est la touche L : gestion des déplacements gauche
                 case Key.L:
                     //Aller à gauche dans la barre d'info
                     if (this.mapInfo)
@@ -348,12 +387,13 @@ namespace SmallWorld
                         else
                             this.caseSelectX = this.jeu.getCarte().getTaille() - 1;
 
-                        selectionCase(false);
+                        selectionCase();
                         if (this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                             afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
                     }
                     break;
-                //Gestion des déplacements droite
+
+                //Si c'et la touche R : gestion des déplacements droite
                 case Key.R:
                     //Aller à droite dans la barre d'info
                     if (this.mapInfo)
@@ -379,12 +419,14 @@ namespace SmallWorld
                         else
                             this.caseSelectX = 0;
 
-                        selectionCase(false);
+                        selectionCase();
                         if (this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                             afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
                     }
                     break;
-                //Gestion des déplacements vers le bas
+
+
+                //Si c'est la touche U : gestion des déplacements vers le bas
                 case Key.U:
 
                     if (this.mapInfo)
@@ -416,13 +458,14 @@ namespace SmallWorld
                         else
                             this.caseSelectY = this.jeu.getCarte().getTaille() - 1;
 
-                        selectionCase(false);
+                        selectionCase();
                         if (this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                             afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
                     }
                     break;
 
-                //Gestion des déplacements vers le bas
+
+                //Si c'est la touche D : gestion des déplacements vers le bas
                 case Key.D:
                     if (this.mapInfo)
                     {
@@ -456,18 +499,22 @@ namespace SmallWorld
                         else
                             this.caseSelectY = 0;
 
-                        selectionCase(false);
+                        selectionCase();
                         if (this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                             afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
                         
                     }
                     break;
 
+                //Si c'est la touche Tab : Changement du focus clavier
                 case Key.Tab:
+                    //Si le focus était sur la barre d'information, le focuse passe sur le canvas
                     if (this.mapInfo)
                     {
                         this.mapInfo = false;
                     }
+
+                    //Si le focus était sur le canvas, le focus passe sur la barre d'information et on sélectionne la première unité
                     else
                     {
                         this.mapInfo = true;
@@ -478,12 +525,21 @@ namespace SmallWorld
                     }
                     break;
 
-                case Key.OemPlus:
+                //Si c'est la touche espace : on gère la fin du tour
+                case Key.Escape:
+                    FinTour_Click(sender, e);
+                    break;
+
+                //Si c'est la touche - : On zoome vers l'arrière
+                case Key.OemMinus:
                     this.uiScaleSlider.Value -= 0.1;
                     break;
+
+                //Si c'est la touche Z : On zomme vers l'avant
                 case Key.Z:
                     this.uiScaleSlider.Value += 0.1;
                     break;
+
                 default:
                     return;
 
@@ -491,11 +547,16 @@ namespace SmallWorld
             }
         }
 
+        /// <summary>
+        /// Gestion du survol souris sur une case du canvas
+        /// </summary>
         private void survolCase(object sender, MouseEventArgs e)
         {
+            //On commence par supprimer l'ancienne case survolée
             if (this.caseSelect != null)
                 this.mapGrid.Children.Remove(this.caseSelect);
 
+            //On ajoute une bordure autour de la case survolée
             var selection = sender as Border;
             Border bordure = new Border();
             bordure.Background = FabriqueImage.getInstance().getSelection(false);
@@ -507,7 +568,8 @@ namespace SmallWorld
             Canvas.SetTop(bordure, Canvas.GetTop(selection));
             this.mapGrid.Children.Add(bordure);
             this.caseSelect = bordure;
-
+            
+            //Si la case survolée contient des unités on les affiche, sinon on affiche les unités de la case sélecionnée
             if (this.jeu.getCarte().getCase(this.getY(Canvas.GetTop(selection)), this.getX(Canvas.GetLeft(selection))).getUnite().Count() > 0)
             {
                 afficherUniteCase(this.jeu.getCarte().getCase(this.getY(Canvas.GetTop(selection)), this.getX(Canvas.GetLeft(selection))).getUnite());
@@ -519,21 +581,33 @@ namespace SmallWorld
 
         }
 
+        /// <summary>
+        /// Gestion de la souris du canvas
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void echapCase(object sender, MouseEventArgs e)
         {
+            //On enlève le repère de survol
             if (this.caseSelect != null)
                 this.mapGrid.Children.Remove(this.caseSelect);
+           
+            //On supprime la grille des unités si aucune case n'est sélectionnée
             if (this.caseClic == null && (this.caseClic != null && this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() == 0))
                 effacementGrilleUnite();
+            
+            //Si une case est sélectionnée on laisse la grille des unités
             if (this.caseClic != null)
-            {
                 afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
-            }
 
         }
 
+        /// <summary>
+        /// Méthode pour effacer la grille des unités de la barre d'information 
+        /// </summary>
         private void effacementGrilleUnite()
         {
+            /*
             if (this.uniteGrid != null)
             {
                 for (int x = 0; x < this.uniteSelect.GetLength(0); x++)
@@ -545,8 +619,13 @@ namespace SmallWorld
                 }
                 this.gridsSelect = new Grid[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             }
+             * */
+            this.barreInfo.Children.Remove(this.uniteGrid);
         }
 
+        /// <summary>
+        /// Méthode pour effacer les suggestions de cases
+        /// </summary>
         private void effacerSuggestion()
         {
             for (int i = 0; i < this.plateauConseil.GetLength(0); i++)
@@ -558,6 +637,9 @@ namespace SmallWorld
             }
         }
 
+        /// <summary>
+        /// Méthode pour effacer la sélection d'une unité dans la barre d'information
+        /// </summary>
         private void effacerSelection()
         {
             this.tour.deselectionnerUnite();
@@ -567,7 +649,10 @@ namespace SmallWorld
         }
 
 
-        //Quand on clique sur une case qui contient des unités
+        /// <summary>
+        /// Affichage des unités d'une case 
+        /// </summary>
+        /// <param name="lunite">La liste des unités de la case</param>
         private void afficherUniteCase(List<Unite> lunite)
         {
             //effacerSelection();
@@ -579,8 +664,11 @@ namespace SmallWorld
             int j = 0;
             int cpt = 0;
             effacementGrilleUnite();
+
+            //On vérifie que la case contient bien des unités
             if (lunite.Count() > 0)
             {
+                //Création de la grille qui va contenir les unités dans la barre d'information
                 uniteGrid = new Grid();
                 for (i = 0; i < 3; i++)
                 {
@@ -626,10 +714,11 @@ namespace SmallWorld
                             defense = "Defense : " + lunite[cpt].getDefense();
                             mouvement = "Mouvement : " + lunite[cpt].getMouvement();
                             texte.Text = vie + "\n" + attaque + "\n" + defense + "\n" + mouvement;
-                            //texte.Text = "\n" + vie + "\n" + mouvement;
                             Grid.SetRow(texte, 1);
                             Grid.SetColumn(texte, 0);
                             grille.Children.Add(texte);
+
+                            //On enregistre les grilles et les unités pour pouvoir détecter par la suite leur sélection 
                             this.gridsSelect[i, j] = grille;
                             this.uniteSelect[i, j] = lunite[cpt];
                             cpt++;
@@ -640,10 +729,17 @@ namespace SmallWorld
         }
 
 
+        /// <summary>
+        /// Gestion de la sélection d'une unité
+        /// </summary>
+        /// <param name="ligne">La ligne sur laquelle se trouve l'unité sélectionnée dans la grille</param>
+        /// <param name="colonne">La colonne sur laquelle se trouve l'unité sélectionnée dans la grille</param>
        unsafe private void clicUnite(int ligne, int colonne) {
-             effacerSelection();
-             effacerSuggestion();
-             this.mapInfo = true;
+
+           effacerSelection(); //On efface l'ancienne sélection
+           effacerSuggestion();  //On efface les anciennes suggestions de cases
+           this.mapInfo = true; //Mise à jour de l'indicateur de focus pour indiquer que l'utilisateur intéragit avec la barre d'information
+
             //Si le joueur essaye de sélectionner des unités qui ne sont pas à lui
             if (this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).estCaseEnnemie(this.joueur))
             {
@@ -651,7 +747,7 @@ namespace SmallWorld
             }
             else
             {
-                    //Mise en place de la bordure
+                    //Mise en place de la bordure autour de l'unité sélectionnée
                     Border bordure = new Border();
                     bordure.BorderBrush = Brushes.Black;
                     bordure.BorderThickness = new Thickness(1);
@@ -662,7 +758,7 @@ namespace SmallWorld
                     //On enregistre l'unité sélectionnée
                     this.tour.selectionnerUnite(this.uniteSelect[ligne, colonne], this.caseSelectX, this.caseSelectY);
 
-                    //On "entoure" les cases où l'unité peut se déplacer
+                    //On met en place une bordure sur les cases où l'unité peut se déplacer
                     int i, j;
                     int tailleMap = this.jeu.getCarte().getTaille();
                     bool** carteBool = this.tour.recupererCarteSuggestion();
@@ -672,7 +768,6 @@ namespace SmallWorld
                         {
                             if (carteBool[i][j] == true)
                             {
-                                //Console.Write("Case :" + i +" ; " + j + "------------");
                                 var suggere = new Border();
                                 suggere.Background = FabriqueImage.getInstance().getSuggere();
                                 suggere.Width = tailleCase;
@@ -683,6 +778,7 @@ namespace SmallWorld
                                 int y = 100 * j;
                                 if ((i % 2) != 0)
                                     y += 50;
+
                                 Canvas.SetLeft(suggere, y);
                                 Canvas.SetTop(suggere, x);
                                 this.mapGrid.Children.Add(suggere);
@@ -697,44 +793,63 @@ namespace SmallWorld
                     this.colonneSelect = colonne;
             }
         }
+        
+        
 
-        //Quand on clique sur une des unités de la barre d'information
+        /// <summary>
+        /// Gestion du clic sur une des unités de la barre d'infomartion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MouseLeftMapUnite(object sender, MouseButtonEventArgs e)
         {
+            //On récupère le numéro de ligne et de colonne de l'unité sur laquelle l'utilisateur a cliqué
             Grid grille = sender as Grid;
             int ligne = Grid.GetRow(grille);
             int colonne = Grid.GetColumn(grille);
             clicUnite(ligne, colonne);
         }
 
+        /// <summary>
+        /// Gestion de l'affichage des informations joueurs
+        /// </summary>
         private void informationsJoueur()
         {
             string uniteRestantes = "";
             string pointVictoire = "";
             string peuple = "";
-            this.pseudoJ1.Text = this.jeu.getJoueur1().getPseudo();
-            peuple = "Peuple " + this.jeu.getJoueur1().getNomPeuple() + "\n";
-            uniteRestantes = this.jeu.getJoueur1().getNbUnite() + " unités restantes\n";
-            pointVictoire = this.jeu.getJoueur1().getPtVictoire() + " points.\n";
+
+            //Informations joueur 1
+            this.pseudoJ1.Text = this.jeu.getJoueur1().getPseudo(); 
+            peuple = "Peuple " + this.jeu.getJoueur1().getNomPeuple() + "\n"; //On affiche le peuple du joueur
+            uniteRestantes = this.jeu.getJoueur1().getNbUnite() + " unités restantes\n"; //On affiche le nombre d'unités restantes au joueur
+            pointVictoire = this.jeu.getJoueur1().getPtVictoire() + " points.\n"; //On affiche le nombre de points de victoire du joueur
             this.infoJ1.Text = peuple + uniteRestantes + pointVictoire;
 
+            //Informations joueur 2
             this.pseudoJ2.Text = this.jeu.getJoueur2().getPseudo();
-            peuple = "Peuple " + this.jeu.getJoueur2().getNomPeuple() + "\n";
-            uniteRestantes = this.jeu.getJoueur2().getNbUnite() + " unités restantes\n";
-            pointVictoire = this.jeu.getJoueur2().getPtVictoire() + " points.\n";
+            peuple = "Peuple " + this.jeu.getJoueur2().getNomPeuple() + "\n"; //On affiche le peuple du joueur
+            uniteRestantes = this.jeu.getJoueur2().getNbUnite() + " unités restantes\n"; //On affiche le nombre d'unités restantes au joueur
+            pointVictoire = this.jeu.getJoueur2().getPtVictoire() + " points.\n"; //On affiche le nombre de points de victoire du joueur
             this.infoJ2.Text = peuple + uniteRestantes + pointVictoire;
         }
 
-
+        /// <summary>
+        /// Gestion du clic sur le bouton fin de tour
+        /// </summary>
         private void FinTour_Click(object sender, RoutedEventArgs e)
         {
-
+            //Si le nombre de tour maximal n'a pas été atteint ou si aucun des deux joueurs n'est mort
             if (this.jeu.getNbTours() > 1 && (this.jeu.finDuJeu() == false))
             {
+                //Si les deux joueurs ont joué le tour actuel
                 if (this.deuxJoueursTour)
                 {
+                    //On met à jour les points de victoire
                     this.jeu.getJoueur1().setPtVictoire(this.jeu.getJoueur1().calculerPoints() + this.jeu.getCarte().nbCasesColonisees(this.jeu.getJoueur1()));
                     this.jeu.getJoueur2().setPtVictoire(this.jeu.getJoueur2().calculerPoints() + this.jeu.getCarte().nbCasesColonisees(this.jeu.getJoueur2()));
+                    
+                    //On décrémente le nombre de tour
                     this.jeu.decNbTours();
                     this.jeu.reinitialisation();
                     this.nbTourInit++;
@@ -742,9 +857,11 @@ namespace SmallWorld
                 }
                 else
                 {
+                    //Sinon on fait jouer le deuxième joueur
                     this.deuxJoueursTour = true;
                 }
 
+                //On inverse le joueur actuel
                 if (this.joueur == this.jeu.getJoueur1())
                 {
                     this.joueur = this.jeu.getJoueur2();
@@ -753,19 +870,22 @@ namespace SmallWorld
                 {
                     this.joueur = this.jeu.getJoueur1();
                 }
+
+                //On crée un nouveau tour
                 this.tour = new TourImpl(this.jeu, this.joueur);
+
+                //On met à jour les informations affichées
                 this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1);
                 this.AuTourDeQui.Text = "C'est au tour de " + this.joueur.getPseudo() + " de jouer avec le peuple " + this.joueur.getNomPeuple() + ".";
-               /* ImageBrush brush = new ImageBrush();
-                brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + numImgJoueur(this.joueur) + ".png", UriKind.Relative));
-                this.ImgJoueurActuel.Fill = brush;
-                this.ImgPeupleActuel.Fill = FabriqueImage.getInstance().getBrushUnite(this.joueur.getUnite(0)); */
                 informationsJoueur();
-                afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectX, this.caseSelectY).getUnite());
+                
+                //On affiche les unités sur la case actuellement sélectionnée
+                afficherUniteCase(this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite());
 
             }
             else
             {
+                //Sinon on détermine le gagnant et on affiche le résultat
                 if (this.jeu.getGagnant() == this.jeu.getJoueur1())
                 {
                     MessageBox.Show("Fin de la partie - Le gagnant est " + this.jeu.getJoueur1().getPseudo() + ".");
@@ -781,6 +901,10 @@ namespace SmallWorld
             }
         }
 
+
+        /// <summary>
+        /// Gestion de la fermeture de la fenêtre
+        /// </summary>
         public void FenetreCarte_Closing(object sender, CancelEventArgs e)
         {
 
@@ -815,6 +939,10 @@ namespace SmallWorld
             }
         }
 
+        /// <summary>
+        /// Gestion de la sauvegarde
+        /// </summary>
+        /// <returns>Vrai si la sauvegarde s'est bien passée</returns>
         public bool? sauvegarderEnTantQue()
         {
             SaveFileDialog dialog = new SaveFileDialog();
@@ -833,6 +961,11 @@ namespace SmallWorld
             }
             return res;
         }
+
+        /// <summary>
+        /// Gestion de la sauvegarde
+        /// </summary>
+        /// <returns>Vrai si la sauvegarde s'est bien passée</returns>
         private bool? sauvegarder()
         {
             bool? res;
@@ -852,6 +985,10 @@ namespace SmallWorld
         }
 
 
+
+        /// <summary>
+        /// Gestion du changement d'image du joueur 1 (au clic sur l'image)
+        /// </summary>
         private void changementImgJoueur1(object sender, MouseButtonEventArgs e)
         {
             if (this.numImgJ1 < numMaxImg)
@@ -864,6 +1001,10 @@ namespace SmallWorld
             this.ImgJ1.Fill = brush;
 
         }
+
+        /// <summary>
+        /// Gestion du changement d'image du joueur 2 (au clic sur l'image)
+        /// </summary>
         private void changementImgJoueur2(object sender, MouseButtonEventArgs e)
         {
             if (this.numImgJ2 < numMaxImg)
@@ -875,6 +1016,10 @@ namespace SmallWorld
             brush.ImageSource = new BitmapImage(new Uri(@"Ressources/Joueurs/player" + this.numImgJ2 + ".png", UriKind.Relative));
             this.ImgJ2.Fill = brush;
         }
+
+        /// <summary>
+        /// Gestion du clic sur le bouton de retour au menu
+        /// </summary>
         private void RetourMenu_Click(object sender, RoutedEventArgs e)
         {
             BoutonMenu = true;
@@ -886,11 +1031,17 @@ namespace SmallWorld
             BoutonAnnuler = false;
         }
 
+        /// <summary>
+        /// Gestion du clic sur le bouton de sauvegarde
+        /// </summary>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             sauvegarder();
         }
 
+        /// <summary>
+        /// Gestion de la roulette de la souris pour zoomer la carte
+        /// </summary>
         private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (e.Delta < 0)
