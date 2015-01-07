@@ -39,54 +39,51 @@ namespace SmallWorld
             this.mwindow = mw;
         }
 
+        /// <summary>
+        /// Gestion d'un clic sur le choix de carte Demo
+        /// </summary>
         private void ChoixDemoCarte(object sender, RoutedEventArgs e)
         {
-           // this.petite.BorderThickness = new Thickness(0);
-            //this.normale.BorderThickness = new Thickness(0);
-            //this.demo.BorderThickness = new Thickness(2);
-            //this.demo.BorderBrush = Brushes.White;
             this.demo.Header = "Choisie !";
             this.petite.Header = "";
             this.normale.Header = "";
             this.demo.Background = Brushes.Blue;
             this.petite.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 43, 79));
             this.normale.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 43, 79));
-            //this.dieu = new CreateurPartie(6);
             this.carte = new CarteDemo();
         }
 
+        /// <summary>
+        /// Gestion d'un clic sur le choix de petite carte
+        /// </summary>
         private void ChoixPetiteCarte(object sender, RoutedEventArgs e)
         {
-            //this.petite.BorderThickness = new Thickness(2);
-            //this.normale.BorderThickness = new Thickness(0);
-            //this.demo.BorderThickness = new Thickness(0);
-            //this.petite.BorderBrush = Brushes.White;
             this.petite.Header = "Choisie !";
             this.demo.Header = "";
             this.normale.Header = "";
             this.petite.Background = Brushes.Blue;
             this.demo.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 43, 79));
             this.normale.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 43, 79));
-            //this.dieu = new CreateurPartie(10);
             this.carte = new CartePetite();
         }
 
+        /// <summary>
+        /// Gestion d'un clic sur le choix de carte normale
+        /// </summary>
         private void ChoixNormaleCarte(object sender, RoutedEventArgs e)
         {
-           // this.petite.BorderThickness = new Thickness(0);
-            //this.normale.BorderThickness = new Thickness(2);
-            //this.demo.BorderThickness = new Thickness(0);
-            //this.normale.BorderBrush = Brushes.White;
             this.normale.Header = "Choisie !";
             this.petite.Header = "";
             this.demo.Header = "";
             this.normale.Background = Brushes.Blue;
             this.petite.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 43, 79));
             this.demo.Background = new SolidColorBrush(System.Windows.Media.Color.FromRgb(39, 43, 79));
-            //this.dieu = new CreateurPartie(14);
             this.carte = new CarteNormale();
         }
 
+        /// <summary>
+        /// Gestion d'un clic sur le bouton valider
+        /// </summary>
         private void ButtonCloseClicked(object sender, RoutedEventArgs e)
         {
             if (this.carte == null)

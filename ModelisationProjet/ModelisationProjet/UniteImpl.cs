@@ -42,7 +42,7 @@ namespace ModelisationProjet
             this.ptVictoire = (int)info.GetValue("ptVictoire", typeof(int));
             this.ptAttaque = (int)info.GetValue("ptAttaque", typeof(int));
             this.ptDefense = (int)info.GetValue("ptDefense", typeof(int));
-            this.ptMouvement = (double)info.GetValue("ptDefense", typeof(double));
+            this.ptMouvement = (double)info.GetValue("ptMouvement", typeof(double));
             this.proprietaire = (Joueur)info.GetValue("proprio", typeof(Joueur));
         }
         public void GetObjectData(SerializationInfo info, StreamingContext context) {

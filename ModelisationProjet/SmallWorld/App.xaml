@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <!-- Style des groupbox -->
         <Style TargetType="{x:Type GroupBox}">
             <Setter Property="Background" Value="#272b4f" />
             <Setter Property="FontFamily" Value="Showcard Gothic"/>
@@ -11,6 +12,7 @@
             <Setter Property="Foreground" Value="White" />
             <Setter Property="Opacity" Value="0.99" />
         </Style>
+        <!-- Style des boutons -->
         <Style TargetType="{x:Type Button}">
             <Setter Property="Background" 
              Value="#272b4f" />
@@ -26,7 +28,7 @@
                         <Grid Width="{TemplateBinding Width}" 
                                 Height="{TemplateBinding Height}" ClipToBounds="True">
 
-                            <!-- Outer Rectangle with rounded corners. -->
+                            <!-- Rectangle extérieur aux coins arrondis -->
                             <Rectangle x:Name="outerRectangle" 
                                 HorizontalAlignment="Stretch" 
                                 VerticalAlignment="Stretch" 
@@ -34,7 +36,7 @@
                                 RadiusX="20" RadiusY="20" StrokeThickness="5" 
                                 Fill="Transparent" />
 
-                            <!-- Inner Rectangle with rounded corners. -->
+                            <!-- Rectangle intérieur aux coins arrondis -->
                             <Rectangle x:Name="innerRectangle" 
                                 HorizontalAlignment="Stretch" 
                                 VerticalAlignment="Stretch" Stroke="Transparent" 
@@ -42,7 +44,7 @@
                                 Fill="{TemplateBinding Background}" 
                                 RadiusX="20" RadiusY="20"   />
 
-                            <!-- Present Content (text) of the button. -->
+                            <!-- Texte du bouton -->
                             <DockPanel Name="myContentPresenterDockPanel">
                                 <ContentPresenter x:Name="myContentPresenter" Margin="20" 
                                   Content="{TemplateBinding  Content}" 
@@ -52,12 +54,8 @@
                             </DockPanel>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <!-- Set properties when mouse pointer is over the button. -->
+                            <!-- Evenement MouseOver sur le bouton  -->
                             <Trigger Property="IsMouseOver" Value="True">
-
-                                <!-- Below are three property settings that occur when the 
-         condition is met (user mouses over button).  -->
-                                <!-- Change the color of the outer rectangle when user          mouses over it. -->
                                 <Setter Property ="Rectangle.Stroke" TargetName="outerRectangle"
                                      Value="Blue" />
                             </Trigger>

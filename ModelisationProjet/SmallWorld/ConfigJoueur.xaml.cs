@@ -30,6 +30,10 @@ namespace SmallWorld
             InitializeComponent();
             this.mwindow = mw;
         }
+
+        /// <summary>
+        /// Vérification de la validité des informations lors d'un clic sur le bouton valider
+        /// </summary>
         private void Valider_joueur(object sender, RoutedEventArgs e)
         {
             if (this.pseudoJ1.Text == "")
@@ -63,6 +67,9 @@ namespace SmallWorld
             
         }
 
+        /// <summary>
+        /// Gestion d'un clic sur le choix Nain de la partie consacrée Joueur 1
+        /// </summary>
         private void ChoixNainJ1(object sender, RoutedEventArgs e)
         {
             this.OrcJ1.StrokeThickness = 0;
@@ -72,6 +79,9 @@ namespace SmallWorld
             this.NainJ1.Stroke = Brushes.White;
             this.choixPeupleJ1 = new PeupleNain();
         }
+        /// <summary>
+        /// Gestion d'un clic sur le choix Orc de la partie consacrée Joueur 1
+        /// </summary>
         private void ChoixOrcJ1(object sender, RoutedEventArgs e)
         {
             this.NainJ1.StrokeThickness = 0;
@@ -81,6 +91,9 @@ namespace SmallWorld
             this.OrcJ1.Stroke = Brushes.White;
             this.choixPeupleJ1 = new PeupleOrc();
         }
+        /// <summary>
+        /// Gestion d'un clic sur le choix Elfe de la partie consacrée Joueur 1
+        /// </summary>
         private void ChoixElfeJ1(object sender, RoutedEventArgs e)
         {
             this.NainJ1.StrokeThickness = 0;
@@ -90,6 +103,9 @@ namespace SmallWorld
             this.ElfeJ1.Stroke = Brushes.White;
             this.choixPeupleJ1 = new PeupleElf();
         }
+        /// <summary>
+        /// Gestion d'un clic sur le choix Pirate de la partie consacrée Joueur 1
+        /// </summary>
         private void ChoixPirateJ1(object sender, RoutedEventArgs e)
         {
             this.NainJ1.StrokeThickness = 0;
@@ -99,6 +115,9 @@ namespace SmallWorld
             this.PirateJ1.Stroke = Brushes.White;
             this.choixPeupleJ1 = new PeuplePirate(); 
         }
+        /// <summary>
+        /// Gestion d'un clic sur le choix Nain de la partie consacrée Joueur 2
+        /// </summary>
         private void ChoixNainJ2(object sender, RoutedEventArgs e)
         {
             this.OrcJ2.StrokeThickness = 0;
@@ -108,6 +127,9 @@ namespace SmallWorld
             this.NainJ2.Stroke = Brushes.White;
             this.choixPeupleJ2 = new PeupleNain();
         }
+        /// <summary>
+        /// Gestion d'un clic sur le choix Orc de la partie consacrée Joueur 2
+        /// </summary>
         private void ChoixOrcJ2(object sender, RoutedEventArgs e)
         {
             this.NainJ2.StrokeThickness = 0;
@@ -117,6 +139,9 @@ namespace SmallWorld
             this.OrcJ2.Stroke = Brushes.White;
             this.choixPeupleJ2 = new PeupleOrc();
         }
+        /// <summary>
+        /// Gestion d'un clic sur le choix Elfe de la partie consacrée Joueur 2
+        /// </summary>
         private void ChoixElfeJ2(object sender, RoutedEventArgs e)
         {
             this.NainJ2.StrokeThickness = 0;
@@ -126,6 +151,9 @@ namespace SmallWorld
             this.ElfeJ2.Stroke = Brushes.White;
             this.choixPeupleJ2 = new PeupleElf();
         }
+        /// <summary>
+        /// Gestion d'un clic sur le choix Pirate de la partie consacrée Joueur 2
+        /// </summary>
         private void ChoixPirateJ2(object sender, RoutedEventArgs e)
         {
             this.NainJ2.StrokeThickness = 0;

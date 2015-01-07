@@ -49,10 +49,6 @@ namespace SmallWorld
             this.elf = new BitmapImage(new Uri(@"Ressources/Unites/elf.png", UriKind.Relative));
             this.orc = new BitmapImage(new Uri(@"Ressources/Unites/orc.png", UriKind.Relative));
             this.pirate = new BitmapImage(new Uri(@"Ressources/Unites/pirate.png", UriKind.Relative));
-            this.nainInfos = new BitmapImage(new Uri(@"Ressources/Unites/nainInfos.png", UriKind.Relative));
-            this.elfInfos = new BitmapImage(new Uri(@"Ressources/Unites/elfInfos.png", UriKind.Relative));
-            this.orcInfos = new BitmapImage(new Uri(@"Ressources/Unites/orcInfos.png", UriKind.Relative));
-            this.pirateInfos = new BitmapImage(new Uri(@"Ressources/Unites/pirate.png", UriKind.Relative));
 
             this.select = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionNoire.png", UriKind.Relative));
             this.suggere = new BitmapImage(new Uri(@"Ressources/Cases/Map3/selectionGrise.png", UriKind.Relative));
@@ -152,28 +148,6 @@ namespace SmallWorld
             else if (u is UnitePirate)
             {
                     brush.ImageSource = this.pirate;
-            }
-            return brush;
-        }
-        public Brush getBrushUniteInfos(Unite u)
-        {
-            ImageBrush brush = new ImageBrush();
-            if (u is UniteNain)
-            {
-                brush.ImageSource = this.nainInfos;
-            }
-            else if (u is UniteElf)
-            {
-                brush.ImageSource = this.elfInfos;
-
-            }
-            else if (u is UniteOrc)
-            {
-                brush.ImageSource = this.orcInfos;
-            }
-            else if (u is UnitePirate)
-            {
-                brush.ImageSource = this.pirateInfos;
             }
             return brush;
         }

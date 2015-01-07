@@ -37,7 +37,7 @@ namespace SmallWorld
         private Grid uniteGrid;
         private Border borderSelect;
         private Joueur joueur;
-        private int nbTourInit;
+        private int nbTourInit = 1;
         private Border caseSelect;
         private Grid gridSelect;
         private Boolean deuxJoueursTour;
@@ -68,7 +68,6 @@ namespace SmallWorld
             this.caseSelectX = -1;
             this.caseSelectY = -1;
             this.borderSelect = null;
-            this.nbTourInit = 1;
             this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1);
             this.BoutonMenu = false;
             this.BoutonAnnuler = false;
@@ -97,7 +96,18 @@ namespace SmallWorld
                 this.uiScaleSlider.Value = 0.7;
             }
         }
+        public FenetreCarte(SerializationInfo info, StreamingContext context) {
+            this.jeu = (Jeu)info.GetValue("Jeu", typeof(Jeu));
+            this.tour = (Tour)info.GetValue("Tour", typeof(Tour));
+            this.nbTourInit = (int)info.GetValue("nbTourInit", typeof(int));
+        }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Jeu", this.jeu);
+            info.AddValue("Tour", this.tour);
+            info.AddValue("nbTourInit", this.nbTourInit);
+        }
         /// <summary>
         /// Mise en place de la carte
         /// </summary>
@@ -267,6 +277,7 @@ namespace SmallWorld
             if (this.caseClic != null)
                 this.mapGrid.Children.Remove(this.caseClic);
 
+            effacerSuggestion();
             //Mise en place de la bordure sur la nouvelle case sélectionnée
             Border bordure = new Border();
             bordure.Background = FabriqueImage.getInstance().getSelection(true);
@@ -314,6 +325,21 @@ namespace SmallWorld
                     effacerSelection();
                     effacerSuggestion();
                     ajoutUnite();
+                    if (this.jeu.finDuJeu() == true)
+                    {
+                        if (this.jeu.getGagnant() == this.jeu.getJoueur1())
+                        {
+                            MessageBox.Show("Fin de la partie - Le gagnant est " + this.jeu.getJoueur1().getPseudo() + ".");
+                        }
+                        else if (this.jeu.getGagnant() == this.jeu.getJoueur2())
+                        {
+                            MessageBox.Show("Fin de la partie - Le gagnant est " + this.jeu.getJoueur2().getPseudo() + ".");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fin de la partie - Égalité.");
+                        }
+                    }
                 }
                 else
                 {
@@ -367,7 +393,7 @@ namespace SmallWorld
 
 
                 //Si c'est la touche L : gestion des déplacements gauche
-                case Key.L:
+                case Key.Q:
                     //Aller à gauche dans la barre d'info
                     if (this.mapInfo && this.caseClic != null && this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                     {
@@ -390,7 +416,7 @@ namespace SmallWorld
                     break;
 
                 //Si c'et la touche R : gestion des déplacements droite
-                case Key.R:
+                case Key.D:
                     //Aller à droite dans la barre d'info
                     if (this.mapInfo && this.caseClic != null && this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                     {
@@ -416,7 +442,7 @@ namespace SmallWorld
 
 
                 //Si c'est la touche U : gestion des déplacements vers le bas
-                case Key.U:
+                case Key.Z:
 
                     if (this.mapInfo && this.caseClic != null && this.jeu.getCarte().getCase(this.caseSelectY, this.caseSelectX).getUnite().Count() > 0)
                     {
@@ -450,7 +476,7 @@ namespace SmallWorld
 
 
                 //Si c'est la touche D : gestion des déplacements vers le bas
-                case Key.D:
+                case Key.S:
                     if (this.mapInfo)
                     {
                         //Aller en bas dans la barre d'info
@@ -500,6 +526,9 @@ namespace SmallWorld
                         this.mapInfo = true;
                         this.infoFocusMap.Fill = FabriqueImage.getInstance().getFocusMap(false);
                         this.infoFocusClavier.Fill = FabriqueImage.getInstance().getFocusClavier(true);
+                        this.ligneSelect = 0;
+                        this.colonneSelect = 0;
+                        clicUnite(this.ligneSelect, this.colonneSelect);
                     }
                     break;
 
@@ -514,7 +543,7 @@ namespace SmallWorld
                     break;
 
                 //Si c'est la touche Z : On zomme vers l'avant
-                case Key.Z:
+                case Key.U:
                     this.uiScaleSlider.Value += 0.1;
                     break;
 
@@ -994,7 +1023,7 @@ namespace SmallWorld
         {
             BoutonMenu = true;
             this.Close();
-            if (BoutonAnnuler == false)
+            if (BoutonAnnuler == false && nomDuFichier != null)
             {
                 new MainWindow().Show();
             }
@@ -1016,11 +1045,11 @@ namespace SmallWorld
         {
             if (e.Delta < 0)
             {
-                this.uiScaleSlider.Value += 0.1;
+                this.uiScaleSlider.Value -= 0.1;
             }
             else if (e.Delta > 0)
             {
-                this.uiScaleSlider.Value -= 0.1;
+                this.uiScaleSlider.Value += 0.1;
             }
         }
 
