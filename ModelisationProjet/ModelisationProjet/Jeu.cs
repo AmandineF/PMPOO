@@ -11,8 +11,9 @@ namespace ModelisationProjet
     [Serializable()]
     public class JeuImpl : Jeu
     {
-
+        private Joueur joueurCourant;
         private int nbTours;
+        private int nbToursTotal;
         private Joueur joueur2;
         private Joueur joueur1;
         private Carte carte;
@@ -27,6 +28,7 @@ namespace ModelisationProjet
         public JeuImpl(int n, Joueur j1, Joueur j2, Carte c) 
         {
             this.nbTours = n;
+            this.nbToursTotal = n;
             this.joueur1 = j1;
             this.joueur2 = j2;
             this.carte = c;
@@ -36,6 +38,7 @@ namespace ModelisationProjet
             this.joueur2 = (Joueur)info.GetValue("Joueur2", typeof(Joueur));
             this.carte = (Carte)info.GetValue("Carte", typeof(Carte));
             this.nbTours = (int)info.GetValue("NbTours", typeof(int));
+            this.nbToursTotal = (int)info.GetValue("NbToursTotal", typeof(int));
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -44,6 +47,7 @@ namespace ModelisationProjet
             info.AddValue("Player2", this.joueur2);
             info.AddValue("Carte", this.carte);
             info.AddValue("NbTours", this.nbTours);
+            info.AddValue("NbToursTotal", this.nbTours);
         }
         public JeuImpl() {}
 
@@ -54,6 +58,14 @@ namespace ModelisationProjet
         public int getNbTours()
         {
             return this.nbTours;
+        }
+        /// <summary>
+        /// Donne le nombre de tour total du jeu
+        /// </summary>
+        /// <returns>Nombre de tours du jeu au total</returns>
+        public int getNbToursTotal()
+        {
+            return this.nbToursTotal;
         }
 
         /// <summary>
@@ -72,6 +84,29 @@ namespace ModelisationProjet
         {
             this.nbTours--;
         }
+        /// <summary>
+        /// change le joueur ayant la main par celui placé en paramètre
+        /// </summary>
+        public void setJoueurCourant(Joueur j)
+        {
+            this.joueurCourant = j;
+        }
+        /// <summary>
+        /// Donne le joueur qui a la main
+        /// </summary>
+        /// <returns>Joueur ayant la main</returns>
+        public Joueur getJoueurCourant()
+        {
+            if (this.joueurCourant == null)
+            {
+                return getPremierJoueur();
+            }
+            else
+            {
+                return this.joueurCourant;
+            }
+        }
+
         /// <summary>
         /// Donne le premier joueur
         /// </summary>
@@ -117,9 +152,16 @@ namespace ModelisationProjet
             Random r = new Random();
             int rand = r.Next(1, 3);
             if (rand == 1)
+            {
+                this.joueurCourant = this.joueur1;
                 return this.joueur1;
+            }
             else
+            {
+                this.joueurCourant = this.joueur2;
                 return this.joueur2;
+            }
+               
         }
 
 
@@ -169,6 +211,8 @@ namespace ModelisationProjet
         bool finDuJeu();
 
         Joueur getGagnant();
+        void setJoueurCourant(Joueur j);
+        Joueur getJoueurCourant();
 
         Joueur getJoueur1();
 
@@ -183,5 +227,7 @@ namespace ModelisationProjet
         void decNbTours();
 
         int getNbTours();
+        int getNbToursTotal();
+
     }
 }

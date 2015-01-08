@@ -37,7 +37,7 @@ namespace SmallWorld
         private Grid uniteGrid;
         private Border borderSelect;
         private Joueur joueur;
-        private int nbTourInit = 1;
+        private int nbTourInit = 1 ;
         private Border caseSelect;
         private Grid gridSelect;
         private Boolean deuxJoueursTour;
@@ -63,12 +63,12 @@ namespace SmallWorld
             this.plateauConseil = new Border[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.plateauUnite = new Border[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
             this.uniteSelect = new Unite[this.jeu.getCarte().getTaille(), this.jeu.getCarte().getTaille()];
-            this.joueur = this.jeu.getPremierJoueur();
+            this.joueur = this.jeu.getJoueurCourant();
             this.tour = new TourImpl(this.jeu, this.joueur);
             this.caseSelectX = -1;
             this.caseSelectY = -1;
             this.borderSelect = null;
-            this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1);
+            this.Menu.Text = "Manche " + (this.jeu.getNbToursTotal()-this.jeu.getNbTours()+1) + "/" + this.jeu.getNbToursTotal();
             this.BoutonMenu = false;
             this.BoutonAnnuler = false;
             this.mapInfo = false;
@@ -96,18 +96,7 @@ namespace SmallWorld
                 this.uiScaleSlider.Value = 0.7;
             }
         }
-        public FenetreCarte(SerializationInfo info, StreamingContext context) {
-            this.jeu = (Jeu)info.GetValue("Jeu", typeof(Jeu));
-            this.tour = (Tour)info.GetValue("Tour", typeof(Tour));
-            this.nbTourInit = (int)info.GetValue("nbTourInit", typeof(int));
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Jeu", this.jeu);
-            info.AddValue("Tour", this.tour);
-            info.AddValue("nbTourInit", this.nbTourInit);
-        }
+      
         /// <summary>
         /// Mise en place de la carte
         /// </summary>
@@ -535,6 +524,7 @@ namespace SmallWorld
                 //Si c'est la touche espace : on gère la fin du tour
                 case Key.P:
                     FinDuTour();
+                    this.deroulement.Text = "Tour suivant !";
                     break;
 
                 //Si c'est la touche - : On zoome vers l'arrière
@@ -832,6 +822,7 @@ namespace SmallWorld
         private void FinTour_Click(object sender, RoutedEventArgs e)
         {
             FinDuTour();
+            this.deroulement.Text = "Tour suivant !";
         }
         /// <summary>
         /// Gestion du clic sur le bouton fin de tour
@@ -864,17 +855,19 @@ namespace SmallWorld
                 if (this.joueur == this.jeu.getJoueur1())
                 {
                     this.joueur = this.jeu.getJoueur2();
+                    this.jeu.setJoueurCourant(this.joueur);
                 }
                 else
                 {
                     this.joueur = this.jeu.getJoueur1();
+                    this.jeu.setJoueurCourant(this.joueur);
                 }
 
                 //On crée un nouveau tour
                 this.tour = new TourImpl(this.jeu, this.joueur);
 
                 //On met à jour les informations affichées
-                this.Menu.Text = "Manche " + this.nbTourInit + "/" + (this.jeu.getNbTours() + this.nbTourInit - 1);
+                this.Menu.Text = "Manche " + (this.jeu.getNbToursTotal() - this.jeu.getNbTours() + 1) + "/" + this.jeu.getNbToursTotal();
                 this.AuTourDeQui.Text = "C'est au tour de " + this.joueur.getPseudo() + " de jouer avec le peuple " + this.joueur.getNomPeuple() + ".";
                 informationsJoueur();
 
@@ -958,6 +951,10 @@ namespace SmallWorld
                 formatter.Serialize(stream, this.jeu);
                 stream.Close();
             }
+            else
+            {
+                BoutonMenu = false;
+            }
             return res;
         }
 
@@ -1022,12 +1019,15 @@ namespace SmallWorld
         private void RetourMenu_Click(object sender, RoutedEventArgs e)
         {
             BoutonMenu = true;
+
             this.Close();
-            if (BoutonAnnuler == false && nomDuFichier != null)
+            if (BoutonAnnuler == false )
             {
+                if(BoutonMenu != false)
                 new MainWindow().Show();
             }
             BoutonAnnuler = false;
+            
         }
 
         /// <summary>
@@ -1035,7 +1035,11 @@ namespace SmallWorld
         /// </summary>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            sauvegarder();
+            bool? res = sauvegarder();
+            if (res == true)
+            {
+                this.deroulement.Text = "Partie sauvegardée !";
+            }
         }
 
         /// <summary>
